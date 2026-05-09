@@ -117,12 +117,6 @@ class_colors = {
 function unlockAchievement(achievement_name)
     if achievements[achievement_name] then return end
     achievements[achievement_name] = true
-    if Steam then
-        local steam_achievement_name = achievement_name:upper():gsub(' ', '_')
-        print(Steam.userstats.SetAchievement(steam_achievement_name))
-        print(achievement_name .. ' unlocked!')
-        timer:after(0.5, function() Steam.userstats.StoreStats() end)
-    end
 end
 
 achievement_names = {

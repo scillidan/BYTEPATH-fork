@@ -1,6 +1,3 @@
-Steam = require 'libraries/steamworks'
-if type(Steam) == 'boolean' then Steam = nil end
-
 Object = require 'libraries/classic/classic'
 Timer = require 'libraries/enhanced_timer/EnhancedTimer'
 Input = require 'libraries/boipushy/Input'
@@ -198,8 +195,6 @@ end
 
 function love.quit()
     save()
-    -- Steam already tracks how long each player plays for and since this is the only thing I'm tracking it's unnecessary to run a server for only that info
-    -- sendDataToServer(binser.serialize({id = id, duration = os.difftime(os.time(), start_time), start_date = start_date, end_date = os.date("*t")}))
 end
 
 function resize(x, y, fs)
@@ -282,24 +277,6 @@ function save()
 
     bitser.dumpLoveFile('permanent_save', permanent_save_data)
     bitser.dumpLoveFile('transient_save', transient_save_data)
-
-    --[[
-    local data, len = bitser.dumps(save_data)
-    print('FileWrite: ' .. tostring(Steam.remotestorage.FileWrite('save', data, len)))
-    ]]--
-end
-
-function loadAchievementsFromSteam()
-    print(Steam)
-    if Steam then 
-        for _, achievement_name in ipairs(achievement_names) do
-            local steam_achievement_name = achievement_name:upper():gsub(' ', '_')
-            local b = ffi.new('bool[1]')
-            Steam.userstats.GetAchievement(steam_achievement_name, b)
-            achievements[achievement_name] = b[0]
-            -- print('Steam Achievement Load: ', achievement_name, b[0])
-        end
-    end
 end
 
 function load()
@@ -346,32 +323,10 @@ function load()
         else first_run_ever = true end
     end
 
-    --[[
-    if Steam.remotestorage.FileExists('save') then
-        local file_size = Steam.remotestorage.GetFileSize('save')
-		local buffer = ffi.new("uint8_t[?]", file_size)
-        local read_amount = Steam.remotestorage.FileRead('save', buffer, file_size)
-        print('FileRead: ' .. read_amount)
-        if read_amount == 0 then
-            localLoad()
-            loadAchievementsFromSteam()
-        else
-            local save_data = bitser.loads(ffi.string(buffer, file_size))
-            loadVariables(save_data)
-            loadAchievementsFromSteam()
-        end
-    else 
-        localLoad() 
-        loadAchievementsFromSteam()
-    end
-    ]]--
-
     localLoad()
-    loadAchievementsFromSteam()
 end
 
 function removeSave()
-    -- print('FileDelete: ' .. tostring(Steam.remotestorage.FileDelete('save')))
     love.filesystem.remove('transient_save')
 end
 
