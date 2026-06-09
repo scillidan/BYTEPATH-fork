@@ -26,7 +26,7 @@ jobs:
 
       - name: Build Windows package
         run: |
-          mkdir -p build/windows
+          mkdir -p build/windows dist
           cp -r love-win/love-0.10.2-win32/* build/windows/
           cat build/windows/love.exe build/bytepath.love > build/windows/bytepath.exe
           rm build/windows/love.exe build/windows/lovec.exe

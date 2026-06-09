@@ -27,15 +27,14 @@ jobs:
 
       - name: Download LÖVE 0.10.2
         run: |
-          wget -q https://github.com/love2d/love/releases/download/0.10.2/love-0.10.2-win-x86.zip
-          unzip -q love-0.10.2-win-x86.zip -d love-win
+          wget -q https://github.com/love2d/love/releases/download/0.10.2/love-0.10.2-win32.zip
+          unzip -q love-0.10.2-win32.zip -d love-win
 
       - name: Build Windows package
         run: |
-          mkdir -p build
+          mkdir -p build/windows dist
           zip -r build/bytepath.love conf.lua main.lua globals.lua utils.lua GameObject.lua tree.lua libraries objects rooms resources -x "*.git*"
-          mkdir -p build/windows
-          cp -r love-win/* build/windows/
+          cp -r love-win/love-0.10.2-win32/* build/windows/
           cat build/windows/love.exe build/bytepath.love > build/windows/bytepath.exe
           rm build/windows/love.exe build/windows/lovec.exe
           mv build/windows/bytepath.exe build/windows/love.exe
