@@ -360,7 +360,7 @@ function Stage:draw()
     end
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.setBlendMode('alpha', 'premultiplied')
-    love.graphics.draw(self.final_canvas, 0, 0, 0, sx, sy)
+    drawGameCanvas(self.final_canvas)
     love.graphics.setBlendMode('alpha')
     love.graphics.setShader()
 end

@@ -53,6 +53,10 @@ function love.load()
 
     local Touch = require 'libraries/touch_controls'
     touch = Touch:new()
+    local is_pi = love.system.getOS() == "Linux" and (ffi.arch == "arm" or ffi.arch == "arm64")
+    if is_pi then
+        touch = nil
+    end
 
     --[[
     input:bind('f1', function()
@@ -116,7 +120,12 @@ function love.load()
 
     load()
 
-    if first_run_ever then resizeFullscreen()
+    local is_gpi = love.system.getOS() == "Linux"
+        and (ffi.arch == "arm" or ffi.arch == "arm64")
+        and select(2, love.window.getDesktopDimensions()) <= 480
+    if is_gpi then
+        resizeFullscreen()
+    elseif first_run_ever then resizeFullscreen()
     else resize(sx, sy, fullscreen) end
 
     current_room = nil
@@ -191,7 +200,8 @@ function love.draw()
     end
     if flash_frames then
         love.graphics.setColor(background_color)
-        love.graphics.rectangle('fill', 0, 0, sx*gw, sy*gh)
+        local ox, oy, s = getLetterboxOffset()
+        love.graphics.rectangle('fill', ox, oy, gw*s, gh*s)
         love.graphics.setColor(1, 1, 1)
     end
 
@@ -229,6 +239,8 @@ function love.resize(w, h)
     if new_sx < 1 then new_sx = 1 end
     if new_sy < 1 then new_sy = 1 end
     sx, sy = new_sx, new_sy
+    if sx == 0 then sx = 1 end
+    if sy == 0 then sy = 1 end
 end
 
 function getLetterboxOffset()
@@ -237,6 +249,16 @@ function getLetterboxOffset()
     local offset_x = math.floor((w - gw*scale)/2)
     local offset_y = math.floor((h - gh*scale)/2)
     return offset_x, offset_y, scale
+end
+
+function drawGameCanvas(canvas)
+    local ox, oy, s = getLetterboxOffset()
+    love.graphics.setColor(0, 0, 0)
+    love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.setBlendMode('alpha', 'premultiplied')
+    love.graphics.draw(canvas, ox, oy, 0, s, s)
+    love.graphics.setBlendMode('alpha')
 end
 
 function resizeFullscreen()
