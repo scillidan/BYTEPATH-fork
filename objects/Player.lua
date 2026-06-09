@@ -277,9 +277,9 @@ function Player:new(area, x, y, opts)
     self.ship = (trailer_mode and opts.device) or device or 'Fighter'
     self:setShip()
 
-    if not opts.trailer_stats then treeToPlayer(self) 
+    if not opts.trailer_stats then treeToPlayer(self)
     else
-        for k, v in pairs(opts.trailer_stats) do 
+        for k, v in pairs(opts.trailer_stats) do
             if type(self[k]) == 'number' then self[k] = self[k] + v
             elseif type(self[k]) == 'boolean' then self[k] = v
             elseif self[k]:is(Stat) then self[k] = Stat(self[k].value + v) end
@@ -545,7 +545,7 @@ function Player:update(dt)
                     self:generateChances()
                     local text = ''
                     if n < 1 then text = text .. '+' .. n*100 .. '% ' .. self.permanent_buffs[buff_type][buff][2] .. '!'
-                    else 
+                    else
                         if self.permanent_buffs[buff_type][buff][2]:find('Chance') then text = text .. '+' .. n .. '% ' .. self.permanent_buffs[buff_type][buff][2] .. '!'
                         else text = text .. '+' .. n .. ' ' .. self.permanent_buffs[buff_type][buff][2] .. '!' end
                     end
@@ -564,8 +564,8 @@ function Player:update(dt)
 
     for _, shape in ipairs(self:enter('Enemy')) do
         local object = shape.object
-        if object then 
-            if object:is(Sapper) then self:hit(10) 
+        if object then
+            if object:is(Sapper) then self:hit(10)
             else self:hit(30) end
             if self.deals_damage_while_invulnerable then object:hit(1000) end
         end
@@ -617,7 +617,7 @@ function Player:update(dt)
     end
     if input:pressed('up') and self.boost > 1 and self.can_boost then self:onBoostStart() end
     if input:released('up') then self:onBoostEnd() end
-    if input:down('up') and self.boost > 1 and self.can_boost then 
+    if input:down('up') and self.boost > 1 and self.can_boost then
         self.boosting = true
         if self.turner then self.boosting_up = true end
         self.max_v = 1.5*self.base_max_v*self.boost_effectiveness_multiplier
@@ -632,7 +632,7 @@ function Player:update(dt)
     end
     if input:pressed('down') and self.boost > 1 and self.can_boost then self:onBoostStart() end
     if input:released('down') then self:onBoostEnd() end
-    if input:down('down') and self.boost > 1 and self.can_boost then 
+    if input:down('down') and self.boost > 1 and self.can_boost then
         self.boosting = true
         if self.turner then self.boosting_down = true end
         self.max_v = 0.5*self.base_max_v*(2-self.boost_effectiveness_multiplier)
@@ -645,7 +645,7 @@ function Player:update(dt)
             self:onBoostEnd()
         end
     end
-    self.trail_color = skill_point_color 
+    self.trail_color = skill_point_color
     if self.boosting then self.trail_color = boost_color end
 
     -- Shoot
@@ -770,7 +770,7 @@ function Player:shoot()
         self.ammo = self.ammo - attacks[self.attack].ammo*self.ammo_consumption_multiplier
         for i = 1, 12+self.additional_blast_projectile do
             local random_angle = random(-math.pi/6, math.pi/6)
-            self.area:addGameObject('Projectile', self.x + 1.5*d*math.cos(self.r + random_angle), self.y + 1.5*d*math.sin(self.r + random_angle), 
+            self.area:addGameObject('Projectile', self.x + 1.5*d*math.cos(self.r + random_angle), self.y + 1.5*d*math.sin(self.r + random_angle),
             {r = self.r + random_angle, attack = self.attack, v = random(500, 600)})
         end
         camera:shake(2, 60, 0.2)
@@ -853,8 +853,8 @@ function Player:shoot()
         local x3n, y3n, x4n, y4n = x2 + wm*16*math.cos(self.r - math.pi/2), y2 + wm*16*math.sin(self.r - math.pi/2), x2 + wm*16*math.cos(self.r + math.pi/2), y2 + wm*16*math.sin(self.r + math.pi/2)
         self.area:addGameObject('LaserLine', 0, 0, {x1 = x1, y1 = y1, x2 = x2, y2 = y2, angle = self.r, wm = wm})
         local objects = self.area:queryPolygonArea({x1n, y1n, x2n, y2n, x3n, y3n, x4n, y4n}, {'EnemyProjectile', unpack(enemies)})
-        for _, object in ipairs(objects) do 
-            object:hit(1000) 
+        for _, object in ipairs(objects) do
+            object:hit(1000)
             if object.dead then self:onKill(object) end
         end
 
@@ -862,9 +862,9 @@ function Player:shoot()
     end
 
     if self.chances.attack_twice_chance:next() then
-        self.timer:after(self.shoot_cooldown/2, function() 
+        self.timer:after(self.shoot_cooldown/2, function()
             -- self.area:addGameObject('InfoText', self.x, self.y, {text = 'Double Attack!'})
-            self:shoot() 
+            self:shoot()
         end)
     end
 
@@ -877,7 +877,7 @@ function Player:shoot()
         self.area:addGameObject('Projectile', self.x + 1.5*d*math.cos(self.r - math.pi), self.y + 1.5*d*math.sin(self.r - math.pi), {r = self.r - math.pi, attack = self.attack})
     end
 
-    if self.ammo <= 0 then 
+    if self.ammo <= 0 then
         self:setAttack('Neutral')
         self.ammo = self.max_ammo
 
@@ -1067,11 +1067,11 @@ function Player:hit(damage, hit_type)
 end
 
 function Player:bounce(bx, by)
-    
+
 end
 
 function Player:die()
-    self.dead = true 
+    self.dead = true
     flash(4)
     camera:shake(6, 60, 0.4)
     slow(0.15/self.invulnerability_time_multiplier, 1.5)
@@ -1094,7 +1094,7 @@ end
 
 function Player:addBoost(amount)
     self.boost = math.min(self.boost + amount, self.max_boost)
-    current_room.score = current_room.score + 150   
+    current_room.score = current_room.score + 150
 end
 
 function Player:removeBoost(amount)
@@ -1432,8 +1432,8 @@ function Player:onBoostStart()
         end
     end)
 
-    if self.increased_luck_while_boosting then 
-        self.luck_boosting = true 
+    if self.increased_luck_while_boosting then
+        self.luck_boosting = true
         self.luck_multiplier = self.luck_multiplier*2
         self:generateChances()
     end
@@ -1451,8 +1451,8 @@ end
 function Player:onBoostEnd()
     self.timer:cancel('launch_homing_projectile_while_boosting_chance')
 
-    if self.increased_luck_while_boosting then 
-        self.luck_boosting = false 
+    if self.increased_luck_while_boosting then
+        self.luck_boosting = false
         self.luck_multiplier = self.luck_multiplier/2
         self:generateChances()
     end
@@ -1492,7 +1492,7 @@ function Player:barrage(barrage_nova)
             local random_angle = random(-math.pi/8, math.pi/8)
             if self.barrage_nova or barrage_nova then random_angle = random(0, 2*math.pi) end
             local d = 2.2*self.w
-            self.area:addGameObject('Projectile', self.x + d*math.cos(self.r + random_angle), self.y + d*math.sin(self.r + random_angle), 
+            self.area:addGameObject('Projectile', self.x + d*math.cos(self.r + random_angle), self.y + d*math.sin(self.r + random_angle),
             {r = self.r + random_angle, attack = self.attack, damage_multiplier = 0.5})
         end)
     end
@@ -1640,10 +1640,6 @@ function Player:setClass(class)
         self.absorb_hits = true
     end
 
-    if classes.turner then
-
-    end
-
     if classes.driver then
         self.invulnerability_time_multiplier = self.invulnerability_time_multiplier + 0.3
         self.boost_recharge_rate_multiplier = self.boost_recharge_rate_multiplier + 0.3
@@ -1714,10 +1710,6 @@ function Player:setClass(class)
         self.boost = self.max_boost
         self.aspd_multiplier = Stat(self.aspd_multiplier.value - 0.15)
         self.mvspd_multiplier = Stat(self.mvspd_multiplier.value - 0.15)
-    end
-
-    if classes.dasher then
-
     end
 
     if classes.engineer then
@@ -1867,10 +1859,6 @@ function Player:setClasses()
         self.absorb_hits = true
     end
 
-    if self.turner then
-
-    end
-
     if self.driver then
         self.invulnerability_time_multiplier = self.invulnerability_time_multiplier + 0.3
         self.boost_recharge_rate_multiplier = self.boost_recharge_rate_multiplier + 0.3
@@ -2005,10 +1993,6 @@ function Player:setClasses()
         self.mvspd_multiplier = Stat(self.mvspd_multiplier.value - 0.15)
     end
 
-    if self.dasher then
-
-    end
-
     if self.engineer then
         self.max_ammo = math.floor(self.max_ammo*0.5)
         self.ammo = self.max_ammo
@@ -2027,7 +2011,7 @@ function Player:setClasses()
 end
 
 function Player:setShip()
-    if self.ship == 'Fighter' then
+    if self.ship == 'Fighter' then do end
 
     elseif self.ship == 'Crusader' then
         self.max_boost = 80
@@ -2121,10 +2105,10 @@ end
 
 function Player:generateChances()
 	self.chances = {}
-  	for k, v in pairs(self) do
-    	if k:find('_chance') and type(v) == 'number' then
+    for k, v in pairs(self) do
+        if k:find('_chance') and type(v) == 'number' then
             if k:find('_on_kill') and v > 0 then
-                self.chances[k] = chanceList({true, math.ceil(self.luck_multiplier*(v+self.added_chance_to_all_on_kill_events))}, 
+                self.chances[k] = chanceList({true, math.ceil(self.luck_multiplier*(v+self.added_chance_to_all_on_kill_events))},
                 {false, 100-math.ceil(self.luck_multiplier*(v+self.added_chance_to_all_on_kill_events))})
             else
                 if k:find('sp') and v > 0 and self.raider then
@@ -2133,7 +2117,7 @@ function Player:generateChances()
                     self.chances[k] = chanceList({true, math.ceil(self.luck_multiplier*v)}, {false, 100-math.ceil(self.luck_multiplier*v)})
                 end
             end
-      	end
+        end
     end
 end
 
@@ -2310,87 +2294,87 @@ function Player:shipVisuals()
 end
 
 function Player:boostTrails()
-    self.trail_color = skill_point_color 
-    self.timer:every(0.01, function() 
+    self.trail_color = skill_point_color
+    self.timer:every(0.01, function()
         if self.ship == 'Fighter' then
-            self.area:addGameObject('TrailParticle', 
-            self.x - 1.0*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r - math.pi/2), 
-            self.y - 1.0*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r - math.pi/2), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color}) 
-            self.area:addGameObject('TrailParticle', 
-            self.x - 1.0*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r + math.pi/2), 
-            self.y - 1.0*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r + math.pi/2), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color}) 
+            self.area:addGameObject('TrailParticle',
+            self.x - 1.0*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r - math.pi/2),
+            self.y - 1.0*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r - math.pi/2),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color})
+            self.area:addGameObject('TrailParticle',
+            self.x - 1.0*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r + math.pi/2),
+            self.y - 1.0*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r + math.pi/2),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color})
 
         elseif self.ship == 'Crusader' then
-            self.area:addGameObject('TrailParticle', 
-            self.x - 1.2*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r - math.pi/2), 
-            self.y - 1.2*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r - math.pi/2), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color}) 
-            self.area:addGameObject('TrailParticle', 
-            self.x - 1.2*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r + math.pi/2), 
-            self.y - 1.2*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r + math.pi/2), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color}) 
+            self.area:addGameObject('TrailParticle',
+            self.x - 1.2*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r - math.pi/2),
+            self.y - 1.2*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r - math.pi/2),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color})
+            self.area:addGameObject('TrailParticle',
+            self.x - 1.2*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r + math.pi/2),
+            self.y - 1.2*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r + math.pi/2),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color})
 
         elseif self.ship == 'Bit Hunter' then
-            self.area:addGameObject('TrailParticle', 
-            self.x - 0.8*self.w*math.cos(self.r), self.y - 0.8*self.w*math.sin(self.r), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.1, 0.2), color = self.trail_color}) 
+            self.area:addGameObject('TrailParticle',
+            self.x - 0.8*self.w*math.cos(self.r), self.y - 0.8*self.w*math.sin(self.r),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.1, 0.2), color = self.trail_color})
 
         elseif self.ship == 'Rogue' then
-            self.area:addGameObject('TrailParticle', 
-            self.x - 0.7*self.w*math.cos(self.r) + 0.4*self.w*math.cos(self.r - math.pi/2), 
-            self.y - 0.7*self.w*math.sin(self.r) + 0.4*self.w*math.sin(self.r - math.pi/2), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color}) 
-            self.area:addGameObject('TrailParticle', 
-            self.x - 0.7*self.w*math.cos(self.r) + 0.4*self.w*math.cos(self.r + math.pi/2), 
-            self.y - 0.7*self.w*math.sin(self.r) + 0.4*self.w*math.sin(self.r + math.pi/2), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color}) 
+            self.area:addGameObject('TrailParticle',
+            self.x - 0.7*self.w*math.cos(self.r) + 0.4*self.w*math.cos(self.r - math.pi/2),
+            self.y - 0.7*self.w*math.sin(self.r) + 0.4*self.w*math.sin(self.r - math.pi/2),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color})
+            self.area:addGameObject('TrailParticle',
+            self.x - 0.7*self.w*math.cos(self.r) + 0.4*self.w*math.cos(self.r + math.pi/2),
+            self.y - 0.7*self.w*math.sin(self.r) + 0.4*self.w*math.sin(self.r + math.pi/2),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color})
 
         elseif self.ship == 'Sentinel' then
-            self.area:addGameObject('TrailParticle', 
-            self.x - 1.0*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r - math.pi/2), 
-            self.y - 1.0*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r - math.pi/2), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color}) 
-            self.area:addGameObject('TrailParticle', 
-            self.x - 1.0*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r + math.pi/2), 
-            self.y - 1.0*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r + math.pi/2), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color}) 
+            self.area:addGameObject('TrailParticle',
+            self.x - 1.0*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r - math.pi/2),
+            self.y - 1.0*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r - math.pi/2),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color})
+            self.area:addGameObject('TrailParticle',
+            self.x - 1.0*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r + math.pi/2),
+            self.y - 1.0*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r + math.pi/2),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color})
 
         elseif self.ship == 'Striker' then
-            self.area:addGameObject('TrailParticle', 
-            self.x - 1.0*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r - math.pi/2), 
-            self.y - 1.0*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r - math.pi/2), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color}) 
-            self.area:addGameObject('TrailParticle', 
-            self.x - 1.0*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r + math.pi/2), 
-            self.y - 1.0*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r + math.pi/2), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color}) 
+            self.area:addGameObject('TrailParticle',
+            self.x - 1.0*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r - math.pi/2),
+            self.y - 1.0*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r - math.pi/2),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color})
+            self.area:addGameObject('TrailParticle',
+            self.x - 1.0*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r + math.pi/2),
+            self.y - 1.0*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r + math.pi/2),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color})
 
         elseif self.ship == 'Nuclear' then
-            self.area:addGameObject('TrailParticle', 
-            self.x - 1*self.w*math.cos(self.r), self.y - 1*self.w*math.sin(self.r), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.1, 0.2), color = self.trail_color}) 
+            self.area:addGameObject('TrailParticle',
+            self.x - 1*self.w*math.cos(self.r), self.y - 1*self.w*math.sin(self.r),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.1, 0.2), color = self.trail_color})
 
         elseif self.ship == 'Cycler' then
-            self.area:addGameObject('TrailParticle', 
-            self.x - 1*self.w*math.cos(self.r), self.y - 1*self.w*math.sin(self.r), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.1, 0.2), color = self.trail_color}) 
+            self.area:addGameObject('TrailParticle',
+            self.x - 1*self.w*math.cos(self.r), self.y - 1*self.w*math.sin(self.r),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.1, 0.2), color = self.trail_color})
 
-            self.area:addGameObject('TrailParticle', 
-            self.x - 0.8*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r - math.pi/2), 
-            self.y - 0.8*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r - math.pi/2), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color}) 
+            self.area:addGameObject('TrailParticle',
+            self.x - 0.8*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r - math.pi/2),
+            self.y - 0.8*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r - math.pi/2),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color})
 
-            self.area:addGameObject('TrailParticle', 
-            self.x - 0.8*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r + math.pi/2), 
-            self.y - 0.8*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r + math.pi/2), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color}) 
+            self.area:addGameObject('TrailParticle',
+            self.x - 0.8*self.w*math.cos(self.r) + 0.2*self.w*math.cos(self.r + math.pi/2),
+            self.y - 0.8*self.w*math.sin(self.r) + 0.2*self.w*math.sin(self.r + math.pi/2),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.15, 0.25), color = self.trail_color})
 
         elseif self.ship == 'Wisp' then
-            self.area:addGameObject('TrailParticle', 
-            self.x - 1*self.w*math.cos(self.r), self.y - 1*self.w*math.sin(self.r), 
-            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.1, 0.15), color = self.trail_color}) 
+            self.area:addGameObject('TrailParticle',
+            self.x - 1*self.w*math.cos(self.r), self.y - 1*self.w*math.sin(self.r),
+            {parent = self, r = random(2, 4)*self.size_multiplier, d = random(0.1, 0.15), color = self.trail_color})
         end
     end)
 end

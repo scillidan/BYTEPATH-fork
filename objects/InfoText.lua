@@ -13,8 +13,8 @@ function InfoText:new(area, x, y, opts)
     for i = 1, #self.text do table.insert(self.characters, self.text:utf8sub(i, i)) end
 
     local x, y, i, j = current_room:getInfoTextPosition(self.x, self.y)
-    if x and y then 
-        self.x, self.y = x, y 
+    if x and y then
+        self.x, self.y = x, y
         self.i, self.j = i, j
     end
 
@@ -39,8 +39,8 @@ function InfoText:new(area, x, y, opts)
             end
         end)
     end)
-    self.timer:after(1.10, function() 
-        self.dead = true 
+    self.timer:after(1.10, function()
+        self.dead = true
         if self.i and self.j then current_room.info_text_grid:set(self.i, self.j, 0) end
     end)
 end
@@ -62,11 +62,11 @@ function InfoText:draw()
         end
 
         if self.background_colors[i] then
-      		love.graphics.setColor(self.background_colors[i])
-      		love.graphics.rectangle('fill', self.x + width, self.y - self.font:getHeight()/2, self.font:getWidth(self.characters[i]), self.font:getHeight())
-      	end
-    	love.graphics.setColor(self.foreground_colors[i] or self.color or default_color)
-    	love.graphics.print(self.characters[i], self.x + width, self.y, 0, 1, 1, 0, self.font:getHeight()/2)
+            love.graphics.setColor(self.background_colors[i])
+            love.graphics.rectangle('fill', self.x + width, self.y - self.font:getHeight()/2, self.font:getWidth(self.characters[i]), self.font:getHeight())
+        end
+        love.graphics.setColor(self.foreground_colors[i] or self.color or default_color)
+        love.graphics.print(self.characters[i], self.x + width, self.y, 0, 1, 1, 0, self.font:getHeight()/2)
     end
     love.graphics.setColor(default_color)
 end

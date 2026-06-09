@@ -6,7 +6,7 @@ function Tanker:new(area, x, y, opts)
     local direction = table.random({-1, 1})
     self.x = gw/2 + direction*(gw/2 + 48)
     self.y = random(16, gh - 16)
-    
+
     self.w, self.h = 32, 32
     self.shape = HC.polygon(unpack(createIrregularPolygon(32)))
     self.shape.id = self.id

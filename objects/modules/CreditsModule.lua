@@ -3,7 +3,7 @@ CreditsModule = Object:extend()
 function CreditsModule:new(console, y)
     self.console = console
     self.y = y
-    
+
     self.console:addLine(0.02, '')
     self.console:addLine(0.04, '    game by $SSYGEN%')
     self.console:addLine(0.06, '    music by $AIRGLOW%')
@@ -64,7 +64,7 @@ end
 
 function CreditsModule:draw()
     if not self.active then return end
-    
+
     local font = self.console.font
     local t = self.selections[self.vertical_selection_index][self.horizontal_selection_index]
     local x, y = t.ox - 1, self.vertical_selection_index*(font:getHeight() + 2) + 5

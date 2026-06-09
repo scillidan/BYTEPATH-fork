@@ -27,4 +27,4 @@ end
 
 function HasteArea:destroy()
     HasteArea.super.destroy(self)
-end 
+end

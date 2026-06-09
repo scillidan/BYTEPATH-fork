@@ -9,7 +9,7 @@ function Glitcher:new(area, x, y, opts)
     self.x = opts.x or (gw/2 + self.direction*(gw/2 + 48))
     self.y = opts.y or (random(16, gh - 16))
 
-    self.w, self.h = 24, 24 
+    self.w, self.h = 24, 24
     self.shape = HC.polygon(self.w, -self.h, self.w, self.h, -self.w, self.h, -self.w, -self.h)
     self.shape:moveTo(self.x, self.y)
     self.shape.id = self.id

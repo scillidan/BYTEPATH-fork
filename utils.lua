@@ -17,7 +17,8 @@ function KEY()
 end
 
 function random(min, max)
-    local min, max = min or 0, max or 1
+    min = min or 0
+    max = max or 1
     return (min > max and (love.math.random()*(min - max) + max)) or (love.math.random()*(max - min) + min)
 end
 
@@ -97,7 +98,7 @@ function getPointsAlongLine(n, x1, y1, x2, y2)
 end
 
 function createIrregularPolygon(size, point_amount)
-    local point_amount = point_amount or 8
+    point_amount = point_amount or 8
     local points = {}
     for i = 1, point_amount do
         local angle_interval = 2*math.pi/point_amount

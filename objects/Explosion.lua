@@ -2,7 +2,7 @@ Explosion = GameObject:extend()
 
 function Explosion:new(area, x, y, opts)
     Explosion.super.new(self, area, x, y, opts)
-    
+
     playGameExplosion()
 
     self.w = 16
@@ -11,7 +11,7 @@ function Explosion:new(area, x, y, opts)
     if current_room.player.projectiles_explosions then
         self.timer:tween(0.1, self, {w = w*current_room.player.area_multiplier}, 'in-out-cubic', function()
             camera:shake(w/24, 60, (w/48)*0.4)
-            for i = 1, love.math.random(8, 12) do 
+            for i = 1, love.math.random(8, 12) do
                 current_room.explode_particles:add(self.x, self.y, (w/48)*random(150, 300), random(6, 10), attacks[current_room.player.attack].color)
             end
             self.timer:tween(0.20, self, {w = 0}, 'in-out-cubic', function() self.dead = true end)
@@ -21,9 +21,9 @@ function Explosion:new(area, x, y, opts)
             self.timer:after((i-1)*0.05, function()
                 local random_angle = random(0, 2*math.pi)
                 if current_room.player.attack == 'Explode' then self.area:addGameObject('Projectile', self.x + math.cos(random_angle), self.y + math.sin(random_angle), {r = random_angle, attack = 'Neutral'})
-                else 
-                    self.area:addGameObject('Projectile', self.x + math.cos(random_angle), self.y + math.sin(random_angle), 
-                    {r = random_angle, attack = current_room.player.attack, dont_explode = self.from_explode_on_expiration}) 
+                else
+                    self.area:addGameObject('Projectile', self.x + math.cos(random_angle), self.y + math.sin(random_angle),
+                    {r = random_angle, attack = current_room.player.attack, dont_explode = self.from_explode_on_expiration})
                 end
             end)
         end
@@ -35,10 +35,10 @@ function Explosion:new(area, x, y, opts)
         end)
 
         local objects = self.area.enemies
-        for i, object in ipairs(objects) do 
+        for i, object in ipairs(objects) do
             if distance(object.x, object.y, self.x, self.y) < (opts.w or 48)*current_room.player.area_multiplier then
-                self.timer:after((i-1)*0.025, function() 
-                    if object.hit then object:hit(200*(self.damage_multiplier or 1))  
+                self.timer:after((i-1)*0.025, function()
+                    if object.hit then object:hit(200*(self.damage_multiplier or 1))
                     else object:die() end
                 end)
             end

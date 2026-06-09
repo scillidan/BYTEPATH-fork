@@ -7,7 +7,7 @@ function Achievements:new()
     self.x, self.y = 15, 15
     self.camera = Cam(gw/2, gh/2, gw, gh)
     self.target_x = gw/2
-    
+
     self.font = fonts.Anonymous_8
     self.big_font = fonts.m5x7_16
     self.main_canvas = love.graphics.newCanvas(gw, gh)
@@ -17,7 +17,7 @@ function Achievements:new()
     self.achievement_index = 1
 
     self.timer:every({0.1, 0.2}, function() self.area:addGameObject('GlitchDisplacement') end)
-    
+
     self.device_vertices = {
         ['Fighter'] = {
             ['vertice_groups'] = {
@@ -37,7 +37,7 @@ function Achievements:new()
                     -3*12/4, -12/4,
                     -12/2, -12/2,
                 },
-                
+
                 [3] = {
                     12/2, 12/2,
                     -12/2, 12/2,
@@ -270,7 +270,7 @@ function Achievements:draw()
         local w = self.font:getWidth(text)
         local x, y = gw - w - 15, 5
         love.graphics.setColor(0, 0, 0, 222)
-        love.graphics.rectangle('fill', x, y, w + 10, 16) 
+        love.graphics.rectangle('fill', x, y, w + 10, 16)
         love.graphics.setColor(255, 255, 255, 255)
         love.graphics.print(text, x + 5, y + 3)
         if pmx >= sx*x and pmx <= sx*(x + w + 10) and pmy >= sy*y and pmy <= sy*(y + 16) then love.graphics.rectangle('line', x, y, w + 10, 16) end
@@ -290,7 +290,7 @@ function Achievements:draw()
         shaders.glitch:send('glitch_map', self.glitch_canvas)
         love.graphics.draw(self.main_canvas, 0, 0, 0, 1, 1)
         love.graphics.setShader()
-  		love.graphics.setBlendMode("alpha")
+        love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas()
 
     if not disable_expensive_shaders then
@@ -322,7 +322,7 @@ function Achievements:drawAchievement(x, y, achievement_name, active)
     if achievements[achievement_name] then love.graphics.setColor(color) end
     love.graphics.print(name, x, y, 0, 2, 2, math.floor(self.font:getWidth(name)/2), math.floor(self.font:getHeight()/2))
 
-    y = y + 28 
+    y = y + 28
     local device = ''
     if achievement_name:find('Fighter') then device = 'Fighter' end
     if achievement_name:find('Crusader') then device = 'Crusader' end
@@ -338,8 +338,8 @@ function Achievements:drawAchievement(x, y, achievement_name, active)
     love.graphics.setColor(default_color)
     pushRotateScale(x, y, -math.pi/2)
     for _, vertice_group in ipairs(self.device_vertices[device].vertice_groups) do
-        local points = fn.map(vertice_group, function(k, v) 
-            if k % 2 == 1 then return x + v + random(-1, 1) else return y + v + random(-1, 1) end 
+        local points = fn.map(vertice_group, function(k, v)
+            if k % 2 == 1 then return x + v + random(-1, 1) else return y + v + random(-1, 1) end
         end)
         love.graphics.polygon('line', points)
     end
@@ -395,12 +395,12 @@ function Achievements:drawAchievement(x, y, achievement_name, active)
 
     if active then
         y = y + 36
-        if achievements[achievement_name] then 
+        if achievements[achievement_name] then
             love.graphics.setColor(ammo_color)
             love.graphics.print('UNLOCKED', x, y, 0, 1, 1, math.floor(self.font:getWidth('UNLOCKED')/2), math.floor(self.font:getHeight()/2))
-        else 
+        else
             love.graphics.setColor(hp_color)
-            love.graphics.print('LOCKED', x, y, 0, 1, 1, math.floor(self.font:getWidth('LOCKED')/2), math.floor(self.font:getHeight()/2)) 
+            love.graphics.print('LOCKED', x, y, 0, 1, 1, math.floor(self.font:getWidth('LOCKED')/2), math.floor(self.font:getHeight()/2))
         end
         love.graphics.setColor(default_color)
 
@@ -410,5 +410,5 @@ function Achievements:drawAchievement(x, y, achievement_name, active)
 end
 
 function Achievements:destroy()
-    
+
 end

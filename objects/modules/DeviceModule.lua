@@ -25,8 +25,8 @@ function DeviceModule:new(console, y)
     self.console:addLine(0.10, '')
     self.console:addLine(0.10, '')
     self.console:addLine(0.12, '~ ;SP: ' .. tostring(skill_points) .. ', / $CURRENT DEVICE: ' .. string.upper(device) .. '%')
-    self.console.timer:after(0.14, function() 
-        self.active = true 
+    self.console.timer:after(0.14, function()
+        self.active = true
         self.device_line = self.console.lines[#self.console.lines]
     end)
 
@@ -163,7 +163,7 @@ function DeviceModule:new(console, y)
                     -3*12/4, -12/4,
                     -12/2, -12/2,
                 },
-                
+
                 [3] = {
                     12/2, 12/2,
                     -12/2, 12/2,
@@ -344,7 +344,7 @@ function DeviceModule:new(console, y)
 end
 
 function DeviceModule:update(dt)
-    if not self.active then return end 
+    if not self.active then return end
 
     if input:pressed('left') then
         self.device_index = self.device_index - 1
@@ -399,7 +399,7 @@ end
 function DeviceModule:draw()
     love.graphics.setColor(default_color)
     pushRotateScale(self.x, self.y, 0, self.sx, self.sy)
-    local w, h = self.w, self.h 
+    local w, h = self.w, self.h
     local x, y = self.x, self.y
 
     love.graphics.setFont(self.font)
@@ -418,17 +418,17 @@ function DeviceModule:draw()
     love.graphics.print(device, self.x - self.w/2 + 10, self.y - 27, 0, 1.01, 1.01, self.font:getWidth(device)/2, self.font:getHeight()/2)
     pushRotate(self.x - self.w/2 + 10, self.y - 2 + self.device_y_offsets[device], -math.pi/2)
     for _, vertice_group in ipairs(self.device_vertices[self.devices[self.device_index]].vertice_groups) do
-        local points = fn.map(vertice_group, function(k, v) 
-            if k % 2 == 1 then return self.x - self.w/2 + 10 + v + random(-1, 1) else return self.y - 2 + self.device_y_offsets[device] + v + random(-1, 1) end 
+        local points = fn.map(vertice_group, function(k, v)
+            if k % 2 == 1 then return self.x - self.w/2 + 10 + v + random(-1, 1) else return self.y - 2 + self.device_y_offsets[device] + v + random(-1, 1) end
         end)
         love.graphics.polygon('line', points)
     end
     love.graphics.pop()
-    if fn.any(unlocked_devices, device) then 
+    if fn.any(unlocked_devices, device) then
         love.graphics.print('UNLOCKED', self.x - self.w/2 + 10, self.y + 23 + self.device_y_offsets[device]/2, 0, 1.01, 1.01, self.font:getWidth('UNLOCKED')/2, self.font:getHeight()/2)
     else
         love.graphics.setColor(skill_point_color)
-        love.graphics.print('LOCKED - ' .. self.device_costs[device] .. 'SP', self.x - self.w/2 + 10, self.y + 23 + self.device_y_offsets[device]/2, 0, 1.01, 1.01, 
+        love.graphics.print('LOCKED - ' .. self.device_costs[device] .. 'SP', self.x - self.w/2 + 10, self.y + 23 + self.device_y_offsets[device]/2, 0, 1.01, 1.01,
         self.font:getWidth('LOCKED - ' .. self.device_costs[device] .. 'SP')/2, self.font:getHeight()/2)
         love.graphics.setColor(default_color)
     end

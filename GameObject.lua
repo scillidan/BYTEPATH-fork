@@ -1,7 +1,7 @@
 GameObject = Object:extend()
 
 function GameObject:new(area, x, y, opts)
-    local opts = opts or {}
+    opts = opts or {}
     if opts then for k, v in pairs(opts) do self[k] = v end end
 
     self.area = area
@@ -18,8 +18,8 @@ end
 
 function GameObject:update(dt)
     if self.timer then self.timer:update(dt) end
-    if self.shape then 
-        self.previous_collisions = table.copy(self.current_collisions) 
+    if self.shape then
+        self.previous_collisions = table.copy(self.current_collisions)
         self.current_collisions = {}
     end
 end
@@ -53,7 +53,7 @@ function GameObject:enemyProjectileCollisions()
         if object then
             self:hit(object.damage, object.x, object.y, object.r)
             if self.hp <= 0 then current_room.player:onKill(self) end
-            if object.pierce > 0 then 
+            if object.pierce > 0 then
                 object.pierce = object.pierce - 1
                 if object.attack == 'Explode' then object.area:addGameObject('Explosion', object.x, object.y, {color = self.color}) end
             else object:die() end

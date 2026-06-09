@@ -89,12 +89,12 @@ function Console:update(dt)
                 local c = command:sub(i, i)
                 self.timer:after(0.025*i, function() love.event.push('keypressed', c) end)
             end
-            self.timer:after(0.025*(#command+1) + 0.25, function() 
-                if self.input_line then 
-                    self.input_line:enter() 
+            self.timer:after(0.025*(#command+1) + 0.25, function()
+                if self.input_line then
+                    self.input_line:enter()
                     playKeystroke()
                     self:rgbShift()
-                end 
+                end
             end)
         end
 
@@ -106,12 +106,12 @@ function Console:update(dt)
                 local c = command:sub(i, i)
                 self.timer:after(0.025*i, function() love.event.push('keypressed', c) end)
             end
-            self.timer:after(0.025*(#command+1) + 0.25, function() 
-                if self.input_line then 
-                    self.input_line:enter() 
+            self.timer:after(0.025*(#command+1) + 0.25, function()
+                if self.input_line then
+                    self.input_line:enter()
                     playKeystroke()
                     self:rgbShift()
-                end 
+                end
             end)
         end
     end
@@ -152,7 +152,7 @@ function Console:draw()
         shaders.glitch:send('glitch_map', self.glitch_canvas)
         love.graphics.draw(self.main_canvas, 0, 0, 0, 1, 1)
         love.graphics.setShader()
-  		love.graphics.setBlendMode("alpha")
+        love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas()
 
     love.graphics.setCanvas(self.final_canvas)
@@ -163,7 +163,7 @@ function Console:draw()
         shaders.rgb_shift:send('amount', {random(-self.rgb_shift_mag, self.rgb_shift_mag)/gw, random(-self.rgb_shift_mag, self.rgb_shift_mag)/gh})
         love.graphics.draw(self.temp_canvas, 0, 0, 0, 1, 1)
         love.graphics.setShader()
-  		love.graphics.setBlendMode("alpha")
+        love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas()
 
     if not disable_expensive_shaders then
@@ -180,20 +180,20 @@ function Console:draw()
 end
 
 function Console:destroy()
-    
+
 end
 
 function Console:addLine(after, text, duration, swaps)
     self.timer:after(after, function()
         if text ~= '' then playComputerLine() end
-        if self.bytepath_main then 
+        if self.bytepath_main then
             if text == '~ type @help# for help' then
                 self.bytepath_main_y = self.line_y
             end
         end
         table.insert(self.lines, ConsoleLine(8, self.line_y, {text = text, duration = duration, swaps = swaps}))
         self.line_y = self.line_y + 12
-        if self.line_y > gh then camera:lookAt(camera.x, camera.y + 12) end 
+        if self.line_y > gh then camera:lookAt(camera.x, camera.y + 12) end
     end)
 end
 
@@ -202,24 +202,24 @@ function Console:addInputLine(delay, text)
         self.input_line = ConsoleInputLine(8, self.line_y, {text = text, console = self})
         table.insert(self.lines, self.input_line)
         self.line_y = self.line_y + 12
-        if self.line_y > gh then camera:lookAt(camera.x, camera.y + 12) end 
+        if self.line_y > gh then camera:lookAt(camera.x, camera.y + 12) end
     end)
 end
 
 function Console:getRandomArchWord()
     local word = ''
     local random_letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWYXZ'
-    for i = 1, love.math.random(1, 5) do 
+    for i = 1, love.math.random(1, 5) do
         local r = love.math.random(1, #random_letters)
-        word = word .. random_letters:utf8sub(r, r) 
+        word = word .. random_letters:utf8sub(r, r)
     end
     return word
 end
 
 function Console:keypressed(key)
-    if self.input_line and self:isConsoleCharacter(key) then 
+    if self.input_line and self:isConsoleCharacter(key) then
         self.bytepath_main = false
-        self.input_line:keypressed(key) 
+        self.input_line:keypressed(key)
     end
 end
 
@@ -234,7 +234,7 @@ function Console:isConsoleCharacter(key)
 end
 
 function Console:bytepathMain(delay)
-    local delay = delay or 0 
+    delay = delay or 0
     local classes_string = ''
     for _, class in ipairs(classes) do
         if class_colors[class] == ammo_color then
@@ -260,7 +260,7 @@ function Console:bytepathMain(delay)
     end
     self:addLine(delay + 0.14, ';SP: ' .. skill_points .. ',')
     self:addLine(delay + 0.16, '$CURRENT DEVICE: ' .. device .. '%')
-    self:addLine(delay + 0.18, 'CLASSES: ' .. classes_string) 
+    self:addLine(delay + 0.18, 'CLASSES: ' .. classes_string)
     self:addLine(delay + 0.20, 'LAST SCORE: ' .. score)
     self:addLine(delay + 0.22, 'HIGH SCORE: ' .. high_score)
     self:addLine(delay + 0.24, '')
@@ -287,7 +287,7 @@ function Console:bytepathMain(delay)
 end
 
 function Console:bytepathMain2()
-    local delay = delay or 0 
+    delay = delay or 0
     local classes_string = ''
     for _, class in ipairs(classes) do
         if class_colors[class] == ammo_color then
@@ -306,7 +306,7 @@ function Console:bytepathMain2()
     self:addLine(delay + 0.02, '')
     self:addLine(delay + 0.04, ';SP: ' .. skill_points .. ',')
     self:addLine(delay + 0.06, '$CURRENT DEVICE: ' .. device .. '%')
-    self:addLine(delay + 0.08, 'CLASSES: ' .. classes_string) 
+    self:addLine(delay + 0.08, 'CLASSES: ' .. classes_string)
     self:addLine(delay + 0.10, 'LAST SCORE: ' .. score)
     self:addLine(delay + 0.12, 'HIGH SCORE: ' .. high_score)
     self:addLine(delay + 0.14, '')
@@ -447,7 +447,7 @@ end
 function Console:glitch(x, y)
     for i = 1, 6 do
         self.timer:after(0.1*i, function()
-            self.area:addGameObject('GlitchDisplacement', x + random(-32, 32), y + random(-32, 32)) 
+            self.area:addGameObject('GlitchDisplacement', x + random(-32, 32), y + random(-32, 32))
         end)
     end
 end

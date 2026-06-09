@@ -27,7 +27,7 @@ function AchievementScreenshots:new()
                     -3*12/4, -12/4,
                     -12/2, -12/2,
                 },
-                
+
                 [3] = {
                     12/2, 12/2,
                     -12/2, 12/2,
@@ -249,7 +249,7 @@ function AchievementScreenshots:drawAchievement(x, y, achievement_name, active)
     if self.active then love.graphics.setColor(color) end
     love.graphics.print(name, x, y, 0, 2, 2, math.floor(self.font:getWidth(name)/2), math.floor(self.font:getHeight()/2))
 
-    y = y + 28 
+    y = y + 28
     local device = ''
     if achievement_name:find('Fighter') then device = 'Fighter' end
     if achievement_name:find('Crusader') then device = 'Crusader' end
@@ -265,8 +265,8 @@ function AchievementScreenshots:drawAchievement(x, y, achievement_name, active)
     love.graphics.setColor(default_color)
     pushRotateScale(x, y, -math.pi/2)
     for _, vertice_group in ipairs(self.device_vertices[device].vertice_groups) do
-        local points = fn.map(vertice_group, function(k, v) 
-            if k % 2 == 1 then return x + v + random(-1, 1) else return y + v + random(-1, 1) end 
+        local points = fn.map(vertice_group, function(k, v)
+            if k % 2 == 1 then return x + v + random(-1, 1) else return y + v + random(-1, 1) end
         end)
         love.graphics.polygon('line', points)
     end
@@ -320,5 +320,5 @@ function AchievementScreenshots:drawAchievement(x, y, achievement_name, active)
 end
 
 function AchievementScreenshots:destroy()
-    
+
 end

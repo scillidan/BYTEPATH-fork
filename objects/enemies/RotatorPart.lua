@@ -25,7 +25,7 @@ function RotatorPart:update(dt)
     RotatorPart.super.update(self, dt)
 
     if self.center then
-        self.collider:setLinearVelocity(self.v, 0) 
+        self.collider:setLinearVelocity(self.v, 0)
         self.collider:setAngularVelocity(self.direction*20)
     end
 

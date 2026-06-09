@@ -32,7 +32,7 @@ function EnemyProjectile:new(area, x, y, opts)
 
     if self.homing then self.timer:after(random(0.4, 0.8), function() self.homing = false end) end
     if self.orbitter then self.invulnerable = true end
-    if self.trailer then 
+    if self.trailer then
         self.homing = true
         self.homing_force = 0.02
     end
@@ -45,9 +45,9 @@ function EnemyProjectile:new(area, x, y, opts)
     end
 
     if self.projectile_ninety_degree_change then
-		self.timer:after(0.2, function()
-      		self.ninety_degree_direction = table.random({-1, 1})
-        	self.r = self.r + self.ninety_degree_direction*math.pi/2
+        self.timer:after(0.2, function()
+            self.ninety_degree_direction = table.random({-1, 1})
+            self.r = self.r + self.ninety_degree_direction*math.pi/2
             self.timer:every('ninety_degree_first', 0.25, function()
                 self.r = self.r - self.ninety_degree_direction*math.pi/2
                 self.timer:after('ninety_degree_second', 0.1, function()
@@ -55,7 +55,7 @@ function EnemyProjectile:new(area, x, y, opts)
                     self.ninety_degree_direction = -1*self.ninety_degree_direction
                 end)
             end)
-      	end)
+        end)
     end
 end
 
@@ -82,7 +82,7 @@ function EnemyProjectile:update(dt)
             local projectile_heading_x, projectile_heading_y = Vector.normalize(self.vx, self.vy)
             local angle = math.atan2(self.target.y - self.y, self.target.x - self.x)
             local to_target_heading_x, to_target_heading_y = Vector.normalize(math.cos(angle), math.sin(angle))
-            local final_heading_x, final_heading_y = Vector.normalize(projectile_heading_x + 0.1*current_room.player.pspd_multiplier.value*to_target_heading_x, 
+            local final_heading_x, final_heading_y = Vector.normalize(projectile_heading_x + 0.1*current_room.player.pspd_multiplier.value*to_target_heading_x,
             projectile_heading_y + 0.1*current_room.player.pspd_multiplier.value*to_target_heading_y)
             self.vx, self.vy = self.v*final_heading_x, self.v*final_heading_y
             self.r = Vector.angle(self.vx, self.vy)

@@ -5,9 +5,9 @@ function Trailer:new(area, x, y, opts)
 
     local positions = {{gw + 32, gh + 32, -3*math.pi/4, -math.pi}, {gw + 32, - 32, 3*math.pi/4, math.pi}, {-32, -32, math.pi/4, 0}, {-32, gh + 32, -math.pi/4, 0}}
     local position = table.random(positions)
-    self.x = position[1] 
+    self.x = position[1]
     self.y = position[2]
-    
+
     self.w, self.h = 12, 6
     self.shape = HC.polygon(self.w, 0, -self.w, self.h, -self.w, -self.h)
     self.shape.id = self.id
@@ -22,10 +22,10 @@ function Trailer:new(area, x, y, opts)
     self.hp = 100*current_room.director.enemy_hp_multiplier
     local r = random(1.6, 2.2)
     self.timer:after(r, function() self.timer:tween(random(0.5, 1.0), self, {r = position[4]}, 'in-out-cubic') end)
-    self.timer:every(0.3, function() 
+    self.timer:every(0.3, function()
         self.area:addGameObject('TrailerShootEffect', self.x + 14*math.cos(self.r - math.pi), self.y + 14*math.sin(self.r - math.pi), {parent = self, d = 14})
-        self.area:addGameObject('EnemyProjectile', self.x + 14*math.cos(self.r - math.pi), self.y + 14*math.sin(self.r - math.pi), 
-        {trailer = true, homing = true, r = random(self.r - math.pi - math.pi/2, self.r - math.pi + math.pi/2)}) 
+        self.area:addGameObject('EnemyProjectile', self.x + 14*math.cos(self.r - math.pi), self.y + 14*math.sin(self.r - math.pi),
+        {trailer = true, homing = true, r = random(self.r - math.pi - math.pi/2, self.r - math.pi + math.pi/2)})
     end)
 end
 

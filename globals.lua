@@ -8,10 +8,10 @@ skill_point_color = {255, 198, 93}
 
 default_colors = {default_color, hp_color, ammo_color, boost_color, skill_point_color}
 negative_colors = {
-    {255-default_color[1], 255-default_color[2], 255-default_color[3]}, 
-    {255-hp_color[1], 255-hp_color[2], 255-hp_color[3]}, 
-    {255-ammo_color[1], 255-ammo_color[2], 255-ammo_color[3]}, 
-    {255-boost_color[1], 255-boost_color[2], 255-boost_color[3]}, 
+    {255-default_color[1], 255-default_color[2], 255-default_color[3]},
+    {255-hp_color[1], 255-hp_color[2], 255-hp_color[3]},
+    {255-ammo_color[1], 255-ammo_color[2], 255-ammo_color[3]},
+    {255-boost_color[1], 255-boost_color[2], 255-boost_color[3]},
     {255-skill_point_color[1], 255-skill_point_color[2], 255-skill_point_color[3]}
 }
 all_colors = fn.append(default_colors, negative_colors)
@@ -55,7 +55,7 @@ attack_names = {'Double', 'Triple', 'Rapid', 'Spread', 'Back', 'Side', 'Homing',
 
 -- Globals
 function setPermanentGlobals(opts)
-    local opts = opts or {}
+    opts = opts or {}
     id = UUID()
     loop = opts.loop or 0
     main_volume = 5
@@ -86,13 +86,13 @@ function setTransientGlobals()
     if loop > 0 then max_tree_nodes = math.min(max_tree_nodes + 5*loop, 100)
     else max_tree_nodes = 80 end
     spent_sp = 0
-    keys = {}; for i = 1, 8 do keys[i] = {address = KEY(), value = KEY()} end 
+    keys = {}; for i = 1, 8 do keys[i] = {address = KEY(), value = KEY()} end
     command_history = {}
 end
 
 -- Before running the UUID() function we need to set a random seed
 -- love.run also sets the random seed but we require this file before love.run is run once
-if love.math then love.math.setRandomSeed(os.time()) end 
+if love.math then love.math.setRandomSeed(os.time()) end
 setPermanentGlobals()
 setTransientGlobals()
 
@@ -101,12 +101,12 @@ setTransientGlobals()
 enemies = {'Rock', 'BigRock', 'Shooter', 'Seeker', 'Waver', 'Roller', 'Trailer', 'Reflecteer', 'Orbitter', 'Tanker', 'Triad', 'Sapper', 'Glitcher'}
 
 -- Classes
-class_colors = { 
+class_colors = {
     ['Gunner'] = ammo_color, ['Tanker'] = hp_color, ['Runner'] = boost_color, ['Cycler'] = default_color,
     ['Buster'] = ammo_color, ['Buffer'] = ammo_color, ['Berserker'] = ammo_color, ['Shielder'] = hp_color,
     ['Regeneer'] = hp_color, ['Recycler'] = hp_color, ['Absorber'] = boost_color, ['Turner'] = boost_color,
     ['Driver'] = boost_color, ['Swapper'] = default_color, ['Barrager'] = default_color, ['Seeker'] = default_color,
-    ['Repeater'] = ammo_color, ['Launcher'] = ammo_color, ['Panzer'] = hp_color, ['Reserver'] = hp_color, 
+    ['Repeater'] = ammo_color, ['Launcher'] = ammo_color, ['Panzer'] = hp_color, ['Reserver'] = hp_color,
     ['Deployer'] = boost_color, ['Booster'] = boost_color, ['Processor'] = default_color, ['Gambler'] = default_color,
     ['Discharger'] = boost_color, ['Hoamer'] = skill_point_color, ['Splitter'] = boost_color, ['Bouncer'] = default_color,
     ['Blaster'] = default_color, ['Raider'] = skill_point_color, ['Waver'] = ammo_color, ['Bomber'] = hp_color, ['Zoomer'] = boost_color,

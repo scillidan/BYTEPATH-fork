@@ -19,7 +19,7 @@ function Shake:update(dt)
 end
 
 function Shake:getAmplitude(t)
-    if not t then 
+    if not t then
         if not self.shaking then return 0 end
         t = self.t
     end

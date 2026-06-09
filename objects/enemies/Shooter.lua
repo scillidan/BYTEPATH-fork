@@ -22,10 +22,10 @@ function Shooter:new(area, x, y, opts)
     self.hp = 100*current_room.director.enemy_hp_multiplier
 
     self.timer:every(random(3, 5), function()
-        self.area:addGameObject('PreAttackEffect', self.x + 1.4*self.w*math.cos(self.r), self.y + 1.4*self.w*math.sin(self.r), 
+        self.area:addGameObject('PreAttackEffect', self.x + 1.4*self.w*math.cos(self.r), self.y + 1.4*self.w*math.sin(self.r),
         {shooter = self, color = hp_color, duration = 1})
         self.timer:after(1, function()
-            self.area:addGameObject('EnemyProjectile', self.x + 1.4*self.w*math.cos(self.r), self.y + 1.4*self.w*math.sin(self.r), 
+            self.area:addGameObject('EnemyProjectile', self.x + 1.4*self.w*math.cos(self.r), self.y + 1.4*self.w*math.sin(self.r),
             {r = self.r, v = random(80, 100), s = 3.5, homing = true})
         end)
     end)

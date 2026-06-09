@@ -15,8 +15,8 @@ function EffectsModule:new(console, y)
 
     self.selection_index = 1
     self:setSelectionWidths()
-    self.console.timer:after(0.16, function() 
-        self.active = true 
+    self.console.timer:after(0.16, function()
+        self.active = true
         self.distortion_line = self.console.lines[#self.console.lines - 3]
         self.screen_shake_line = self.console.lines[#self.console.lines - 2]
         self.glitch_line = self.console.lines[#self.console.lines - 1]

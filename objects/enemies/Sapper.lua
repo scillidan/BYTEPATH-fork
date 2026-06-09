@@ -20,7 +20,7 @@ function Sapper:new(area, x, y, opts)
     self.vx, self.vy = self.v*math.cos(self.r), self.v*math.sin(self.r)
     self.dr = random(-10, 10)
 
-    self.hp = 50*current_room.director.enemy_hp_multiplier 
+    self.hp = 50*current_room.director.enemy_hp_multiplier
     self.r = 0
 
     self.timer:every(0.1, function()
@@ -45,13 +45,13 @@ function Sapper:update(dt)
         local projectile_heading_x, projectile_heading_y = Vector.normalize(self.vx, self.vy)
         local angle = math.atan2(self.target.y - self.y, self.target.x - self.x)
         local to_target_heading_x, to_target_heading_y = Vector.normalize(math.cos(angle), math.sin(angle))
-        local final_heading_x, final_heading_y = Vector.normalize(projectile_heading_x + 0.1*current_room.player.pspd_multiplier.value*to_target_heading_x, 
+        local final_heading_x, final_heading_y = Vector.normalize(projectile_heading_x + 0.1*current_room.player.pspd_multiplier.value*to_target_heading_x,
         projectile_heading_y + 0.1*current_room.player.pspd_multiplier.value*to_target_heading_y)
         self.vx, self.vy = self.v*final_heading_x, self.v*final_heading_y
 
         local d = distance(self.x, self.y, self.target.x, self.target.y)
-        if d < 100 and not self.in_player_range then 
-            self.in_player_range = true 
+        if d < 100 and not self.in_player_range then
+            self.in_player_range = true
             self.target:insertSapper(self.id)
         elseif d >= 100 and self.in_player_range then
             self.in_player_range = false

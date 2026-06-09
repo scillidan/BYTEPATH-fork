@@ -20,8 +20,8 @@ function ResolutionModule:new(console, y)
 
     self.selection_index = 1
     self.selection_widths = {
-        self.console.font:getWidth('FULLSCREEN WINDOWED BORDERLESS - ' .. w .. 'x' .. h), 
-        self.console.font:getWidth('480x270'), self.console.font:getWidth('960x540'), self.console.font:getWidth('1440x810'), 
+        self.console.font:getWidth('FULLSCREEN WINDOWED BORDERLESS - ' .. w .. 'x' .. h),
+        self.console.font:getWidth('480x270'), self.console.font:getWidth('960x540'), self.console.font:getWidth('1440x810'),
         self.console.font:getWidth('1920x1080')
     }
     self.console.timer:after(0.02 + self.selection_index*0.02, function() self.active = true end)

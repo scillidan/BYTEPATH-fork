@@ -62,16 +62,16 @@ function Node:update(dt)
         if current_room.temporary_bought_node_indexes and fn.any(current_room.temporary_bought_node_indexes, self.id) then
             current_room:glitch(self.x, self.y)
             local index = table.find(bought_node_indexes, self.id)
-            for i = #bought_node_indexes, index, -1 do 
+            for i = #bought_node_indexes, index, -1 do
                 local id = bought_node_indexes[i]
-                table.remove(bought_node_indexes, i) 
+                table.remove(bought_node_indexes, i)
                 current_room.nodes[id]:updateStatus()
             end
             -- table.remove(bought_node_indexes, table.find(bought_node_indexes, self.id))
             local index = table.find(current_room.temporary_bought_node_indexes, self.id)
-            for i = #current_room.temporary_bought_node_indexes, index, -1 do 
+            for i = #current_room.temporary_bought_node_indexes, index, -1 do
                 local id = current_room.temporary_bought_node_indexes[i]
-                table.remove(current_room.temporary_bought_node_indexes, i) 
+                table.remove(current_room.temporary_bought_node_indexes, i)
                 current_room.nodes[id]:updateStatus()
                 current_room.skill_points_to_buy = current_room.skill_points_to_buy - self.cost[current_room.nodes[id].size]
             end

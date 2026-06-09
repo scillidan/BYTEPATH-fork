@@ -24,7 +24,7 @@ function Triad:new(area, x, y, opts)
     self.timer:every(random(10, 14), function()
         self.timer:tween(0.5, self, {angv = 0, v = 0}, 'in-out-cubic', function()
             self.immune = true
-            self.timer:tween(1.5, self, {angv = random(-10, 10)}, 'in-out-cubic') 
+            self.timer:tween(1.5, self, {angv = random(-10, 10)}, 'in-out-cubic')
             self.timer:after(0.5, function()
                 self.timer:every(0.02, function()
                     local angle = self.angv

@@ -20,9 +20,9 @@ function ShutdownModule:new(console, y)
 end
 
 function ShutdownModule:update(dt)
-    
+
 end
 
 function ShutdownModule:draw()
-    
+
 end

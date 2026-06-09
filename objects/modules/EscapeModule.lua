@@ -4,7 +4,7 @@ function EscapeModule:new(console, y)
     self.console = console
     self.y = y
 
-    if found_keys[1] == 1 and found_keys[2] == 1 and found_keys[3] == 1 and found_keys[4] == 1 and 
+    if found_keys[1] == 1 and found_keys[2] == 1 and found_keys[3] == 1 and found_keys[4] == 1 and
        found_keys[5] == 1 and found_keys[6] == 1 and found_keys[7] == 1 and found_keys[8] == 1 then
         self.console:addLine(0.02, '')
         self.console:addLine(0.04, '~ all keys have been found')
@@ -51,7 +51,7 @@ function EscapeModule:new(console, y)
             local n = #bought_node_indexes
             self.console:addLine(t + 2.02 + 0.04 + n*0.02, '[  ;WAIT,  ] unlinking paths', 1.4, {{';WAIT,', ' <OK> '}, {'unlinking', 'unlinked'}})
             self.console:addLine(t + 2.04 + 0.04 + n*0.02, '[  ;WAIT,  ] removing core targets', 0.8, {{';WAIT,', ' <OK> '}, {'removing', 'removed'}})
-            self.console:addLine(t + 2.06 + 0.04 + n*0.02, '[  ;WAIT,  ] unmounting (' .. self.console:getRandomArchWord() .. ') [' .. self.console:getRandomArchWord() .. ']', 
+            self.console:addLine(t + 2.06 + 0.04 + n*0.02, '[  ;WAIT,  ] unmounting (' .. self.console:getRandomArchWord() .. ') [' .. self.console:getRandomArchWord() .. ']',
             0.4, {{';WAIT,', ' <OK> '}, {'unmounting', 'unmounted'}})
             self.console:addLine(t + 2.08 + 0.04 + n*0.02, '')
 
@@ -128,5 +128,5 @@ function EscapeModule:update(dt)
 end
 
 function EscapeModule:draw()
-    
+
 end

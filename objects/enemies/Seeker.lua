@@ -23,7 +23,7 @@ function Seeker:new(area, x, y, opts)
 
     self.timer:every(random(1, 2), function()
         self.timer:after(1, function()
-            self.area:addGameObject('EnemyProjectile', self.x + 1.4*self.w*math.cos(self.r - math.pi), self.y + 1.4*self.w*math.sin(self.r - math.pi), 
+            self.area:addGameObject('EnemyProjectile', self.x + 1.4*self.w*math.cos(self.r - math.pi), self.y + 1.4*self.w*math.sin(self.r - math.pi),
             {r = self.r - math.pi, v = random(80, 100), s = 3.5, mine = true})
         end)
     end)
@@ -40,7 +40,7 @@ function Seeker:update(dt)
         local projectile_heading_x, projectile_heading_y = Vector.normalize(self.vx, self.vy)
         local angle = math.atan2(self.target.y - self.y, self.target.x - self.x)
         local to_target_heading_x, to_target_heading_y = Vector.normalize(math.cos(angle), math.sin(angle))
-        local final_heading_x, final_heading_y = Vector.normalize(projectile_heading_x + 0.1*current_room.player.pspd_multiplier.value*to_target_heading_x, 
+        local final_heading_x, final_heading_y = Vector.normalize(projectile_heading_x + 0.1*current_room.player.pspd_multiplier.value*to_target_heading_x,
         projectile_heading_y + 0.1*current_room.player.pspd_multiplier.value*to_target_heading_y)
         self.vx, self.vy = self.v*final_heading_x, self.v*final_heading_y
     else self.vx, self.vy = self.v*math.cos(self.r), self.v*math.sin(self.r) end

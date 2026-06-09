@@ -21,14 +21,14 @@ function Area:update(dt)
     -- Adjust projectile cap based on FPS
     self.down_fps_timer = self.down_fps_timer + dt
     self.up_fps_timer = self.up_fps_timer + dt
-    if fps < 50 and self.down_fps_timer > 2 then 
+    if fps < 50 and self.down_fps_timer > 2 then
         self.projectile_cap = math.max(self.projectile_cap/2, 100)
         self.down_fps_timer = 0
     end
     if fps < 50 then self.up_fps_timer = 0 end
     if fps >= 50 then self.down_fps_timer = 0 end
-    if fps >= 50 and self.up_fps_timer > 2 then 
-        self.projectile_cap = math.min(self.projectile_cap + 100, 1000) 
+    if fps >= 50 and self.up_fps_timer > 2 then
+        self.projectile_cap = math.min(self.projectile_cap + 100, 1000)
         self.up_fps_timer = 1.5
     end
 
@@ -50,18 +50,18 @@ function Area:update(dt)
         game_object:update(dt)
 
         -- Remove dead objects
-        if game_object.dead then 
+        if game_object.dead then
             if game_object.class_name == 'Projectile' then self.projectile_amount = self.projectile_amount - 1 end
             if game_object.class_name == 'Ammo' then self.ammo_amount = self.ammo_amount - 1 end
             if game_object.class_name == 'InfoText' then self.info_text_amount = self.info_text_amount - 1 end
             game_object:destroy()
-            table.remove(self.game_objects, i) 
+            table.remove(self.game_objects, i)
         end
     end
 
     for i = #self.enemies, 1, -1 do
         local game_object = self.enemies[i]
-        local outside_game_boundaries = false 
+        local outside_game_boundaries = false
         if game_object.x > gw + 120 then outside_game_boundaries = true; game_object.dead = true end
         if game_object.x < -120 then outside_game_boundaries = true; game_object.dead = true end
         if game_object.dead then
@@ -70,7 +70,7 @@ function Area:update(dt)
         end
     end
 
-    table.sort(self.game_objects, function(a, b) 
+    table.sort(self.game_objects, function(a, b)
         if a.depth == b.depth then return a.creation_time < b.creation_time
         else return a.depth < b.depth end
     end)
@@ -81,8 +81,8 @@ function Area:draw()
 end
 
 function Area:drawExcept(types)
-    for _, game_object in ipairs(self.game_objects) do 
-        if not game_object.graphics_types then game_object:draw() 
+    for _, game_object in ipairs(self.game_objects) do
+        if not game_object.graphics_types then game_object:draw()
         else
             if #fn.intersection(types, game_object.graphics_types) == 0 then
                 game_object:draw()
@@ -92,10 +92,10 @@ function Area:drawExcept(types)
 end
 
 function Area:drawOnly(types)
-    for _, game_object in ipairs(self.game_objects) do 
+    for _, game_object in ipairs(self.game_objects) do
         if game_object.graphics_types then
             if #fn.intersection(types, game_object.graphics_types) > 0 then
-                game_object:draw() 
+                game_object:draw()
             end
         end
     end
@@ -110,7 +110,7 @@ function Area:addGameObject(game_object_type, x, y, opts)
     if game_object_type == 'InfoText' then self.info_text_amount = self.info_text_amount + 1 end
     if fn.any(enemies, game_object_type) then self.room.enemies_created = self.room.enemies_created + 1 end
 
-    local opts = opts or {}
+    opts = opts or {}
     local game_object = _G[game_object_type](self, x or 0, y or 0, opts)
     game_object.class_name = game_object_type
     table.insert(self.game_objects, game_object)

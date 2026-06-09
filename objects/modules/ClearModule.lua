@@ -50,8 +50,8 @@ function ClearModule:update(dt)
                     self.console:addLine(0.08, '    YES')
                     self.console:addLine(0.10, '    NO')
                     self.console:addLine(0.12, '')
-                    self.console.timer:after(0.14, function() 
-                        self.confirm_selecting = true 
+                    self.console.timer:after(0.14, function()
+                        self.confirm_selecting = true
                         self.confirming = false
                     end)
 
@@ -63,8 +63,8 @@ function ClearModule:update(dt)
                     self.console:addLine(0.08, '    YES')
                     self.console:addLine(0.10, '    NO')
                     self.console:addLine(0.12, '')
-                    self.console.timer:after(0.14, function() 
-                        self.confirm_selecting = true 
+                    self.console.timer:after(0.14, function()
+                        self.confirm_selecting = true
                         self.confirming = false
                     end)
 
@@ -76,8 +76,8 @@ function ClearModule:update(dt)
                     self.console:addLine(0.08, '    YES')
                     self.console:addLine(0.10, '    NO')
                     self.console:addLine(0.12, '')
-                    self.console.timer:after(0.14, function() 
-                        self.confirm_selecting = true 
+                    self.console.timer:after(0.14, function()
+                        self.confirm_selecting = true
                         self.confirming = false
                     end)
                 end
@@ -113,7 +113,7 @@ function ClearModule:update(dt)
                     classes = {}
                     rank = 1
                     save()
-                
+
                 elseif self.selection_index == 2 then
                     if #bought_node_indexes >= 80 then unlockAchievement('Reroll Skills') end
                     self.active = false
@@ -122,7 +122,7 @@ function ClearModule:update(dt)
                     local n = #bought_node_indexes
                     self.console:addLine(0.02 + 0.04 + n*0.02, '[  ;WAIT,  ] unlinking paths', 1.4, {{';WAIT,', ' <OK> '}, {'unlinking', 'unlinked'}})
                     self.console:addLine(0.04 + 0.04 + n*0.02, '[  ;WAIT,  ] removing core targets', 0.8, {{';WAIT,', ' <OK> '}, {'removing', 'removed'}})
-                    self.console:addLine(0.06 + 0.04 + n*0.02, '[  ;WAIT,  ] unmounting (' .. self.console:getRandomArchWord() .. ') [' .. self.console:getRandomArchWord() .. ']', 
+                    self.console:addLine(0.06 + 0.04 + n*0.02, '[  ;WAIT,  ] unmounting (' .. self.console:getRandomArchWord() .. ') [' .. self.console:getRandomArchWord() .. ']',
                     0.4, {{';WAIT,', ' <OK> '}, {'unmounting', 'unmounted'}})
                     self.console:addLine(0.08 + 0.04 + n*0.02, '')
                     self.console:addInputLine(1.6 + 0.04 + n*0.02, '[;root,]arch~ ')
@@ -147,7 +147,7 @@ function ClearModule:update(dt)
                     local n = #bought_node_indexes
                     self.console:addLine(t + 0.02 + 0.04 + n*0.02, '[  ;WAIT,  ] unlinking paths', 1.4, {{';WAIT,', ' <OK> '}, {'unlinking', 'unlinked'}})
                     self.console:addLine(t + 0.04 + 0.04 + n*0.02, '[  ;WAIT,  ] removing core targets', 0.8, {{';WAIT,', ' <OK> '}, {'removing', 'removed'}})
-                    self.console:addLine(t + 0.06 + 0.04 + n*0.02, '[  ;WAIT,  ] unmounting (' .. self.console:getRandomArchWord() .. ') [' .. self.console:getRandomArchWord() .. ']', 
+                    self.console:addLine(t + 0.06 + 0.04 + n*0.02, '[  ;WAIT,  ] unmounting (' .. self.console:getRandomArchWord() .. ') [' .. self.console:getRandomArchWord() .. ']',
                     0.4, {{';WAIT,', ' <OK> '}, {'unmounting', 'unmounted'}})
                     self.console:addLine(t + 0.08 + 0.04 + n*0.02, '')
 
@@ -195,7 +195,7 @@ function ClearModule:update(dt)
 end
 
 function ClearModule:draw()
-    if self.active and not self.confirm_selecting then 
+    if self.active and not self.confirm_selecting then
         local width = self.selection_widths[self.selection_index]
         local r, g, b = unpack(default_color)
         if self.selection_index == 1 then r, g, b = unpack(boost_color) end

@@ -2,7 +2,7 @@ Item = GameObject:extend()
 
 function Item:new(area, x, y, opts)
     Item.super.new(self, area, x, y, opts)
-    
+
     local direction = table.random({-1, 1})
     self.x = gw/2 + direction*(gw/2 + 48)
     self.y = random(48, gh - 48)
@@ -45,6 +45,6 @@ end
 
 function Item:die()
     self.dead = true
-    self.area:addGameObject('AttackEffect', self.x, self.y, {color = default_color, w = 1.1*self.w, h = 1.1*self.h}) 
+    self.area:addGameObject('AttackEffect', self.x, self.y, {color = default_color, w = 1.1*self.w, h = 1.1*self.h})
     self.area:addGameObject('AttackEffect', self.x, self.y, {color = default_color, w = 1.3*self.w, h = 1.3*self.h})
 end

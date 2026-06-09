@@ -148,13 +148,13 @@ function love.update(dt)
 
     -- Disable expensive shaders if FPS remains below 10 for 1 seconds
     fps = love.timer.getFPS()
-    if fps < 10 and not pre_disable_expensive_shaders then 
-        pre_disable_expensive_shaders = true 
+    if fps < 10 and not pre_disable_expensive_shaders then
+        pre_disable_expensive_shaders = true
         disable_expensive_shaders_time = love.timer.getTime()
     end
     if fps > 10 and pre_disable_expensive_shaders then pre_disable_expensive_shaders = false end
-    if love.timer.getTime() - disable_expensive_shaders_time > 3 and pre_disable_expensive_shaders then 
-        disable_expensive_shaders = true 
+    if love.timer.getTime() - disable_expensive_shaders_time > 3 and pre_disable_expensive_shaders then
+        disable_expensive_shaders = true
         pre_disable_expensive_shaders = false
     end
 
@@ -198,7 +198,7 @@ function love.quit()
 end
 
 function resize(x, y, fs)
-    local y = y or x
+    y = y or x
     fullscreen = fs
     love.window.setMode(x*gw, y*gh, {display = display, fullscreen = fs, borderless = fs})
     sx, sy = x, y

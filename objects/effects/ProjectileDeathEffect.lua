@@ -4,14 +4,14 @@ function ProjectileDeathEffect:new(area, x, y, opts)
     ProjectileDeathEffect.super.new(self, area, x, y, opts)
     self.depth = 75
 
-    if self.attack == 'Laser' then 
+    if self.attack == 'Laser' then
         self.w = 3*self.w
         self.h = self.w
     end
 
     self.current_color = default_color
-    self.timer:after(0.1, function() 
-        self.current_color = self.color 
+    self.timer:after(0.1, function()
+        self.current_color = self.color
         self.timer:after(0.15, function()
             self.dead = true
         end)

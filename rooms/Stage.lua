@@ -70,9 +70,9 @@ function Stage:new()
     fadeVolume('game', 5, 1)
     if not isAnySongPlaying() and not muted then playRandomSong() end
 
-    self.timer:every(0.1, function() 
-        self.area:addGameObject('GlitchDisplacement') 
-        self.area:addGameObject('RGBShift') 
+    self.timer:every(0.1, function()
+        self.area:addGameObject('GlitchDisplacement')
+        self.area:addGameObject('RGBShift')
     end)
 
     self.info_text_grid = Grid(gw/60, gh/15, 0)
@@ -85,14 +85,14 @@ function Stage:getInfoTextPosition(x, y)
     local grid_x, grid_y = math.floor(snap(x, 60)/60)+1, math.floor(snap(y, 15)/15)+1
     if grid_x > 2 then grid_x = grid_x + love.math.random(0, 2)-2 end
 
-    if self.info_text_grid:get(grid_x, grid_y) == 0 then 
+    if self.info_text_grid:get(grid_x, grid_y) == 0 then
         self.info_text_grid:set(grid_x, grid_y, 1)
         return 60*grid_x - 30, 15*grid_y, grid_x, grid_y
     end
 
     while runs < 1000 do
         grid_x, grid_y = love.math.random(1, 8), love.math.random(1, 18)
-        if self.info_text_grid:get(grid_x, grid_y) == 0 then 
+        if self.info_text_grid:get(grid_x, grid_y) == 0 then
             found_grid_spot = true
             self.info_text_grid:set(grid_x, grid_y, 1)
             return 60*grid_x - 30, 15*grid_y, grid_x, grid_y
@@ -143,20 +143,20 @@ function Stage:draw()
 
     love.graphics.setCanvas(self.rgb_shift_canvas)
     love.graphics.clear()
-    	camera:attach(0, 0, gw, gh)
+        camera:attach(0, 0, gw, gh)
         self.trail_particles:draw()
-    	self.area:drawOnly({'rgb_shift'})
-    	camera:detach()
+        self.area:drawOnly({'rgb_shift'})
+        camera:detach()
     love.graphics.setCanvas()
 
     love.graphics.setCanvas(self.rgb_canvas)
     love.graphics.clear()
-    	camera:attach(0, 0, gw, gh)
+        camera:attach(0, 0, gw, gh)
         love.graphics.setColor(127, 127, 127)
         love.graphics.rectangle('fill', 0, 0, gw, gh)
         love.graphics.setColor(255, 255, 255)
-    	self.area:drawOnly({'rgb'})
-    	camera:detach()
+        self.area:drawOnly({'rgb'})
+        camera:detach()
     love.graphics.setCanvas()
 
     love.graphics.setCanvas(self.main_canvas)
@@ -189,11 +189,11 @@ function Stage:draw()
         love.graphics.setColor(r - 32, g - 32, b - 32)
         love.graphics.rectangle('line', gw/2 - 52, 16, 48, 4)
         love.graphics.print('AMMO', gw/2 - 52 + 24, 26, 0, 1, 1, math.floor(self.font:getWidth('AMMO')/2), math.floor(self.font:getHeight()/2))
-        love.graphics.print(math.floor(ammo) .. '/' .. math.floor(max_ammo), gw/2 - 52 + 24, 8, 0, 1, 1, 
+        love.graphics.print(math.floor(ammo) .. '/' .. math.floor(max_ammo), gw/2 - 52 + 24, 8, 0, 1, 1,
         math.floor(self.font:getWidth(math.floor(ammo) .. '/' .. math.floor(max_ammo))/2), math.floor(self.font:getHeight()/2))
         love.graphics.setColor(255, 255, 255)
 
-        -- Boost 
+        -- Boost
         local r, g, b = unpack(boost_color)
         local boost, max_boost = self.player.boost, self.player.max_boost
         love.graphics.setColor(r, g, b)
@@ -201,7 +201,7 @@ function Stage:draw()
         love.graphics.setColor(r - 32, g - 32, b - 32)
         love.graphics.rectangle('line', gw/2 + 4, 16, 48, 4)
         love.graphics.print('BOOST', gw/2 + 4 + 24, 26, 0, 1, 1, math.floor(self.font:getWidth('AMMO')/2), math.floor(self.font:getHeight()/2))
-        love.graphics.print(math.floor(boost) .. '/' .. math.floor(max_boost), gw/2 + 4 + 24, 8, 
+        love.graphics.print(math.floor(boost) .. '/' .. math.floor(max_boost), gw/2 + 4 + 24, 8,
         0, 1, 1, math.floor(self.font:getWidth(math.floor(boost) .. '/' .. math.floor(max_boost))/2), math.floor(self.font:getHeight()/2))
         love.graphics.setColor(255, 255, 255)
 
@@ -215,7 +215,7 @@ function Stage:draw()
         love.graphics.rectangle('line', gw/2 - 52, gh - 16, 48, 4)
         if self.player.energy_shield then love.graphics.print('ES', gw/2 - 52 + 24, gh - 24, 0, 1, 1,math.floor(self.font:getWidth('ES'))/2, math.floor(self.font:getHeight()/2))
         else love.graphics.print('HP', gw/2 - 52 + 24, gh - 24, 0, 1, 1, math.floor(self.font:getWidth('HP')/2), math.floor(self.font:getHeight()/2)) end
-        love.graphics.print(math.floor(hp) .. '/' .. math.floor(max_hp), gw/2 - 52 + 24, gh - 6, 0, 1, 1, 
+        love.graphics.print(math.floor(hp) .. '/' .. math.floor(max_hp), gw/2 - 52 + 24, gh - 6, 0, 1, 1,
         math.floor(self.font:getWidth(math.floor(hp) .. '/' .. math.floor(max_hp))/2), math.floor(self.font:getHeight()/2))
         love.graphics.setColor(255, 255, 255)
 
@@ -253,7 +253,7 @@ function Stage:draw()
         -- Difficulty
         local r, g, b = unpack(default_color)
         love.graphics.setColor(r, g, b)
-        love.graphics.rectangle('fill', 10, 10, 
+        love.graphics.rectangle('fill', 10, 10,
         24*(self.director.round_timer/(self.director.round_duration/(self.player.enemy_spawn_rate_multiplier*self.director.adaptive_difficulty_enemy_spawn_rate_multiplier))), 4)
         love.graphics.setColor(r - 32, g - 32, b - 32)
         love.graphics.rectangle('line', 10, 10, 24, 4)
@@ -262,7 +262,7 @@ function Stage:draw()
         -- Resource
         local r, g, b = unpack(ammo_color)
         love.graphics.setColor(r, g, b)
-        love.graphics.rectangle('fill', 10, 18, 
+        love.graphics.rectangle('fill', 10, 18,
         24*(self.director.resource_timer/(self.director.resource_duration/(self.player.resource_spawn_rate_multiplier + self.director.first_10_runs_resource_spawn_rate))), 4)
         love.graphics.setColor(r - 32, g - 32, b - 32)
         love.graphics.rectangle('line', 10, 18, 24, 4)
@@ -304,7 +304,7 @@ function Stage:draw()
     love.graphics.clear()
         love.graphics.setColor(255, 255, 255)
         love.graphics.setBlendMode("alpha", "premultiplied")
-  
+
         love.graphics.setShader(shaders.rgb_shift)
         shaders.rgb_shift:send('amount', {random(-self.rgb_shift_mag, self.rgb_shift_mag)/gw, random(-self.rgb_shift_mag, self.rgb_shift_mag)/gh})
         love.graphics.draw(self.rgb_shift_canvas, 0, 0, 0, 1, 1)
@@ -315,7 +315,7 @@ function Stage:draw()
         love.graphics.draw(self.main_canvas, 0, 0, 0, 1, 1)
         love.graphics.setBlendMode('alpha')
         love.graphics.setShader()
-  	love.graphics.setCanvas()
+    love.graphics.setCanvas()
 
     love.graphics.setCanvas(self.temp_canvas_2)
     love.graphics.clear()
@@ -325,7 +325,7 @@ function Stage:draw()
         shaders.glitch:send('glitch_map', self.glitch_canvas)
         love.graphics.draw(self.temp_canvas, 0, 0, 0, 1, 1)
         love.graphics.setShader()
-  		love.graphics.setBlendMode("alpha")
+        love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas()
 
     love.graphics.setCanvas(self.temp_canvas_3)
@@ -336,7 +336,7 @@ function Stage:draw()
         shaders.rgb_shift:send('amount', {random(-self.rgb_shift_mag_2, self.rgb_shift_mag_2)/gw, random(-self.rgb_shift_mag_2, self.rgb_shift_mag_2)/gh})
         love.graphics.draw(self.temp_canvas_2, 0, 0, 0, 1, 1)
         love.graphics.setShader()
-  		love.graphics.setBlendMode("alpha")
+        love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas()
 
     love.graphics.setCanvas(self.final_canvas)
@@ -349,7 +349,7 @@ function Stage:draw()
         end
         love.graphics.draw(self.temp_canvas_3, 0, 0, 0, 1, 1)
         love.graphics.setShader()
-  		love.graphics.setBlendMode("alpha")
+        love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas()
 
     if not disable_expensive_shaders then
@@ -372,7 +372,7 @@ function Stage:destroy()
 end
 
 function Stage:finish()
-    timer:after(1, function() 
+    timer:after(1, function()
         score = self.score
         if score > high_score then high_score = score end
 
@@ -425,7 +425,7 @@ function Stage:finish()
 end
 
 function Stage:pause()
-    self.paused = not self.paused 
+    self.paused = not self.paused
     if self.paused then self.paused_object = Paused(self)
     else self.paused_object = nil end
 end
@@ -436,11 +436,11 @@ function Stage:rgbShift()
 end
 
 function Stage:glitch(x, y, w, h)
-    local w = w or random(8, 16)
-    local h = h or random(8, 16)
+    w = w or random(8, 16)
+    h = h or random(8, 16)
     for i = 1, love.math.random(0, 3) do
         self.timer:after(0.1*i, function()
-            self.area:addGameObject('GlitchDisplacement', 0, 0, {x = x + random(-w/2, w/2), y = y + random(-h/2, h/2), w = random(w/1.5, 1.5*w), h = random(h/1.5, 1.5*h), type = 'rectangular_block_shift'}) 
+            self.area:addGameObject('GlitchDisplacement', 0, 0, {x = x + random(-w/2, w/2), y = y + random(-h/2, h/2), w = random(w/1.5, 1.5*w), h = random(h/1.5, 1.5*h), type = 'rectangular_block_shift'})
         end)
     end
 end

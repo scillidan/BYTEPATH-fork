@@ -21,33 +21,33 @@ function Director:new(stage, starting_difficulty)
     self.difficulty_to_points[4] = 16
     self.difficulty_to_points[5] = 32
     self.difficulty_to_points[6] = 40
-    self.difficulty_to_points[7] = 40 
+    self.difficulty_to_points[7] = 40
     self.difficulty_to_points[8] = 26
     self.difficulty_to_points[9] = 52
     self.difficulty_to_points[10] = 60
-    self.difficulty_to_points[11] = 60 
+    self.difficulty_to_points[11] = 60
     self.difficulty_to_points[12] = 52
     self.difficulty_to_points[13] = 78
     self.difficulty_to_points[14] = 70
-    self.difficulty_to_points[15] = 70 
-    self.difficulty_to_points[16] = 62 
+    self.difficulty_to_points[15] = 70
+    self.difficulty_to_points[16] = 62
     self.difficulty_to_points[17] = 98
-    self.difficulty_to_points[18] = 98 
-    self.difficulty_to_points[19] = 90 
+    self.difficulty_to_points[18] = 98
+    self.difficulty_to_points[19] = 90
     self.difficulty_to_points[20] = 108
     self.difficulty_to_points[21] = 128
-    self.difficulty_to_points[22] = 72 
+    self.difficulty_to_points[22] = 72
     self.difficulty_to_points[23] = 80
-    self.difficulty_to_points[24] = 140 
+    self.difficulty_to_points[24] = 140
     self.difficulty_to_points[25] = 92
     self.difficulty_to_points[26] = 128
     self.difficulty_to_points[27] = 86
-    self.difficulty_to_points[28] = 94 
+    self.difficulty_to_points[28] = 94
     self.difficulty_to_points[29] = 142
     self.difficulty_to_points[30] = 88
     self.difficulty_to_points[31] = 96
-    self.difficulty_to_points[32] = 104 
-    self.difficulty_to_points[33] = 112 
+    self.difficulty_to_points[32] = 104
+    self.difficulty_to_points[33] = 112
     self.difficulty_to_points[34] = 142
     self.difficulty_to_points[35] = 158
     self.difficulty_to_points[36] = 178
@@ -55,7 +55,7 @@ function Director:new(stage, starting_difficulty)
     self.difficulty_to_points[38] = 96
     self.difficulty_to_points[39] = 160
     for i = 40, 2048 do self.difficulty_to_points[i] = 160 + 2*i end
-    self.enemy_hp_multiplier = 1 
+    self.enemy_hp_multiplier = 1
 
     self.enemy_to_points = {
         ['Rock'] = 1,
@@ -96,15 +96,15 @@ function Director:new(stage, starting_difficulty)
         [19] = chanceList({'Rock', 4}, {'BigRock', 4}, {'Shooter', 3}, {'Glitcher', 2}),
         [20] = chanceList({'Tanker', 1}),
     }
-    for i = 21, 1024 do 
-        self.enemy_spawn_chances[i] = chanceList({'Rock', love.math.random(2, 12)}, {'BigRock', love.math.random(2, 12)}, {'Shooter', love.math.random(2, 12)}, {'Sapper', love.math.random(2, 12)}, 
+    for i = 21, 1024 do
+        self.enemy_spawn_chances[i] = chanceList({'Rock', love.math.random(2, 12)}, {'BigRock', love.math.random(2, 12)}, {'Shooter', love.math.random(2, 12)}, {'Sapper', love.math.random(2, 12)},
         {'Roller', love.math.random(2, 12)}, {'Seeker', love.math.random(2, 12)}, {'Waver', love.math.random(2, 12)}, --[[{'Rotator', love.math.random(2, 12)},]] {'Tanker', love.math.random(2, 12)},
-        {'Triad', love.math.random(2, 6)}, {'Trailer', love.math.random(2, 12)}, {'Reflecteer', love.math.random(2, 12)}, {'Orbitter', love.math.random(2, 12)}, {'Glitcher', love.math.random(2, 6)}) 
+        {'Triad', love.math.random(2, 6)}, {'Trailer', love.math.random(2, 12)}, {'Reflecteer', love.math.random(2, 12)}, {'Orbitter', love.math.random(2, 12)}, {'Glitcher', love.math.random(2, 6)})
     end
 
     local first_10_runs_sp_spawn_chance_multiplier = 1
     if run <= 15 then first_10_runs_sp_spawn_chance_multiplier = 1 + (15 - run)/5 end
-    self.resource_spawn_chances = chanceList({'Boost', 28*self.stage.player.boost_spawn_chance_multiplier}, 
+    self.resource_spawn_chances = chanceList({'Boost', 28*self.stage.player.boost_spawn_chance_multiplier},
     {'HP', 14*self.stage.player.hp_spawn_chance_multiplier}, {'SkillPoint', 92*self.stage.player.sp_spawn_chance_multiplier*first_10_runs_sp_spawn_chance_multiplier})
 
     self.first_10_runs_resource_spawn_rate = 0
@@ -114,20 +114,20 @@ function Director:new(stage, starting_difficulty)
     if run <= 15 then self.first_10_runs_item_spawn_rate = (15 - run)/15 end
 
     -- Adaptive difficulty
-    self.adaptive_difficulty_enemy_spawn_rate_multiplier = 1 
+    self.adaptive_difficulty_enemy_spawn_rate_multiplier = 1
 
     self:setEnemySpawnsForThisRound()
-    self.timer:after(1, function() 
-        self.stage.area:addGameObject('Attack') 
-        self.stage.area:addGameObject('Item') 
+    self.timer:after(1, function()
+        self.stage.area:addGameObject('Attack')
+        self.stage.area:addGameObject('Item')
     end)
     self.spawned_item_count = 0
 
     -- Spawn keys at the appropriate difficulties
     self.timer:every(1, function()
         for i = 1, 8 do
-            if self.difficulty >= i*5 and self.difficulty < (i+1)*5 and found_keys[i] == 0 and not self.key then 
-                self.key = self.stage.area:addGameObject('Key', 0, 0, {n = i}) 
+            if self.difficulty >= i*5 and self.difficulty < (i+1)*5 and found_keys[i] == 0 and not self.key then
+                self.key = self.stage.area:addGameObject('Key', 0, 0, {n = i})
             end
         end
     end)
@@ -148,7 +148,7 @@ function Director:update(dt)
         self:setEnemySpawnsForThisRound()
     end
     if self.key and self.key.dead then self.key = nil end
-    if self.difficulty <= 40 then self.enemy_hp_multiplier = 1 
+    if self.difficulty <= 40 then self.enemy_hp_multiplier = 1
     else self.enemy_hp_multiplier = 1 + (self.difficulty*self.difficulty)/2400 end
 
     -- Resources
@@ -187,7 +187,7 @@ function Director:update(dt)
 
     -- Item
     self.item_timer = self.item_timer + dt
-    if self.item_timer > self.item_duration/(self.stage.player.luck_multiplier*self.stage.player.item_spawn_rate_multiplier + self.first_10_runs_item_spawn_rate) and 
+    if self.item_timer > self.item_duration/(self.stage.player.luck_multiplier*self.stage.player.item_spawn_rate_multiplier + self.first_10_runs_item_spawn_rate) and
        self.spawned_item_count <= math.floor(5*self.stage.player.item_spawn_rate_multiplier) then
         self.item_timer = 0
         self.stage.area:addGameObject('Item')

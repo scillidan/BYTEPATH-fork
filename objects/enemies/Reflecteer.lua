@@ -6,7 +6,7 @@ function Reflecteer:new(area, x, y, opts)
     local direction = table.random({-1, 1})
     self.x = gw/2 + direction*(gw/2 + 48)
     self.y = random(16, gh - 16)
-    
+
     self.w, self.h = 16, 16
     self.shape = HC.circle(self.x, self.y, self.w)
     self.shape.id = self.id
@@ -33,7 +33,7 @@ function Reflecteer:update(dt)
         local projectile_heading_x, projectile_heading_y = Vector.normalize(self.vx, self.vy)
         local angle = math.atan2(self.target.y - self.y, self.target.x - self.x)
         local to_target_heading_x, to_target_heading_y = Vector.normalize(math.cos(angle), math.sin(angle))
-        local final_heading_x, final_heading_y = Vector.normalize(projectile_heading_x + 0.1*current_room.player.pspd_multiplier.value*to_target_heading_x, 
+        local final_heading_x, final_heading_y = Vector.normalize(projectile_heading_x + 0.1*current_room.player.pspd_multiplier.value*to_target_heading_x,
         projectile_heading_y + 0.1*current_room.player.pspd_multiplier.value*to_target_heading_y)
         self.vx, self.vy = self.v*final_heading_x, self.v*final_heading_y
     else self.vx, self.vy = self.v*math.cos(self.r), self.v*math.sin(self.r) end

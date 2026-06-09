@@ -32,7 +32,7 @@ end
 
 function AboutModule:draw()
     if not self.active then return end
-    
+
     local width = self.console.font:getWidth('escape')
     local r, g, b = unpack(hp_color)
     love.graphics.setColor(r, g, b, 128)

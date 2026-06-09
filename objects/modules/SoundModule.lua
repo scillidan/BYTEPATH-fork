@@ -16,8 +16,8 @@ function SoundModule:new(console, y)
 
     self.selection_index = 1
     self:setSelectionWidths()
-    self.console.timer:after(0.16, function() 
-        self.active = true 
+    self.console.timer:after(0.16, function()
+        self.active = true
         self.main_volume_line = self.console.lines[#self.console.lines - 4]
         self.sfx_volume_line = self.console.lines[#self.console.lines - 3]
         self.music_volume_line = self.console.lines[#self.console.lines - 2]

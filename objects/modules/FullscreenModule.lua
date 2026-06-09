@@ -8,8 +8,8 @@ function FullscreenModule:new(console, y)
     self.console:addLine(0.04, '~ press ;ESC, to exit')
     self.console:addLine(0.06, '    ;fullscreened: ' .. tostring(fullscreen) .. ',')
     self.console:addLine(0.08, '')
-    self.console.timer:after(0.14, function() 
-        self.active = true 
+    self.console.timer:after(0.14, function()
+        self.active = true
         self.fullscreen_line = self.console.lines[#self.console.lines - 1]
     end)
 

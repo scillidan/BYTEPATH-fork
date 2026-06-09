@@ -35,14 +35,14 @@ function ConsoleLine:setCharacters()
     self.characters = {}
     self.base_characters = {}
     local language = 'normal'
-    for i = 1, #self.text do 
+    for i = 1, #self.text do
         local c = self.text:utf8sub(i, i)
         local c2 = self.text:utf8sub(i+1, i+1)
         local marker = false
         if c == '{' or c == '}' or c == '(' or c == ')' or c == '<' or c == '>' or c == ';' or c == ',' or c == '@' or c == '#' or c == '$' or c == '%' then marker = true end
         if c == ']' then language = 'normal' end
         if c == ')' then language = 'normal' end
-        table.insert(self.characters, {c = c, language = language, visible = false, marker = marker}) 
+        table.insert(self.characters, {c = c, language = language, visible = false, marker = marker})
         if c == '[' and c2 ~= ' ' then language = 'arch' end
         if c == '(' then language = 'arch' end
     end
@@ -121,7 +121,7 @@ function ConsoleLine:draw()
 
     local normal_font = fonts.Anonymous_8
     local arch_font = fonts.Arch_16
-    for i = 1, #self.characters do 
+    for i = 1, #self.characters do
         if not self.characters[i].visible then return end
 
         if self.characters[i].language == 'normal' then love.graphics.setFont(normal_font)

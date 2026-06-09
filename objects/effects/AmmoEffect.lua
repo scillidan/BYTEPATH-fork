@@ -8,8 +8,8 @@ function AmmoEffect:new(area, x, y, opts)
     self.h = self.w
 
     self.current_color = default_color
-    self.timer:after(0.1, function() 
-        self.current_color = self.color 
+    self.timer:after(0.1, function()
+        self.current_color = self.color
         self.timer:after(0.15, function()
             self.dead = true
         end)

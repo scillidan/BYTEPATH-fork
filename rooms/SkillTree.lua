@@ -20,7 +20,7 @@ function SkillTree:new()
 
     -- Create nodes and links
     for id, node in pairs(self.tree) do self.nodes[id] = Node(id, node.x, node.y, node.size) end
-    for id, node in pairs(self.tree) do 
+    for id, node in pairs(self.tree) do
         for _, linked_node_id in ipairs(node.links or {}) do
             table.insert(self.lines, Line(self.nodes, id, linked_node_id))
         end
@@ -95,9 +95,9 @@ function SkillTree:new()
     input:bind('start', 'kb_apply')
     input:bind('k', 'kb_apply')
 
-    self.timer:every(0.2, function() 
-        self.area:addGameObject('GlitchDisplacement') 
-        self.area:addGameObject('RGBShift') 
+    self.timer:every(0.2, function()
+        self.area:addGameObject('GlitchDisplacement')
+        self.area:addGameObject('RGBShift')
     end)
 
     self.stats_rectangle_sx, self.stats_rectangle_sy = 0, 0
@@ -118,23 +118,23 @@ function SkillTree:update(dt)
         end
 
         local delay = 0.040
-        for direction, linked_node_id in pairs(node.link_directions) do 
-            if direction == 'left-up' and ((input:pressed('left') and input:pressed('up')) or (input:sequence('left', delay, 'up') or input:sequence('up', delay, 'left'))) then 
+        for direction, linked_node_id in pairs(node.link_directions) do
+            if direction == 'left-up' and ((input:pressed('left') and input:pressed('up')) or (input:sequence('left', delay, 'up') or input:sequence('up', delay, 'left'))) then
                 self.timer:cancel('kb_left')
                 self.timer:cancel('kb_up')
                 changeSelectedNode(linked_node_id)
                 goto continue
-            elseif direction == 'left-down' and ((input:pressed('left') and input:pressed('down')) or (input:sequence('left', delay, 'down') or input:sequence('down', delay, 'left'))) then 
+            elseif direction == 'left-down' and ((input:pressed('left') and input:pressed('down')) or (input:sequence('left', delay, 'down') or input:sequence('down', delay, 'left'))) then
                 self.timer:cancel('kb_left')
                 self.timer:cancel('kb_down')
                 changeSelectedNode(linked_node_id)
                 goto continue
-            elseif direction == 'right-up' and ((input:pressed('right') and input:pressed('up')) or (input:sequence('right', delay, 'up') or input:sequence('up', delay, 'right'))) then 
+            elseif direction == 'right-up' and ((input:pressed('right') and input:pressed('up')) or (input:sequence('right', delay, 'up') or input:sequence('up', delay, 'right'))) then
                 self.timer:cancel('kb_right')
                 self.timer:cancel('kb_up')
                 changeSelectedNode(linked_node_id)
                 goto continue
-            elseif direction == 'right-down' and ((input:pressed('right') and input:pressed('down')) or (input:sequence('right', delay, 'down') or input:sequence('down', delay, 'right'))) then 
+            elseif direction == 'right-down' and ((input:pressed('right') and input:pressed('down')) or (input:sequence('right', delay, 'down') or input:sequence('down', delay, 'right'))) then
                 self.timer:cancel('kb_right')
                 self.timer:cancel('kb_down')
                 changeSelectedNode(linked_node_id)
@@ -142,14 +142,14 @@ function SkillTree:update(dt)
             end
         end
 
-        for direction, linked_node_id in pairs(node.link_directions) do 
+        for direction, linked_node_id in pairs(node.link_directions) do
             if direction == 'left' and input:pressed('left') then self.timer:after('kb_left', delay, function() changeSelectedNode(linked_node_id) end); goto continue
             elseif direction == 'right' and input:pressed('right') then self.timer:after('kb_right', delay, function() changeSelectedNode(linked_node_id) end); goto continue
             elseif direction == 'up' and input:pressed('up') then self.timer:after('kb_up', delay, function() changeSelectedNode(linked_node_id) end); goto continue
             elseif direction == 'down' and input:pressed('down') then self.timer:after('kb_down', delay, function() changeSelectedNode(linked_node_id) end); goto continue end
         end
-        
-        for direction, linked_node_id in pairs(node.link_directions) do 
+
+        for direction, linked_node_id in pairs(node.link_directions) do
             if direction == 'left-up' and input:pressed('left') then self.timer:after('kb_left', delay, function() changeSelectedNode(linked_node_id) end)
             elseif direction == 'left-up' and input:pressed('up') then self.timer:after('kb_up', delay, function() changeSelectedNode(linked_node_id) end)
             elseif direction == 'left-down' and input:pressed('left') then self.timer:after('kb_left', delay, function() changeSelectedNode(linked_node_id) end)
@@ -163,7 +163,9 @@ function SkillTree:update(dt)
         ::continue::
     end
 
-    if input:pressed('left') or input:pressed('right') or input:pressed('up') or input:pressed('down') or input:pressed('kb_zoom_in') or input:pressed('kb_zoom_out') or input:pressed('kb_enter') or input:pressed('kb_apply') or input:pressed('kb_cancel') then
+    if input:pressed('left') or input:pressed('right') or input:pressed('up') or input:pressed('down') or
+       input:pressed('kb_zoom_in') or input:pressed('kb_zoom_out') or input:pressed('kb_enter') or
+       input:pressed('kb_apply') or input:pressed('kb_cancel') then
         self.moving_with_kb = true
     end
 
@@ -178,7 +180,7 @@ function SkillTree:update(dt)
 
     if input:pressed('zoom_in') or input:pressed('kb_zoom_in') then self.timer:tween('zoom', 0.2, camera, {scale = camera.scale + 0.1}, 'in-out-cubic') end
     if input:pressed('zoom_out') or input:pressed('kb_zoom_out') then self.timer:tween('zoom', 0.2, camera, {scale = camera.scale - 0.1}, 'in-out-cubic') end
-    camera.scale = math.max(0.2, camera.scale) 
+    camera.scale = math.max(0.2, camera.scale)
 
     -- Console
     local pmx, pmy = love.mouse.getPosition()
@@ -230,7 +232,7 @@ function SkillTree:update(dt)
         local x = x + w + 10 + 5
         local text = 'Cancel'
         local w = self.font:getWidth(text)
-        if (pmx >= sx*x and pmx <= sx*(x + w + 10) and pmy >= sy*y and pmy <= sy*(y + 16) and input:pressed('left_click')) or input:pressed('kb_cancel') then 
+        if (pmx >= sx*x and pmx <= sx*(x + w + 10) and pmy >= sy*y and pmy <= sy*(y + 16) and input:pressed('left_click')) or input:pressed('kb_cancel') then
             playMenuBack()
             self:cancel()
         end
@@ -356,7 +358,7 @@ function SkillTree:draw()
         local w = self.font:getWidth(text)
         local x, y = gw - w - 15, 5
         love.graphics.setColor(0, 0, 0, 222)
-        love.graphics.rectangle('fill', x, y, w + 10, 16) 
+        love.graphics.rectangle('fill', x, y, w + 10, 16)
         love.graphics.setColor(255, 255, 255, 255)
         love.graphics.print(text, x + 5, y + 3)
         if pmx >= sx*x and pmx <= sx*(x + w + 10) and pmy >= sy*y and pmy <= sy*(y + 16) then love.graphics.rectangle('line', x, y, w + 10, 16) end
@@ -369,7 +371,7 @@ function SkillTree:draw()
 
             local x, y = 5, gh - 20
             love.graphics.setColor(0, 0, 0, 222)
-            love.graphics.rectangle('fill', x, y, w + 10, 16) 
+            love.graphics.rectangle('fill', x, y, w + 10, 16)
             love.graphics.setColor(255, 255, 255, 255)
             love.graphics.print(text, x + 5, y + 3)
             if pmx >= sx*x and pmx <= sx*(x + w + 10) and pmy >= sy*y and pmy <= sy*(y + 16) then love.graphics.rectangle('line', x, y, w + 10, 16) end
@@ -378,7 +380,7 @@ function SkillTree:draw()
             local text = 'Cancel'
             local w = self.font:getWidth(text)
             love.graphics.setColor(0, 0, 0, 222)
-            love.graphics.rectangle('fill', x, y, w + 10, 16) 
+            love.graphics.rectangle('fill', x, y, w + 10, 16)
             love.graphics.setColor(255, 255, 255, 255)
             love.graphics.print(text, x + 5, y + 3)
             if pmx >= sx*x and pmx <= sx*(x + w + 10) and pmy >= sy*y and pmy <= sy*(y + 16) then love.graphics.rectangle('line', x, y, w + 10, 16) end
@@ -402,9 +404,9 @@ function SkillTree:draw()
                 end
                 max_text_width = max_text_width + 24
                 -- Draw rectangle
-                local mx, my = love.mouse.getPosition() 
-                if self.moving_with_kb then 
-                    mx, my = camera:getCameraCoords(node.x, node.y) 
+                local mx, my = love.mouse.getPosition()
+                if self.moving_with_kb then
+                    mx, my = camera:getCameraCoords(node.x, node.y)
                     mx = mx - 1.5*max_text_width
                     my = my + 48
                 end
@@ -414,7 +416,7 @@ function SkillTree:draw()
                 love.graphics.setColor(0, 0, 0, 222)
                 love.graphics.rectangle('fill', mx, my, 16 + max_text_width, font:getHeight() + (#stats/3)*font:getHeight())
                 love.graphics.setColor(skill_point_color)
-                love.graphics.print(node.cost[node.size] .. 'SP', math.floor(mx + 16 + max_text_width - 16), math.floor(my + font:getHeight()), 
+                love.graphics.print(node.cost[node.size] .. 'SP', math.floor(mx + 16 + max_text_width - 16), math.floor(my + font:getHeight()),
                 0, 1, 1, math.floor(self.font:getWidth(node.cost[node.size] .. 'SP')/2), math.floor(self.font:getHeight()/2))
                 -- Draw text
                 love.graphics.setColor(default_color)
@@ -435,7 +437,7 @@ function SkillTree:draw()
         shaders.glitch:send('glitch_map', self.glitch_canvas)
         love.graphics.draw(self.main_canvas, 0, 0, 0, 1, 1)
         love.graphics.setShader()
-  		love.graphics.setBlendMode("alpha")
+        love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas()
 
     love.graphics.setCanvas(self.final_canvas)
@@ -446,7 +448,7 @@ function SkillTree:draw()
         shaders.rgb_shift:send('amount', {random(-self.rgb_shift_mag, self.rgb_shift_mag)/gw, random(-self.rgb_shift_mag, self.rgb_shift_mag)/gh})
         love.graphics.draw(self.temp_canvas, 0, 0, 0, 1, 1)
         love.graphics.setShader()
-  		love.graphics.setBlendMode("alpha")
+        love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas()
 
     if not disable_expensive_shaders then
@@ -463,7 +465,7 @@ function SkillTree:draw()
 end
 
 function SkillTree:destroy()
-    
+
 end
 
 function SkillTree:canNodeBeBought(id)
@@ -481,7 +483,7 @@ function SkillTree:updateCanBeBoughtNodes()
         end
     end
 
-    for _, node in pairs(self.nodes) do 
+    for _, node in pairs(self.nodes) do
         if node.bought then node.can_be_bought = false end
     end
 end
@@ -490,7 +492,7 @@ function SkillTree:cancel()
     self.skill_points_to_buy = 0
     self.buying = false
     bought_node_indexes = fn.difference(bought_node_indexes, self.temporary_bought_node_indexes)
-    self.temporary_bought_node_indexes = {} 
+    self.temporary_bought_node_indexes = {}
     for _, node in pairs(self.nodes) do node:updateStatus() end
     self:updateCanBeBoughtNodes()
 end
@@ -543,7 +545,7 @@ function SkillTree:reachNodeFrom(start_id, target_id, explored_nodes, node_pool)
                 end
             end
         end
-    until current_node == target_id or #stack == 0 
+    until current_node == target_id or #stack == 0
     if current_node == target_id then return true end
 end
 
@@ -555,7 +557,7 @@ end
 function SkillTree:glitch(x, y)
     for i = 1, 6 do
         self.timer:after(0.1*i, function()
-            self.area:addGameObject('GlitchDisplacement', x + random(-32, 32), y + random(-32, 32)) 
+            self.area:addGameObject('GlitchDisplacement', x + random(-32, 32), y + random(-32, 32))
         end)
     end
 end

@@ -21,11 +21,11 @@ function Attack:new(area, x, y, opts)
 
     local player = current_room.player
     self.attack = chanceList(
-        {'Double', 10 + player.double_spawn_chance}, {'Triple', 10 + player.triple_spawn_chance}, {'Rapid', 10 + player.rapid_spawn_chance}, 
-        {'Spread', 10 + player.spread_spawn_chance}, {'Back', 10 + player.back_spawn_chance}, {'Side', 10 + player.side_spawn_chance}, 
-        {'Homing', 10 + player.homing_spawn_chance}, {'Blast', 10 + player.blast_spawn_chance}, {'Spin', 10 + player.spin_spawn_chance}, 
+        {'Double', 10 + player.double_spawn_chance}, {'Triple', 10 + player.triple_spawn_chance}, {'Rapid', 10 + player.rapid_spawn_chance},
+        {'Spread', 10 + player.spread_spawn_chance}, {'Back', 10 + player.back_spawn_chance}, {'Side', 10 + player.side_spawn_chance},
+        {'Homing', 10 + player.homing_spawn_chance}, {'Blast', 10 + player.blast_spawn_chance}, {'Spin', 10 + player.spin_spawn_chance},
         {'Bounce', 10 + player.bounce_spawn_chance}, {'Lightning', 10 + player.lightning_spawn_chance}, {'Flame', 10 + player.flame_spawn_chance},
-        {'2Split', 10 + player.twosplit_spawn_chance}, {'4Split', 10 + player.foursplit_spawn_chance}, {'Explode', 10 + player.explode_spawn_chance}, 
+        {'2Split', 10 + player.twosplit_spawn_chance}, {'4Split', 10 + player.foursplit_spawn_chance}, {'Explode', 10 + player.explode_spawn_chance},
         {'Laser', 10 + player.laser_spawn_chance}
     ):next()
 end
@@ -56,8 +56,8 @@ end
 
 function Attack:die()
     self.dead = true
-    self.area:addGameObject('AttackEffect', self.x, self.y, {color = default_color, w = 1.1*self.w, h = 1.1*self.h}) 
-    if self.attack == 'Spread' then self.area:addGameObject('AttackEffect', self.x, self.y, {color = table.random(all_colors), w = 1.3*self.w, h = 1.3*self.h}) 
+    self.area:addGameObject('AttackEffect', self.x, self.y, {color = default_color, w = 1.1*self.w, h = 1.1*self.h})
+    if self.attack == 'Spread' then self.area:addGameObject('AttackEffect', self.x, self.y, {color = table.random(all_colors), w = 1.3*self.w, h = 1.3*self.h})
     else self.area:addGameObject('AttackEffect', self.x, self.y, {color = attacks[self.attack].color, w = 1.3*self.w, h = 1.3*self.h}) end
     self.area:addGameObject('InfoText', self.x + table.random({-1, 1})*self.w, self.y + table.random({-1, 1})*self.h, {color = default_color, text = self.attack})
 end

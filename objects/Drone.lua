@@ -68,7 +68,7 @@ function Drone:shoot()
     elseif self.attack == 'Blast' then
         for i = 1, 12+self.player.additional_blast_projectile do
             local random_angle = random(-math.pi/6, math.pi/6)
-            self.area:addGameObject('Projectile', self.x + 8*math.cos(self.r + random_angle), self.y + 8*math.sin(self.r + random_angle), 
+            self.area:addGameObject('Projectile', self.x + 8*math.cos(self.r + random_angle), self.y + 8*math.sin(self.r + random_angle),
             {r = self.r + random_angle, attack = self.attack, damage_multiplier = 0.5, v = random(500, 600)})
         end
 
@@ -115,7 +115,7 @@ function Drone:shoot()
 
     elseif self.attack == 'Flame' then
         local random_angle = random(-math.pi/16, math.pi/16)
-        self.area:addGameObject('Projectile', self.x + 8*math.cos(self.r + random_angle), self.y + 8*math.sin(self.r + random_angle), 
+        self.area:addGameObject('Projectile', self.x + 8*math.cos(self.r + random_angle), self.y + 8*math.sin(self.r + random_angle),
         {r = self.r + random_angle, attack = self.attack, damage_multiplier = 0.5, s = 2})
 
     elseif self.attack == '2Split' then

@@ -24,13 +24,13 @@ function ConsoleInputLine:update(dt)
         end
     end
 
-    if input:pressed('return') then 
-        self:enter() 
+    if input:pressed('return') then
+        self:enter()
         playKeystroke()
     end
 
-    if input:pressed('escape') then 
-        --self:enter() 
+    if input:pressed('escape') then
+        --self:enter()
         self.console:bytepathMain2()
         playKeystroke()
     end
@@ -112,7 +112,7 @@ function ConsoleInputLine:enter()
 
         elseif command == 'clear' then
             table.insert(self.console.modules, ClearModule(self.console, self.console.line_y))
-            
+
         elseif command == 'escape' then
             table.insert(self.console.modules, EscapeModule(self.console, self.console.line_y))
 
@@ -130,7 +130,7 @@ function ConsoleInputLine:enter()
                     local r = love.math.random(4, 6)
                     local words = {}; for i = 1, r do words[i] = self.console:getRandomArchWord() end
                     for i = 1, r do self.console:addLine(0.04 + 0.02*i, '[  ;WAIT,  ] connecting to node [' .. words[i] .. ']', random(1.2, 2.2), {{';WAIT,', ' <OK> '}, {'connecting', 'connected'}}) end
-                    self.console:addLine(2.46, '[  ;WAIT,  ] verifying node integrity', 1.6, {{';WAIT,', ' <OK> '}, {'verifying', 'verified'}}) 
+                    self.console:addLine(2.46, '[  ;WAIT,  ] verifying node integrity', 1.6, {{';WAIT,', ' <OK> '}, {'verifying', 'verified'}})
                     for i = 1, r do self.console:addLine(2.5 + 0.02*i, '[  ;WAIT,  ] verifying node data [' .. words[i] .. ']', random(0.8, 1.4), {{';WAIT,', ' <OK> '}, {'verifying', 'verified'}}) end
                     self.console:addLine(4.48, '')
                     self.console:addInputLine(4.50, '[;root,]arch~ ')
@@ -155,12 +155,12 @@ end
 function ConsoleInputLine:draw()
     local normal_font = fonts.Anonymous_8
     local arch_font = fonts.Arch_16
-    for i = 1, #self.characters do 
+    for i = 1, #self.characters do
         local width = 0
         if i > 1 then
             for j = 1, i-1 do
-                if self.characters[j].c ~= '{' and self.characters[j].c ~= '}' and self.characters[j].c ~= '(' and self.characters[j].c ~= ')' and 
-                   self.characters[j].c ~= '<' and self.characters[j].c ~= '>' and self.characters[j].c ~= ';' and self.characters[j].c ~= ',' and 
+                if self.characters[j].c ~= '{' and self.characters[j].c ~= '}' and self.characters[j].c ~= '(' and self.characters[j].c ~= ')' and
+                   self.characters[j].c ~= '<' and self.characters[j].c ~= '>' and self.characters[j].c ~= ';' and self.characters[j].c ~= ',' and
                    self.characters[j].c ~= '@' and self.characters[j].c ~= '#' and self.characters[j].c ~= '$' and self.characters[j].c ~= '%' then
                     if self.characters[j].language == 'normal' then width = width + normal_font:getWidth(self.characters[j].c)
                     elseif self.characters[j].language == 'arch' then width = width + arch_font:getWidth(self.characters[j].c) end
@@ -180,7 +180,7 @@ function ConsoleInputLine:draw()
         if self.characters[i].c == '#' then love.graphics.setColor(default_color) end
         if self.characters[i].c == '$' then love.graphics.setColor(boost_color) end
         if self.characters[i].c == '%' then love.graphics.setColor(default_color) end
-        if self.characters[i].c ~= '{' and self.characters[i].c ~= '}' and self.characters[i].c ~= '(' and self.characters[i].c ~= ')' and 
+        if self.characters[i].c ~= '{' and self.characters[i].c ~= '}' and self.characters[i].c ~= '(' and self.characters[i].c ~= ')' and
            self.characters[i].c ~= '<' and self.characters[i].c ~= '>' and self.characters[i].c ~= ';' and self.characters[i].c ~= ',' and
            self.characters[i].c ~= '@' and self.characters[i].c ~= '#' and self.characters[i].c ~= '$' and self.characters[i].c ~= '%' then
             if self.characters[i].language == 'normal' then love.graphics.print(self.characters[i].c, self.x + width, self.y + math.floor(normal_font:getHeight()/2), 0, 1, 1, 0, 0)
@@ -189,8 +189,8 @@ function ConsoleInputLine:draw()
     end
     local width = 0
     for j = 1, #self.characters do
-        if self.characters[j].c ~= '{' and self.characters[j].c ~= '}' and self.characters[j].c ~= '(' and self.characters[j].c ~= ')' and 
-           self.characters[j].c ~= '<' and self.characters[j].c ~= '>' and self.characters[j].c ~= ';' and self.characters[j].c ~= ',' and 
+        if self.characters[j].c ~= '{' and self.characters[j].c ~= '}' and self.characters[j].c ~= '(' and self.characters[j].c ~= ')' and
+           self.characters[j].c ~= '<' and self.characters[j].c ~= '>' and self.characters[j].c ~= ';' and self.characters[j].c ~= ',' and
            self.characters[j].c ~= '@' and self.characters[j].c ~= '#' and self.characters[j].c ~= '$' and self.characters[j].c ~= '%' then
             if self.characters[j].language == 'normal' then width = width + normal_font:getWidth(self.characters[j].c)
             elseif self.characters[j].language == 'arch' then width = width + arch_font:getWidth(self.characters[j].c) end
@@ -209,12 +209,12 @@ end
 function ConsoleInputLine:setCharacters()
     self.characters = {}
     local language = 'normal'
-    for i = 1, #self.text do 
+    for i = 1, #self.text do
         local c = self.text:utf8sub(i, i)
         local c2 = self.text:utf8sub(i+1, i+1)
         if c == ']' then language = 'normal' end
         if c == ')' then language = 'normal' end
-        table.insert(self.characters, {c = c, language = language}) 
+        table.insert(self.characters, {c = c, language = language})
         if c == '[' and c2 ~= ' ' then language = 'arch' end
         if c == '(' then language = 'arch' end
     end

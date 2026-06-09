@@ -7,7 +7,7 @@ function RollerPool:new(area, x, y, opts)
 
     self.w, self.h = 0, 0
     self.r = 0
-    self.timer:tween(random(0.5, 1), self, {w = 18, h = 18, r = random(0, 2*math.pi)}, 'in-out-cubic') 
+    self.timer:tween(random(0.5, 1), self, {w = 18, h = 18, r = random(0, 2*math.pi)}, 'in-out-cubic')
     self.timer:after(6, function()
         self.timer:tween(random(0.5, 1), self, {w = 0, h = 0, r = 0}, 'in-out-cubic', function() self.dead = true end)
     end)

@@ -7,8 +7,8 @@ function BoostEffect:new(area, x, y, opts)
     self.x, self.y = math.floor(self.x), math.floor(self.y)
 
     self.current_color = default_color
-    self.timer:after(0.2, function() 
-        self.current_color = self.color 
+    self.timer:after(0.2, function()
+        self.current_color = self.color
         self.timer:after(0.35, function()
             self.dead = true
         end)

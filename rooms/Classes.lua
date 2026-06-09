@@ -3,7 +3,7 @@ Classes = Object:extend()
 function Classes:new()
     self.timer = Timer()
     self.area = Area(self)
-    
+
     self.font = fonts.Anonymous_8
     self.main_canvas = love.graphics.newCanvas(gw, gh)
     self.final_canvas = love.graphics.newCanvas(gw, gh)
@@ -33,12 +33,12 @@ function Classes:new()
         end
     end
 
-    self.class_colors = { 
+    self.class_colors = {
         ['Gunner'] = ammo_color, ['Tanker'] = hp_color, ['Runner'] = boost_color, ['Cycler'] = default_color,
         ['Buster'] = ammo_color, ['Buffer'] = ammo_color, ['Berserker'] = ammo_color, ['Shielder'] = hp_color,
         ['Regeneer'] = hp_color, ['Recycler'] = hp_color, ['Absorber'] = boost_color, ['Turner'] = boost_color,
         ['Driver'] = boost_color, ['Swapper'] = default_color, ['Barrager'] = default_color, ['Seeker'] = default_color,
-        ['Repeater'] = ammo_color, ['Launcher'] = ammo_color, ['Panzer'] = hp_color, ['Reserver'] = hp_color, 
+        ['Repeater'] = ammo_color, ['Launcher'] = ammo_color, ['Panzer'] = hp_color, ['Reserver'] = hp_color,
         ['Deployer'] = boost_color, ['Booster'] = boost_color, ['Processor'] = default_color, ['Gambler'] = default_color,
         ['Discharger'] = boost_color, ['Hoamer'] = skill_point_color, ['Splitter'] = boost_color, ['Bouncer'] = default_color,
         ['Blaster'] = default_color, ['Raider'] = skill_point_color, ['Waver'] = ammo_color, ['Bomber'] = hp_color, ['Zoomer'] = boost_color,
@@ -374,8 +374,8 @@ function Classes:new()
 
     self.selection_index = 1
 
-    self.timer:every(0.1, function() 
-        self.area:addGameObject('GlitchDisplacement') 
+    self.timer:every(0.1, function()
+        self.area:addGameObject('GlitchDisplacement')
     end)
 end
 
@@ -404,7 +404,7 @@ function Classes:update(dt)
 
     if input:pressed('left') then
         self.selection_index = self.selection_index - 1
-        if self.selection_index == 0 or self.selection_index == n or self.selection_index == 2*n or self.selection_index == 3*n then 
+        if self.selection_index == 0 or self.selection_index == n or self.selection_index == 2*n or self.selection_index == 3*n then
             self.selection_index = self.selection_index + n
             if self.selection_index > #self.classes[rank] then self.selection_index = #self.classes[rank] end
         end
@@ -425,7 +425,7 @@ function Classes:update(dt)
     end
     if input:pressed('up') then
         self.selection_index = self.selection_index - n
-        if self.selection_index < 1 then 
+        if self.selection_index < 1 then
             self.selection_index = #self.classes[rank] + self.selection_index
             if self.selection_index > #self.classes[rank] then self.selection_index = #self.classes[rank] end
         end
@@ -434,7 +434,7 @@ function Classes:update(dt)
     end
     if input:pressed('down') then
         self.selection_index = self.selection_index + n
-        if self.selection_index > #self.classes[rank] then 
+        if self.selection_index > #self.classes[rank] then
             self.selection_index = self.selection_index - #self.classes[rank]
             if self.selection_index < 1 then self.selection_index = 1 end
         end
@@ -483,12 +483,12 @@ function Classes:draw()
 
     love.graphics.setCanvas(self.rgb_canvas)
     love.graphics.clear()
-    	camera:attach(0, 0, gw, gh)
+        camera:attach(0, 0, gw, gh)
         love.graphics.setColor(127, 127, 127)
         love.graphics.rectangle('fill', 0, 0, gw, gh)
         love.graphics.setColor(255, 255, 255)
-    	self.area:drawOnly({'rgb'})
-    	camera:detach()
+        self.area:drawOnly({'rgb'})
+        camera:detach()
     love.graphics.setCanvas()
 
     love.graphics.setFont(self.font)
@@ -513,7 +513,7 @@ function Classes:draw()
     end
 
     -- for i = 1, 9 do love.graphics.rectangle('line', 8, 50 + (i-1)*24, gw/2 + gw/6, 20) end
-    for i = 1, rank do 
+    for i = 1, rank do
         if i == 10 then goto continue end
         local n = 3
         if i == 1 then n = 4 end
@@ -522,7 +522,7 @@ function Classes:draw()
         if i >= 7 and i <= 8 then n = 4 end
         if i == 9 then n = 4 end
         local y = 28 + (i-1)*24 + 10
-        drawNormalButton(8 + 24, y, 48, 16, 'Rank ' .. i, default_color) 
+        drawNormalButton(8 + 24, y, 48, 16, 'Rank ' .. i, default_color)
         if not classes[i] then drawNormalButton(8 + 24 + 56, y, 64, 16, 'COST: ' .. tostring(rank*5) .. 'SP', skill_point_color) end
         if classes[i] then drawNormalButton(8 + 24 + 48, y, 48, 16, classes[i], self.class_colors[classes[i]])
         else
@@ -551,7 +551,7 @@ function Classes:draw()
     local w = self.font:getWidth(text)
     local x, y = gw - w - 15, 5
     love.graphics.setColor(0, 0, 0, 222)
-    love.graphics.rectangle('fill', x, y, w + 10, 16) 
+    love.graphics.rectangle('fill', x, y, w + 10, 16)
     love.graphics.setColor(255, 255, 255, 255)
     love.graphics.print(text, x + 5, y + 3)
     if pmx >= sx*x and pmx <= sx*(x + w + 10) and pmy >= sy*y and pmy <= sy*(y + 16) then love.graphics.rectangle('line', x, y, w + 10, 16) end
@@ -585,7 +585,7 @@ function Classes:draw()
         shaders.glitch:send('glitch_map', self.glitch_canvas)
         love.graphics.draw(self.main_canvas, 0, 0, 0, 1, 1)
         love.graphics.setShader()
-  		love.graphics.setBlendMode("alpha")
+        love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas()
 
     love.graphics.setCanvas(self.final_canvas)
@@ -596,7 +596,7 @@ function Classes:draw()
         shaders.rgb_shift:send('amount', {random(-self.rgb_shift_mag, self.rgb_shift_mag)/gw, random(-self.rgb_shift_mag, self.rgb_shift_mag)/gh})
         love.graphics.draw(self.temp_canvas, 0, 0, 0, 1, 1)
         love.graphics.setShader()
-  		love.graphics.setBlendMode("alpha")
+        love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas()
 
     if not disable_expensive_shaders then
@@ -613,7 +613,7 @@ function Classes:draw()
 end
 
 function Classes:destroy()
-    
+
 end
 
 function Classes:changedIndex()
@@ -629,7 +629,7 @@ end
 function Classes:glitch(x, y)
     for i = 1, 6 do
         self.timer:after(0.1*i, function()
-            self.area:addGameObject('GlitchDisplacement', x + random(-32, 32), y + random(-32, 32)) 
+            self.area:addGameObject('GlitchDisplacement', x + random(-32, 32), y + random(-32, 32))
         end)
     end
 end

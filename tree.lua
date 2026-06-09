@@ -1,10 +1,10 @@
 function treeToPlayer(player)
     local approved_list = {
-        'increased_cycle_speed_while_boosting', 'invulnerability_while_boosting', 'increased_luck_while_boosting', 'projectile_ninety_degree_change', 'projectile_random_degree_change', 'wavy_projectiles', 
-        'fast_slow', 'slow_fast', 'energy_shield', 'barrage_nova', 'projectiles_explode_on_expiration', 'lesser_increased_self_explosion_size', 'greater_increased_self_explosion_size', 
-        'projectiles_explosions', 'change_attack_periodically', 'gain_sp_on_death', 'convert_hp_to_sp_if_hp_full', 'no_boost', 'half_ammo', 'half_hp', 'deals_damage_while_invulnerable', 
-        'refill_ammo_if_hp_full', 'refill_boost_if_hp_full', 'only_spawn_boost', 'only_spawn_attack', 'no_ammo_drop', 'infinite_ammo', 'fixed_spin_direction', 'start_with_double', 'start_with_triple', 
-        'start_with_rapid', 'start_with_spread', 'start_with_back', 'start_with_side', 'start_with_homing', 'start_with_blast', 'start_with_spin', 'start_with_lightning', 'start_with_flame', 
+        'increased_cycle_speed_while_boosting', 'invulnerability_while_boosting', 'increased_luck_while_boosting', 'projectile_ninety_degree_change', 'projectile_random_degree_change', 'wavy_projectiles',
+        'fast_slow', 'slow_fast', 'energy_shield', 'barrage_nova', 'projectiles_explode_on_expiration', 'lesser_increased_self_explosion_size', 'greater_increased_self_explosion_size',
+        'projectiles_explosions', 'change_attack_periodically', 'gain_sp_on_death', 'convert_hp_to_sp_if_hp_full', 'no_boost', 'half_ammo', 'half_hp', 'deals_damage_while_invulnerable',
+        'refill_ammo_if_hp_full', 'refill_boost_if_hp_full', 'only_spawn_boost', 'only_spawn_attack', 'no_ammo_drop', 'infinite_ammo', 'fixed_spin_direction', 'start_with_double', 'start_with_triple',
+        'start_with_rapid', 'start_with_spread', 'start_with_back', 'start_with_side', 'start_with_homing', 'start_with_blast', 'start_with_spin', 'start_with_lightning', 'start_with_flame',
         'start_with_2split', 'start_with_4split', 'start_with_explode', 'start_with_laser', 'start_with_bounce'
     }
 
@@ -47,11 +47,11 @@ local s = 12
 tree = {}
 
 types = {
-    ['HP'] = {'HP', red}, ['ASPD'] = {'S', green}, ['Luck'] = {'L', pink}, ['Homing'] = {'H', yellow}, 
+    ['HP'] = {'HP', red}, ['ASPD'] = {'S', green}, ['Luck'] = {'L', pink}, ['Homing'] = {'H', yellow},
     ['Conversion'] = {'C', pink}, ['Cycle'] = {'C', white}, ['Attack'] = {'A', orange}, ['Enemy'] = {'E', red},
-    ['Resource'] = {'R', green}, ['PSPD'] = {'P', green}, ['Barrage'] = {'B', yellow}, ['Kill'] = {'K', gray}, 
-    ['ES'] = {'ES', white}, ['Buff'] = {'B', purple}, ['MVSPD'] = {'M', dark}, ['Proj'] = {'P', bluegreen}, 
-    ['Turn Rate'] = {'T', brown}, ['Boost'] = {'B', blue}, ['Size'] = {'S', blue}, ['Invuln'] = {'I', white}, 
+    ['Resource'] = {'R', green}, ['PSPD'] = {'P', green}, ['Barrage'] = {'B', yellow}, ['Kill'] = {'K', gray},
+    ['ES'] = {'ES', white}, ['Buff'] = {'B', purple}, ['MVSPD'] = {'M', dark}, ['Proj'] = {'P', bluegreen},
+    ['Turn Rate'] = {'T', brown}, ['Boost'] = {'B', blue}, ['Size'] = {'S', blue}, ['Invuln'] = {'I', white},
     ['SP'] = {'SP', yellow}, ['Special'] = {'X', white}, ['Area'] = {'A', red}, ['Ammo'] = {'A', green}, ['Item'] = {'I', white},
 }
 
@@ -91,7 +91,7 @@ tree[37] = {x = 126, y = -222, types = {'HP', 'Cycle'}, stats = {'2% Added Chanc
 tree[38] = {x = 126, y = -258, types = {'HP', 'Cycle'}, stats = {'1% Added Chance to Spawn HP on Cycle', 'spawn_hp_on_cycle_chance', 1}, links = {37, 41}, size = 1}
 tree[39] = {x = 90, y = -222, types = {'HP'}, stats = {'4% Increased HP', 'hp_multiplier', 0.04}, links = {32, 40}, size = 1}
 tree[40] = {x = 90, y = -258, types = {'HP'}, stats = {'2% Increased HP', 'hp_multiplier', 0.02}, links = {39, 41}, size = 1}
-tree[41] = {x = 90, y = -294, types = {'HP', 'Cycle'}, stats = {'4% Increased HP', 'hp_multiplier', 0.04, '10% Increased Chance to Spawn HP', 'hp_spawn_chance_multiplier', 0.10, 
+tree[41] = {x = 90, y = -294, types = {'HP', 'Cycle'}, stats = {'4% Increased HP', 'hp_multiplier', 0.04, '10% Increased Chance to Spawn HP', 'hp_spawn_chance_multiplier', 0.10,
 '2% Added Chance to Spawn HP on Cycle', 'spawn_hp_on_cycle_chance', 2, '2% Added Chance to Regain HP on Cycle', 'regain_hp_on_cycle_chance', 2}, links = {35, 42, 40, 38}, size = 2}
 tree[42] = {x = 90, y = -378, types = {'HP'}, stats = {'2% Increased HP', 'hp_multiplier', 2}, links = {41, 43, 64, 65}, size = 1}
 tree[43] = {x = 30, y = -438, types = {'ASPD', 'HP'}, stats = {'20% Added Chance to Spawn Haste Area Area on HP Pickup', 'spawn_haste_area_on_hp_pickup_chance', 20}, links = {29, 42, 44}, size = 2}
@@ -185,7 +185,7 @@ tree[131] = {x = -474, y = -54, types = {'ASPD'}, stats = {'6% Increased Attack 
 tree[132] = {x = -510, y = -54, types = {'ASPD'}, stats = {'6% Increased Attack Speed', 'aspd_multiplier', 0.06}, links = {131, 133}, size = 1}
 tree[133] = {x = -510, y = -90, types = {'ASPD'}, stats = {'6% Increased Attack Speed', 'aspd_multiplier', 0.06}, links = {132, 134}, size = 1}
 tree[134] = {x = -474, y = -90, types = {'ASPD'}, stats = {'6% Increased Attack Speed', 'aspd_multiplier', 0.06}, links = {133, 135}, size = 1}
-tree[135] = {x = -438, y = -90, types = {'ASPD', 'MVSPD', 'HP'}, stats = {'12% Increased Attack Speed', 'aspd_multiplier', 0.12, '10% Decreased Movement Speed', 'mvspd_multiplier', -0.10, 
+tree[135] = {x = -438, y = -90, types = {'ASPD', 'MVSPD', 'HP'}, stats = {'12% Increased Attack Speed', 'aspd_multiplier', 0.12, '10% Decreased Movement Speed', 'mvspd_multiplier', -0.10,
 '-15 Max HP', 'flat_hp', -15}, links = {134}, size = 2}
 tree[136] = {x = -570, y = -114, types = {'Item'}, stats = {'4% Increased Item Spawn Rate', 'item_spawn_rate_multiplier', 0.04}, links = {105, 127, 363}, size = 1}
 tree[137] = {x = -234, y = 174, types = {'ASPD', 'Buff', 'Kill'}, stats = {'5% Added Chance to Gain Attack Speed Boost on Kill', 'gain_aspd_boost_on_kill_chance', 5}, links = {96, 141, 145, 138}, size = 1}
@@ -196,7 +196,7 @@ tree[141] = {x = -270, y = 210, types = {'PSPD'}, stats = {'5% Decreased Project
 tree[142] = {x = -306, y = 246, types = {'PSPD', 'Proj'}, stats = {'10% Decreased Projectile Speed', 'pspd_multiplier', -0.10, '10% Increased Projectile Size', 'projectile_size_multiplier', 0.10}, links = {141, 143}, size = 1}
 tree[143] = {x = -354, y = 246, types = {'PSPD'}, stats = {'5% Decreased Projectile Speed', 'pspd_multiplier', -0.05}, links = {142, 144}, size = 1}
 tree[144] = {x = -462, y = 246, types = {'ASPD', 'Proj', 'Attack', 'Cycle'}, stats = {'10% Decreased Attack Speed', 'aspd_multiplier', -0.10, '10% Increased Projectile Size', 'projectile_size_multiplier', 0.10, '4% Added Chance to Change Attack on Cycle', 'change_attack_on_cycle_chance', 4}, links = {143, 149, 150, 159}, size = 2}
-tree[145] = {x = -306, y = 174, types = {'Proj', 'Proj'}, stats = {'20% Increased Projectile Size', 'projectile_size_multiplier', 0.20, 
+tree[145] = {x = -306, y = 174, types = {'Proj', 'Proj'}, stats = {'20% Increased Projectile Size', 'projectile_size_multiplier', 0.20,
 '8% Added Chance to Shoot Shield Projectiles', 'shield_projectile_chance', 8}, links = {146, 137, 148}, size = 2}
 tree[146] = {x = -330, y = 150, types = {'PSPD', 'Buff', 'Cycle'}, stats = {'10% Added Chance to Gain Projectile Speed Boost on Cycle', 'gain_pspd_boost_on_cycle_chance', 10}, links = {147, 145}, size = 1}
 tree[147] = {x = -354, y = 174, types = {'Homing', 'Kill'}, stats = {'5% Added Chance to Launch Homing Projectile on Kill', 'launch_homing_projectile_on_kill_chance', 5}, links = {149, 146, 148}, size = 1}
@@ -218,7 +218,7 @@ tree[168] = {x = -354, y = 354, types = {'Proj'}, stats = {'10% Added Projectile
 tree[169] = {x = -378, y = 330, types = {'Proj'}, stats = {'15% Added Projectile Waviness', 'projectile_waviness_multiplier', 0.15}, links = {168}, size = 1}
 tree[170] = {x = -426, y = 342, types = {'Proj'}, stats = {'Projectile Start Fast and Become Slow', 'fast_slow', true}, links = {159, 172}, size = 2}
 tree[171] = {x = -498, y = 342, types = {'Proj'}, stats = {'Projectile Start Slow and Become Fast', 'slow_fast', true}, links = {159, 172}, size = 2}
-tree[172] = {x = -462, y = 378, types = {'Proj'}, stats = {'10% Increased Projectile Acceleration', 'projectile_acceleration_multiplier', 0.10, 
+tree[172] = {x = -462, y = 378, types = {'Proj'}, stats = {'10% Increased Projectile Acceleration', 'projectile_acceleration_multiplier', 0.10,
 '10% Increased Projectile Deceleration', 'projectile_deceleration_multiplier', 0.10}, links = {170, 173, 171, 177}, size = 1}
 tree[173] = {x = -438, y = 402, types = {'Proj'}, stats = {'10% Increased Projectile Deceleration', 'projectile_deceleration_multiplier', 0.10}, links = {172, 174}, size = 1}
 tree[174] = {x = -414, y = 378, types = {'Proj'}, stats = {'10% Increased Projectile Deceleration', 'projectile_deceleration_multiplier', 0.10}, links = {173, 175}, size = 1}
@@ -268,7 +268,7 @@ tree[217] = {x = 126, y = 486, types = {'MVSPD'}, stats = {'16% Decreased Moveme
 tree[218] = {x = 126, y = 522, types = {'MVSPD'}, stats = {'8% Decreased Movement Speed', 'mvspd_multiplier', -0.08}, links = {217, 221}, size = 1}
 tree[219] = {x = 162, y = 522, types = {'Homing', 'Boost'}, stats = {'2% Added Chance to Launch Homing Projectile while Boosting', 'launch_homing_projectile_while_boosting_chance', 2}, links = {220, 221}, size = 1}
 tree[220] = {x = 162, y = 486, types = {'Homing', 'Boost'}, stats = {'4% Added Chance to Launch Homing Projectile while Boosting', 'launch_homing_projectile_while_boosting_chance', 4}, links = {214, 219}, size = 1}
-tree[221] = {x = 126, y = 558, types = {'Conversion', 'MVSPD', 'HP'}, stats = {'30% of Decreases in Movement Speed Added as HP', 'mvspd_to_hp', 30, '20% Decreased Turn Rate', 'turn_rate_multiplier', -0.20, 
+tree[221] = {x = 126, y = 558, types = {'Conversion', 'MVSPD', 'HP'}, stats = {'30% of Decreases in Movement Speed Added as HP', 'mvspd_to_hp', 30, '20% Decreased Turn Rate', 'turn_rate_multiplier', -0.20,
 '20% Decreased Attack Speed', 'aspd_multiplier', -0.20}, links = {218, 216, 219, 228}, size = 2}
 tree[222] = {x = 42, y = 522, types = {'MVSPD', 'Turn Rate'}, stats = {'4% Increased Movement Speed', 'mvspd_multiplier', 0.04, '4% Increased Turn Rate', 'turn_rate_multiplier', 0.04}, links = {206, 223}, size = 1}
 tree[223] = {x = 42, y = 558, types = {'Conversion', 'MVSPD', 'ASPD', 'HP'}, stats = {'30% of Increases in Movement Speed Added as Attack Speed', 'mvspd_to_aspd', 30, '-25 Max HP', 'flat_hp', -25}, links = {222, 227}, size = 2}
@@ -310,7 +310,7 @@ tree[260] = {x = 174, y = 126, types = {'Luck'}, stats = {'5% Increased Luck', '
 tree[261] = {x = 126, y = 54, types = {'SP'}, stats = {'5% Increased Chance to Spawn SP', 'sp_spawn_chance_multiplier', 0.05}, links = {262, 4}, size = 1}
 tree[262] = {x = 150, y = 30, types = {'SP'}, stats = {'5% Increased Chance to Spawn SP', 'sp_spawn_chance_multiplier', 0.05}, links = {263, 261, 88}, size = 1}
 tree[263] = {x = 174, y = 54, types = {'SP'}, stats = {'5% Increased Chance to Spawn SP', 'sp_spawn_chance_multiplier', 0.05}, links = {264, 262}, size = 1}
-tree[264] = {x = 210, y = 90, types = {'SP', 'Luck'}, stats = {'10% Increased Chance to Spawn SP', 'sp_spawn_chance_multiplier', 0.10, 
+tree[264] = {x = 210, y = 90, types = {'SP', 'Luck'}, stats = {'10% Increased Chance to Spawn SP', 'sp_spawn_chance_multiplier', 0.10,
 '10% Increased Luck', 'luck_multiplier', 0.10}, links = {260, 263, 267,  266, 283, 300, 902}, size = 2}
 tree[902] = {x = 282, y = 90, types = {'Attack', 'Cycle'}, stats = {'4% Added Chance to Change Attack on Cycle', 'change_attack_on_cycle_chance', 4}, links = {264, 271}, size = 1}
 tree[265] = {x = 150, y = 210, types = {'Luck', 'Boost'}, stats = {'100% Increased Luck while Boosting', 'increased_luck_while_boosting', true}, links = {187, 259, 305}, size = 3}
@@ -412,7 +412,7 @@ tree[376] = {x = -498, y = -294, types = {'Item'}, stats = {'2% Increased Item S
 tree[377] = {x = -522, y = -318, types = {'Item'}, stats = {'2% Increased Item Spawn Rate', 'item_spawn_rate_multiplier', 0.02}, links = {376, 378}, size = 1}
 tree[378] = {x = -546, y = -294, types = {'Item'}, stats = {'2% Increased Item Spawn Rate', 'item_spawn_rate_multiplier', 0.02}, links = {377, 379}, size = 1}
 tree[379] = {x = -570, y = -270, types = {'Item'}, stats = {'2% Increased Item Spawn Rate', 'item_spawn_rate_multiplier', 0.02}, links = {378, 368, 363}, size = 1}
-tree[380] = {x = -462, y = -150, types = {'Attack'}, stats = {'12% Added Chance to Spawn Back Attack', 'back_spawn_chance', 20, 
+tree[380] = {x = -462, y = -150, types = {'Attack'}, stats = {'12% Added Chance to Spawn Back Attack', 'back_spawn_chance', 20,
 '12% Added Chance to Spawn Side Attack', 'side_spawn_chance', 20, 'Start With Back Attack', 'start_with_back', true, 'Start With Side Attack', 'start_with_side', true}, links = {105, 381}, size = 2}
 tree[381] = {x = -426, y = -150, types = {'Attack'}, stats = {'6% Added Chance to Spawn Back Attack', 'back_spawn_chance', 10, '6% Added Chance to Spawn Side Attack', 'side_spawn_chance', 10}, links = {380}, size = 1}
 tree[382] = {x = -654, y = -186, types = {'ASPD'}, stats = {'3% Increased Attack Speed', 'aspd_multiplier', 0.03}, links = {363, 394, 395, 396}, size = 1}
@@ -422,7 +422,7 @@ tree[389] = {x = -618, y = -114, types = {'Barrage', 'Kill'}, stats = {'2% Added
 tree[390] = {x = -690, y = -78, types = {'PSPD'}, stats = {'3% Increased Projectile Speed', 'pspd_multiplier', 0.03}, links = {387, 393}, size = 1}
 tree[391] = {x = -654, y = -78, types = {'ASPD'}, stats = {'3% Increased Attack Speed', 'aspd_multiplier', 0.03}, links = {388, 393}, size = 1}
 tree[392] = {x = -618, y = -78, types = {'Barrage', 'Kill'}, stats = {'1% Added Chance to Barrage on Kill', 'barrage_on_kill_chance', 1}, links = {389, 393}, size = 1}
-tree[393] = {x = -654, y = -42, types = {'PSPD', 'ASPD', 'Barrage', 'Kill'}, stats = {'10% Increased Projectile Speed', 'pspd_multiplier', 0.10, '10% Increased Attack Speed', 'aspd_multiplier', 0.10, 
+tree[393] = {x = -654, y = -42, types = {'PSPD', 'ASPD', 'Barrage', 'Kill'}, stats = {'10% Increased Projectile Speed', 'pspd_multiplier', 0.10, '10% Increased Attack Speed', 'aspd_multiplier', 0.10,
 '2% Added Chance to Barrage on Kill', 'barrage_on_kill_chance', 2}, links = {390, 391, 392, 402}, size = 2}
 tree[394] = {x = -690, y = -150, types = {'PSPD'}, stats = {'3% Increased Projectile Speed', 'pspd_multiplier', 0.03}, links = {387, 382}, size = 1}
 tree[395] = {x = -654, y = -150, types = {'ASPD'}, stats = {'3% Increased Attack Speed', 'aspd_multiplier', 0.03}, links = {388, 382}, size = 1}
@@ -496,13 +496,13 @@ tree[464] = {x = 378, y = -594, types = {'HP', 'Cycle'}, stats = {'2% Added Chan
 tree[465] = {x = 354, y = -618, types = {'HP', 'Cycle'}, stats = {'1% Added Chance to Spawn HP on Cycle', 'spawn_hp_on_cycle_chance', 1}, links = {464, 470}, size = 1}
 tree[467] = {x = 486, y = -594, types = {'HP'}, stats = {'8% Increased Chance to Spawn HP', 'hp_spawn_chance_multiplier', 0.08}, links = {460, 468}, size = 1}
 tree[468] = {x = 510, y = -618, types = {'HP'}, stats = {'4% Increased Chance to Spawn HP', 'hp_spawn_chance_multiplier', 0.04}, links = {467, 470}, size = 1}
-tree[470] = {x = 438, y = -618, types = {'HP'}, stats = {'8% Increased Chance to Spawn HP', 'hp_spawn_chance_multiplier', 0.08, 
+tree[470] = {x = 438, y = -618, types = {'HP'}, stats = {'8% Increased Chance to Spawn HP', 'hp_spawn_chance_multiplier', 0.08,
 '2% Added Chance to Spawn HP on Cycle', 'spawn_hp_on_cycle_chance', 2}, links = {465, 468}, size = 2}
 tree[471] = {x = 378, y = -450, types = {'HP', 'Cycle'}, stats = {'2% Added Chance to Regain HP on Cycle', 'regain_hp_on_cycle_chance', 2}, links = {457, 472}, size = 1}
 tree[472] = {x = 354, y = -426, types = {'HP', 'Cycle'}, stats = {'1% Added Chance to Regain HP on Cycle', 'regain_hp_on_cycle_chance', 1}, links = {471, 477}, size = 1}
 tree[474] = {x = 486, y = -450, types = {'HP', 'SP'}, stats = {'2% Added Chance to Regain HP on SP Pickup', 'regain_hp_on_sp_pickup_chance', 2}, links = {462, 475}, size = 1}
 tree[475] = {x = 510, y = -426, types = {'HP', 'SP'}, stats = {'1% Added Chance to Regain HP on SP Pickup', 'regain_hp_on_sp_pickup_chance', 1}, links = {474, 477}, size = 1}
-tree[477] = {x = 438, y = -426, types = {'HP', 'SP', 'Cycle'}, stats = {'2% Added Chance to Regain HP on SP Pickup', 'regain_hp_on_sp_pickup_chance', 2, 
+tree[477] = {x = 438, y = -426, types = {'HP', 'SP', 'Cycle'}, stats = {'2% Added Chance to Regain HP on SP Pickup', 'regain_hp_on_sp_pickup_chance', 2,
 '2% Added Chance to Regain HP on Cycle', 'regain_hp_on_cycle_chance', 2}, links = {472, 475}, size = 2}
 tree[478] = {x = 558, y = -378, types = {'Resource'}, stats = {'2% Increased Resource Spawn Rate', 'resource_spawn_rate_multiplier', 0.02}, links = {299, 86, 479, 463, 516, 519}, size = 1}
 tree[479] = {x = 522, y = -342, types = {'Attack'}, stats = {'8% Increased Attack Spawn Rate', 'attack_spawn_rate_multiplier', 0.08}, links = {478, 480}, size = 1}
@@ -570,7 +570,7 @@ tree[547] = {x = 690, y = -114, types = {'Attack'}, stats = {'12% Added Chance t
 tree[548] = {x = 774, y = -114, types = {'Attack'}, stats = {'12% Added Chance to Spawn Flame Attack', 'flame_spawn_chance', 20}, links = {545, 551}, size = 1}
 tree[549] = {x = 846, y = -114, types = {'Attack'}, stats = {'12% Added Chance to Spawn Blast Attack', 'blast_spawn_chance', 20}, links = {544, 551}, size = 1}
 tree[550] = {x = 726, y = -78, types = {'Attack'}, stats = {'6% Added Chance to Spawn Spin Attack', 'spin_spawn_chance', 10}, links = {547, 551}, size = 1}
-tree[551] = {x = 810, y = -78, types = {'Attack'}, stats = {'6% Added Chance to Spawn Flame Attack', 'flame_spawn_chance', 10, 
+tree[551] = {x = 810, y = -78, types = {'Attack'}, stats = {'6% Added Chance to Spawn Flame Attack', 'flame_spawn_chance', 10,
 '6% Added Chance to Spawn Blast Attack', 'blast_spawn_chance', 10}, links = {548, 549, 550, 552}, size = 1}
 tree[552] = {x = 810, y = -18, types = {'Resource'}, stats = {'2% Increased Resource Spawn Rate', 'resource_spawn_rate_multiplier', 0.02}, links = {551, 328, 496, 553, 556, 559}, size = 1}
 tree[553] = {x = 810, y = 90, types = {'Cycle'}, stats = {'8% Increased Cycle Speed', 'cycle_multiplier', 0.08}, links = {552, 554, 327, 557, 560, 561}, size = 1}
@@ -598,7 +598,7 @@ tree[576] = {x = 654, y = 354, types = {'PSPD'}, stats = {'10% Decreased Project
 tree[577] = {x = 630, y = 330, types = {'PSPD'}, stats = {'10% Decreased Projectile Speed', 'pspd_multiplier', -0.10}, links = {576}, size = 1}
 tree[578] = {x = 582, y = 330, types = {'Cycle'}, stats = {'10% Increased Cycle Speed', 'cycle_multiplier', 0.10}, links = {312, 579}, size = 1}
 tree[579] = {x = 558, y = 354, types = {'Cycle'}, stats = {'10% Increased Cycle Speed', 'cycle_multiplier', 0.10}, links = {578, 581}, size = 1}
-tree[580] = {x = 810, y = 138, types = {'Homing', 'Barrage', 'ASPD', 'SP', 'Attack', 'Cycle'}, stats = {'+1 Homing Projectile', 'additional_homing_projectile', 1, '+2 Barrage Projectiles', 'additional_barrage_projectile', 2, '5% Added Chance to Spawn Haste Area on SP Pickup', 'spawn_haste_area_on_sp_pickup_chance', 5, '10% Added Chance to Change Attack on Cycle', 'change_attack_on_cycle_chance', 10}, 
+tree[580] = {x = 810, y = 138, types = {'Homing', 'Barrage', 'ASPD', 'SP', 'Attack', 'Cycle'}, stats = {'+1 Homing Projectile', 'additional_homing_projectile', 1, '+2 Barrage Projectiles', 'additional_barrage_projectile', 2, '5% Added Chance to Spawn Haste Area on SP Pickup', 'spawn_haste_area_on_sp_pickup_chance', 5, '10% Added Chance to Change Attack on Cycle', 'change_attack_on_cycle_chance', 10},
 links = {560, 561, 565, 563}, size = 2}
 tree[581] = {x = 534, y = 330, types = {'Cycle'}, stats = {'10% Increased Cycle Speed', 'cycle_multiplier', 0.10}, links = {579}, size = 1}
 tree[582] = {x = 702, y = 354, types = {'PSPD'}, stats = {'10% Decreased Projectile Speed', 'pspd_multiplier', -0.10}, links = {575, 499}, size = 1}
@@ -646,9 +646,9 @@ tree[626] = {x = 150, y = 834, types = {'Barrage', 'Kill'}, stats = {'1% Added C
 tree[627] = {x = 102, y = 834, types = {'Barrage', 'Kill'}, stats = {'2% Added Chance to Barrage on Kill', 'barrage_on_kill_chance', 2}, links = {628, 626}, size = 1}
 tree[628] = {x = 54, y = 834, types = {'Barrage', 'Kill'}, stats = {'2% Added Chance to Barrage on Kill', 'barrage_on_kill_chance', 2}, links = {629, 627}, size = 1}
 tree[629] = {x = 6, y = 834, types = {'Barrage', 'Kill'}, stats = {'1% Added Chance to Barrage on Kill', 'barrage_on_kill_chance', 1}, links = {628, 900}, size = 1}
-tree[900] = {x = -30, y = 798, types = {'Boost', 'ASPD'}, stats = {'32% Increased Chance to Spawn Boost', 'boost_spawn_chance_multiplier', 0.32, '8% Decreased Attack Speed', 'aspd_multiplier', -0.08}, 
+tree[900] = {x = -30, y = 798, types = {'Boost', 'ASPD'}, stats = {'32% Increased Chance to Spawn Boost', 'boost_spawn_chance_multiplier', 0.32, '8% Decreased Attack Speed', 'aspd_multiplier', -0.08},
 links = {631, 625, 621, 629}, size = 2}
-tree[630] = {x = 186, y = 798, types = {'Boost', 'ASPD'}, stats = {'32% Increased Chance to Spawn Boost', 'boost_spawn_chance_multiplier', 0.32, 
+tree[630] = {x = 186, y = 798, types = {'Boost', 'ASPD'}, stats = {'32% Increased Chance to Spawn Boost', 'boost_spawn_chance_multiplier', 0.32,
 '8% Decreased Attack Speed', 'aspd_multiplier', -0.08}, links = {609, 246, 618, 622, 626}, size = 2}
 tree[631] = {x = -78, y = 798, types = {'Boost'}, stats = {'4% Increased Boost', 'boost_multiplier', 0.04}, links = {633, 636, 900}, size = 1}
 tree[632] = {x = -78, y = 762, types = {'Turn Rate'}, stats = {'8% Decreased Turn Rate', 'turn_rate_multiplier', -0.08}, links = {633, 235}, size = 1}
@@ -656,7 +656,7 @@ tree[633] = {x = -114, y = 762, types = {'Turn Rate'}, stats = {'8% Decreased Tu
 tree[634] = {x = -186, y = 762, types = {'HP'}, stats = {'4% Increased HP', 'hp_multiplier', 0.04}, links = {639, 635}, size = 1}
 tree[635] = {x = -150, y = 798, types = {'Turn Rate'}, stats = {'8% Decreased Turn Rate', 'turn_rate_multiplier', -0.08}, links = {633, 636, 638, 634}, size = 1}
 tree[636] = {x = -114, y = 834, types = {'Boost'}, stats = {'4% Increased Boost', 'boost_multiplier', 0.04}, links = {631, 635, 641}, size = 1}
-tree[638] = {x = -186, y = 834, types = {'Turn Rate', 'Size', 'Ammo'}, stats = {'24% Decreased Turn Rate', 'turn_rate_multiplier', -0.24, '10% Increased Size', 'size_multiplier', 0.10, 
+tree[638] = {x = -186, y = 834, types = {'Turn Rate', 'Size', 'Ammo'}, stats = {'24% Decreased Turn Rate', 'turn_rate_multiplier', -0.24, '10% Increased Size', 'size_multiplier', 0.10,
 '-15 Max Ammo', 'flat_ammo', -15, '20% Increased Ammo Consumption', 'ammo_consumption_multiplier', 0.20}, links = {635}, size = 2}
 tree[639] = {x = -222, y = 762, types = {'HP'}, stats = {'8% Increased HP', 'hp_multiplier', 0.08, '8% Increased Movement Speed', 'mvspd_multiplier', 0.08}, links = {640, 634}, size = 2}
 tree[640] = {x = -258, y = 762, types = {'HP'}, stats = {'4% Increased HP', 'hp_multiplier', 0.04}, links = {639}, size = 1}
@@ -666,7 +666,7 @@ tree[643] = {x = -126, y = 606, types = {'Turn Rate'}, stats = {'4% Increased Tu
 tree[644] = {x = -150, y = 630, types = {'Turn Rate'}, stats = {'4% Increased Turn Rate', 'turn_rate_multiplier', 0.04}, links = {643, 645}, size = 1}
 tree[645] = {x = -174, y = 606, types = {'Turn Rate'}, stats = {'4% Increased Turn Rate', 'turn_rate_multiplier', 0.04}, links = {644, 646}, size = 1}
 tree[646] = {x = -150, y = 582, types = {'Turn Rate'}, stats = {'4% Increased Turn Rate', 'turn_rate_multiplier', 0.04}, links = {645, 647}, size = 1}
-tree[647] = {x = -150, y = 534, types = {'Turn Rate', 'Size', 'Ammo'}, stats = {'16% Increased Turn Rate', 'turn_rate_multiplier', 0.16, '20% Decreased Size', 'size_multiplier', 0.20, 
+tree[647] = {x = -150, y = 534, types = {'Turn Rate', 'Size', 'Ammo'}, stats = {'16% Increased Turn Rate', 'turn_rate_multiplier', 0.16, '20% Decreased Size', 'size_multiplier', 0.20,
 '-15 Max Ammo', 'flat_ammo', -15, '20% Increased Ammo Consumption', 'ammo_consumption_multiplier', 0.20}, links = {646}, size = 2}
 tree[648] = {x = -186, y = 522, types = {'Attack'}, stats = {'12% Added Chance to Spawn Homing Attack', 'homing_spawn_chance', 20}, links = {195, 649}, size = 1}
 tree[649] = {x = -186, y = 558, types = {'Attack'}, stats = {'12% Added Chance to Spawn Homing Attack', 'homing_spawn_chance', 20, 'Start With Homing Attack', 'start_with_homing', true}, links = {648}, size = 2}
@@ -681,7 +681,7 @@ tree[658] = {x = -258, y = 522, types = {'Special', 'Ammo'}, stats = {'Half Ammo
 tree[659] = {x = -498, y = 642, types = {'Proj'}, stats = {'10% Increased Projectile Duration', 'projectile_duration_multiplier', 0.10}, links = {661, 660, 664}, size = 1}
 tree[660] = {x = -450, y = 594, types = {'Proj'}, stats = {'10% Increased Projectile Duration', 'projectile_duration_multiplier', 0.10}, links = {662, 659}, size = 1}
 tree[661] = {x = -522, y = 618, types = {'Buff'}, stats = {'10% Increased Stat Boost Duration', 'stat_boost_duration_multiplier', 0.10}, links = {663, 659}, size = 1}
-tree[662] = {x = -498, y = 546, types = {'Buff', 'Proj'}, stats = {'20% Increased Stat Boost Duration', 'stat_boost_duration_multiplier', 0.20, 
+tree[662] = {x = -498, y = 546, types = {'Buff', 'Proj'}, stats = {'20% Increased Stat Boost Duration', 'stat_boost_duration_multiplier', 0.20,
 '20% Increased Projectile Duration', 'projectile_duration_multiplier', 0.20}, links = {663, 660}, size = 2}
 tree[663] = {x = -522, y = 570, types = {'Buff'}, stats = {'10% Increased Stat Boost Duration', 'stat_boost_duration_multiplier', 0.10}, links = {661, 662}, size = 1}
 tree[664] = {x = -534, y = 678, types = {'ES'}, stats = {'10% Decreased Energy Shield Recharge Cooldown', 'energy_shield_recharge_cooldown_multiplier', 0.10}, links = {509, 659, 665, 675}, size = 1}
@@ -726,7 +726,7 @@ tree[704] = {x = -294, y = 918, types = {'Special', 'Ammo'}, stats = {'Half Ammo
 tree[705] = {x = -222, y = 918, types = {'Attack'}, stats = {'6% Added Chance to Spawn 2Split Attack', 'twosplit_spawn_chance', 10}, links = {706, 703}, size = 1}
 tree[706] = {x = -222, y = 954, types = {'Attack'}, stats = {'6% Added Chance to Spawn 2Split Attack', 'twosplit_spawn_chance', 10}, links = {708, 705}, size = 1}
 tree[707] = {x = -150, y = 918, types = {'Attack'}, stats = {'6% Added Chance to Spawn 4Split Attack', 'foursplit_spawn_chance', 10}, links = {703, 708}, size = 1}
-tree[708] = {x = -186, y = 954, types = {'Attack'}, stats = {'6% Added Chance to Spawn 2Split Attack', 'twosplit_spawn_chance', 10, '6% Added Chance to Spawn 4Split Attack', 'foursplit_spawn_chance', 10, 
+tree[708] = {x = -186, y = 954, types = {'Attack'}, stats = {'6% Added Chance to Spawn 2Split Attack', 'twosplit_spawn_chance', 10, '6% Added Chance to Spawn 4Split Attack', 'foursplit_spawn_chance', 10,
 'Start With 2Split Attack', 'start_with_2split', true}, links = {707, 706}, size = 2}
 tree[709] = {x = -54, y = 906, types = {'MVSPD', 'Buff', 'Cycle'}, stats = {'4% Added Chance to Gain Movement Speed Boost on Cycle', 'gain_mvspd_boost_on_cycle_chance', 4}, links = {614, 710}, size = 1}
 tree[710] = {x = -54, y = 942, types = {'MVSPD', 'Buff', 'Cycle'}, stats = {'4% Added Chance to Gain Movement Speed Boost on Cycle', 'gain_mvspd_boost_on_cycle_chance', 4}, links = {709, 711}, size = 1}
@@ -734,11 +734,11 @@ tree[711] = {x = -54, y = 978, types = {'MVSPD', 'Buff', 'Cycle'}, stats = {'4% 
 tree[712] = {x = -102, y = 906, types = {'Proj'}, stats = {'8% Increased Projectile Size', 'projectile_size_multiplier', 0.08}, links = {713, 614}, size = 1}
 tree[713] = {x = -102, y = 942, types = {'Proj'}, stats = {'8% Increased Projectile Size', 'projectile_size_multiplier', 0.08}, links = {714, 712}, size = 1}
 tree[714] = {x = -102, y = 978, types = {'Proj'}, stats = {'8% Increased Projectile Size', 'projectile_size_multiplier', 0.08}, links = {715, 713}, size = 1}
-tree[715] = {x = -78, y = 1002, types = {'Proj', 'MVSPD', 'Buff', 'Cycle'}, stats = {'16% Projectile Size', 'projectile_size_multiplier', 0.16, 
+tree[715] = {x = -78, y = 1002, types = {'Proj', 'MVSPD', 'Buff', 'Cycle'}, stats = {'16% Projectile Size', 'projectile_size_multiplier', 0.16,
 '6% Added Chance to Gain Movement Speed Boost on Cycle', 'gain_mvspd_boost_on_cycle_chance', 6}, links = {714, 711}, size = 2}
 tree[716] = {x = 18, y = 906, types = {'Attack'}, stats = {'6% Added Chance to Spawn Laser Attack', 'laser_spawn_chance', 10}, links = {702, 717}, size = 1}
 tree[717] = {x = 42, y = 930, types = {'Attack'}, stats = {'6% Added Chance to Spawn Laser Attack', 'laser_spawn_chance', 10}, links = {716, 718, 719}, size = 1}
-tree[718] = {x = 66, y = 906, types = {'Attack', 'ASPD'}, stats = {'12% Added Chance to Spawn Laser Attack', 'laser_spawn_chance', 20, 'Start With Laser Attack', 'start_with_laser', true, 
+tree[718] = {x = 66, y = 906, types = {'Attack', 'ASPD'}, stats = {'12% Added Chance to Spawn Laser Attack', 'laser_spawn_chance', 20, 'Start With Laser Attack', 'start_with_laser', true,
 '16% Decreased Attack Speed', 'aspd_multiplier', -0.16}, links = {717}, size = 2}
 tree[719] = {x = 42, y = 966, types = {'Attack'}, stats = {'15% Increased Laser Width', 'laser_width_multiplier', 0.15, '6% Added Chance to Spawn Laser Attack', 'laser_spawn_chance', 10}, links = {717, 720}, size = 1}
 tree[720] = {x = 18, y = 990, types = {'Attack'}, stats = {'15% Increased Laser Width', 'laser_width_multiplier', 0.15, '6% Added Chance to Spawn Laser Attack', 'laser_spawn_chance', 10}, links = {719, 721}, size = 1}
@@ -758,7 +758,7 @@ tree[733] = {x = 486, y = 810, types = {'Cycle', 'Boost', 'Ammo'}, stats = {'200
 tree[734] = {x = 558, y = 642, types = {'SP'}, stats = {'8% Increased Chance to Spawn SP', 'sp_spawn_chance_multiplier', 0.08}, links = {501, 735, 738}, size = 1}
 tree[735] = {x = 558, y = 678, types = {'SP'}, stats = {'2% Added Chance to Spawn SP on Cycle', 'spawn_sp_on_cycle_chance', 2}, links = {734, 736}, size = 1}
 tree[736] = {x = 582, y = 702, types = {'SP'}, stats = {'2% Added Chance to Spawn SP on Cycle', 'spawn_sp_on_cycle_chance', 2}, links = {735, 737}, size = 1}
-tree[737] = {x = 618, y = 666, types = {'SP', 'Cycle'}, stats = {'10% Increased Chance to Spawn SP', 'sp_spawn_chance_multiplier', 0.10, 
+tree[737] = {x = 618, y = 666, types = {'SP', 'Cycle'}, stats = {'10% Increased Chance to Spawn SP', 'sp_spawn_chance_multiplier', 0.10,
 '4% Added Chance to Spawn SP on Cycle', 'spawn_sp_on_cycle_chance', 4, '4% Added Chance to Gain Double SP', 'gain_double_sp_chance', 4}, links = {736, 738}, size = 2}
 tree[738] = {x = 594, y = 642, types = {'SP'}, stats = {'4% Added Chance to Gain Double SP', 'gain_double_sp_chance', 4}, links = {737, 734}, size = 1}
 tree[739] = {x = 570, y = 462, types = {'PSPD'}, stats = {'8% Increased Projectile Speed', 'pspd_multiplier', 0.08}, links = {500, 741, 740}, size = 1}
@@ -773,7 +773,7 @@ tree[747] = {x = 726, y = 570, types = {'HP'}, stats = {'2% Increased HP', 'hp_m
 tree[748] = {x = 702, y = 594, types = {'HP'}, stats = {'2% Increased HP', 'hp_multiplier', 0.02}, links = {749, 747}, size = 1}
 tree[749] = {x = 678, y = 618, types = {'HP'}, stats = {'2% Increased HP', 'hp_multiplier', 0.02}, links = {750, 748}, size = 1}
 tree[750] = {x = 654, y = 594, types = {'HP'}, stats = {'2% Increased HP', 'hp_multiplier', 0.02}, links = {745, 749}, size = 1}
-tree[751] = {x = 726, y = 450, types = {'Barrage', 'Cycle', 'Homing'}, stats = {'1% Added Chance to Barrage on Cycle', 'barrage_on_cycle_chance', 1, 
+tree[751] = {x = 726, y = 450, types = {'Barrage', 'Cycle', 'Homing'}, stats = {'1% Added Chance to Barrage on Cycle', 'barrage_on_cycle_chance', 1,
 '1% Added Chance to Launch Homing Projectile on Cycle', 'launch_homing_projectile_on_cycle_chance', 1}, links = {499, 756, 752}, size = 1}
 tree[752] = {x = 762, y = 450, types = {'Barrage', 'Cycle'}, stats = {'3% Added Chance to Barrage on Cycle', 'barrage_on_cycle_chance', 3}, links = {751, 753}, size = 1}
 tree[753] = {x = 798, y = 450, types = {'Barrage', 'Cycle'}, stats = {'3% Added Chance to Barrage on Cycle', 'barrage_on_cycle_chance', 3}, links = {752, 754}, size = 1}
@@ -802,7 +802,7 @@ tree[778] = {x = 1050, y = -18, types = {'Special', 'Proj'}, stats = {'Projectil
 tree[779] = {x = 1050, y = 42, types = {'Proj'}, stats = {'16% Decreased Projectile Duration', 'projectile_duration_multiplier', -0.16}, links = {778, 780}, size = 1}
 tree[780] = {x = 990, y = 42, types = {'Proj'}, stats = {'24% Decreased Projectile Duration', 'projectile_duration_multiplier', -0.24}, links = {779, 781}, size = 1}
 tree[781] = {x = 954, y = 6, types = {'Proj'}, stats = {'16% Decreased Projectile Duration', 'projectile_duration_multiplier', -0.16}, links = {780, 774}, size = 1}
-tree[904] = {x = 930, y = -222, types = {'Special', 'Ammo', 'Attack'}, stats = {'No Ammo Drops', 'no_ammo_drop', true, 'Infinite Ammo', 'infinite_ammo', true, 
+tree[904] = {x = 930, y = -222, types = {'Special', 'Ammo', 'Attack'}, stats = {'No Ammo Drops', 'no_ammo_drop', true, 'Infinite Ammo', 'infinite_ammo', true,
 'Change Attack Every 10 Seconds', 'change_attack_periodically', true}, links = {495}, size = 3}
 tree[782] = {x = 750, y = -378, types = {'Area'}, stats = {'5% Increased Area', 'area_multiplier', 0.05}, links = {494, 784}, size = 1}
 tree[783] = {x = 726, y = -402, types = {'PSPD'}, stats = {'8% Increased Projectile Speed', 'pspd_multiplier', 0.08}, links = {493, 786}, size = 1}
@@ -812,11 +812,11 @@ tree[785] = {x = 822, y = -402, types = {'Area'}, stats = {'5% Increased Area', 
 tree[786] = {x = 702, y = -426, types = {'PSPD'}, stats = {'8% Increased Projectile Speed', 'pspd_multiplier', 0.08}, links = {783, 787}, size = 1}
 tree[787] = {x = 726, y = -450, types = {'PSPD'}, stats = {'8% Increased Projectile Speed', 'pspd_multiplier', 0.08}, links = {786, 788}, size = 1}
 tree[788] = {x = 750, y = -474, types = {'PSPD'}, stats = {'8% Increased Projectile Speed', 'pspd_multiplier', 0.08}, links = {787, 789}, size = 1}
-tree[789] = {x = 774, y = -450, types = {'Special', 'Attack'}, stats = {'Fixed Spin Direction', 'fixed_spin_direction', true, '12% Added Chance to Spawn Spin Attack', 'spin_spawn_chance', 20, 
+tree[789] = {x = 774, y = -450, types = {'Special', 'Attack'}, stats = {'Fixed Spin Direction', 'fixed_spin_direction', true, '12% Added Chance to Spawn Spin Attack', 'spin_spawn_chance', 20,
 'Start With Spin Attack', 'start_with_spin', true}, links = {788}, size = 2}
-tree[790] = {x = 822, y = -450, types = {'Area', 'Attack'}, stats = {'10% Increased Area', 'area_multiplier', 0.10, '+1 Lightning Bolt', 'additional_lightning_bolt', 1, 
+tree[790] = {x = 822, y = -450, types = {'Area', 'Attack'}, stats = {'10% Increased Area', 'area_multiplier', 0.10, '+1 Lightning Bolt', 'additional_lightning_bolt', 1,
 '50% Increased Lightning Trigger Distance', 'lightning_trigger_distance_multiplier', 0.50}, links = {785}, size = 2}
-tree[791] = {x = 606, y = -570, types = {'Special', 'ES'}, stats = {'[Energy Shield]', 'energy_shield', true, 'Takes Double Damage', 'energy_shield', true, 'Recharging HP', 'energy_shield', true, 
+tree[791] = {x = 606, y = -570, types = {'Special', 'ES'}, stats = {'[Energy Shield]', 'energy_shield', true, 'Takes Double Damage', 'energy_shield', true, 'Recharging HP', 'energy_shield', true,
 'Half Invulnerability Time', 'energy_shield', true}, links = {463, 792}, size = 3}
 tree[792] = {x = 654, y = -522, types = {'ES'}, stats = {'8% Increased Energy Shield Recharge Amount', 'energy_shield_recharge_amount_multiplier', 0.08}, links = {791, 793, 793}, size = 1}
 tree[793] = {x = 678, y = -546, types = {'ES'}, stats = {'8% Increased Energy Shield Recharge Amount', 'energy_shield_recharge_amount_multiplier', 0.08}, links = {792, 794, 792, 794}, size = 1}
@@ -839,7 +839,7 @@ tree[812] = {x = 162, y = -690, types = {'Buff'}, stats = {'5% Increased Stat Bo
 tree[813] = {x = 162, y = -726, types = {'Buff'}, stats = {'5% Increased Stat Boost Duration', 'stat_boost_duration_multiplier', 0.05}, links = {812, 816}, size = 1}
 tree[814] = {x = 114, y = -690, types = {'Proj'}, stats = {'5% Increased Projectile Duration', 'projectile_duration_multiplier', 0.05}, links = {815, 436}, size = 1}
 tree[815] = {x = 114, y = -726, types = {'Proj'}, stats = {'5% Increased Projectile Duration', 'projectile_duration_multiplier', 0.05}, links = {816, 814}, size = 1}
-tree[816] = {x = 138, y = -750, types = {'Buff', 'Proj', 'Ammo'}, stats = {'10% Increased Stat Boost Duration', 'stat_boost_duration_multiplier', 0.10, 
+tree[816] = {x = 138, y = -750, types = {'Buff', 'Proj', 'Ammo'}, stats = {'10% Increased Stat Boost Duration', 'stat_boost_duration_multiplier', 0.10,
 '10% Increased Projectile Duration', 'projectile_duration_multiplier', 0.10, '-15 Max Ammo', 'flat_ammo', -15}, links = {813, 815}, size = 2}
 tree[817] = {x = -6, y = -702, types = {'Attack'}, stats = {'6% Added Chance to Spawn Triple Attack', 'triple_spawn_chance', 10}, links = {820, 406}, size = 1}
 tree[818] = {x = 66, y = -702, types = {'Attack'}, stats = {'6% Added Chance to Spawn Double Attack', 'double_spawn_chance', 10}, links = {406, 819}, size = 1}
@@ -853,7 +853,7 @@ tree[824] = {x = -270, y = -786, types = {'Ammo'}, stats = {'8% Increased Ammo',
 tree[825] = {x = -390, y = -558, types = {'ASPD', 'SP'}, stats = {'2% Added Chance to Spawn Haste Area on SP Pickup', 'spawn_haste_area_on_sp_pickup_chance', 2}, links = {827, 404}, size = 1}
 tree[826] = {x = -426, y = -522, types = {'Ammo', 'Cycle'}, stats = {'1% Added Chance to Regain Full Ammo on Cycle', 'regain_full_ammo_on_cycle_chance', 1}, links = {404, 828}, size = 1}
 tree[827] = {x = -414, y = -582, types = {'ASPD', 'SP'}, stats = {'2% Added Chance to Spawn Haste Area on SP Pickup', 'spawn_haste_area_on_sp_pickup_chance', 2}, links = {828, 825}, size = 1}
-tree[828] = {x = -450, y = -546, types = {'ASPD', 'SP', 'Ammo', 'Cycle'}, stats = {'5% Added Chance to Spawn Haste Area on SP Pickup', 'spawn_haste_area_on_sp_pickup_chance', 5, 
+tree[828] = {x = -450, y = -546, types = {'ASPD', 'SP', 'Ammo', 'Cycle'}, stats = {'5% Added Chance to Spawn Haste Area on SP Pickup', 'spawn_haste_area_on_sp_pickup_chance', 5,
 '3% Added Chance to Regain Full Ammo on Cycle', 'regain_full_ammo_on_cycle_chance', 3}, links = {826, 827}, size = 2}
 tree[830] = {x = -522, y = -438, types = {'Proj'}, stats = {'2% Added Chance to Shoot Shield Projectiles', 'shield_projectile_chance', 2}, links = {365, 831}, size = 1}
 tree[831] = {x = -546, y = -462, types = {'Proj'}, stats = {'2% Added Chance to Shoot Shield Projectiles', 'shield_projectile_chance', 2}, links = {830, 833, 832}, size = 1}
@@ -861,15 +861,15 @@ tree[832] = {x = -570, y = -486, types = {'Proj'}, stats = {'4% Increased Projec
 tree[833] = {x = -570, y = -438, types = {'Proj'}, stats = {'5% Increased Projectile Duration', 'projectile_duration_multiplier', 0.05}, links = {831, 834}, size = 1}
 tree[834] = {x = -606, y = -438, types = {'Proj'}, stats = {'5% Increased Projectile Duration', 'projectile_duration_multiplier', 0.05}, links = {833, 836}, size = 1}
 tree[835] = {x = -606, y = -486, types = {'Proj'}, stats = {'4% Increased Projectile Size', 'projectile_size_multiplier', 0.04}, links = {836, 832}, size = 1}
-tree[836] = {x = -630, y = -462, types = {'Proj'}, stats = {'10% Increased Projectile Duration', 'projectile_duration_multiplier', 0.10, '10% Increased Projectile Size', 'projectile_size_multiplier', 0.10, 
+tree[836] = {x = -630, y = -462, types = {'Proj'}, stats = {'10% Increased Projectile Duration', 'projectile_duration_multiplier', 0.10, '10% Increased Projectile Size', 'projectile_size_multiplier', 0.10,
 '4% Added Chance to Shoot Shield Projectiles', 'shield_projectile_chance', 4}, links = {834, 835}, size = 2}
-tree[837] = {x = -630, y = -330, types = {'Attack'}, stats = {'4% Added Chance to Attack From Sides', 'attack_from_sides_chance', 4, 
+tree[837] = {x = -630, y = -330, types = {'Attack'}, stats = {'4% Added Chance to Attack From Sides', 'attack_from_sides_chance', 4,
 '4% Added Chance to Attack From Back', 'attack_from_back_chance', 4}, links = {368, 838}, size = 1}
-tree[838] = {x = -654, y = -354, types = {'Attack'}, stats = {'4% Added Chance to Attack From Sides', 'attack_from_sides_chance', 4, 
+tree[838] = {x = -654, y = -354, types = {'Attack'}, stats = {'4% Added Chance to Attack From Sides', 'attack_from_sides_chance', 4,
 '4% Added Chance to Attack From Back', 'attack_from_back_chance', 4}, links = {837, 839, 840}, size = 1}
 tree[839] = {x = -654, y = -390, types = {'Attack'}, stats = {'8% Added Chance to Attack From Back', 'attack_from_back_chance', 8}, links = {838, 841}, size = 1}
 tree[840] = {x = -690, y = -354, types = {'Attack'}, stats = {'8% Added Chance to Attack From Sides', 'attack_from_sides_chance', 8}, links = {841, 838}, size = 1}
-tree[841] = {x = -690, y = -390, types = {'Attack'}, stats = {'12% Added Chance to Attack From Sides', 'attack_from_sides_chance', 4, 
+tree[841] = {x = -690, y = -390, types = {'Attack'}, stats = {'12% Added Chance to Attack From Sides', 'attack_from_sides_chance', 4,
 '12% Added Chance to Attack From Back', 'attack_from_back_chance', 4}, links = {839, 840}, size = 2}
 tree[842] = {x = -762, y = -222, types = {'Special', 'Boost'}, stats = {'No Boost', 'no_boost', true, '+50 Max Ammo', 'flat_ammo', 50}, links = {366}, size = 3}
 tree[843] = {x = -762, y = -18, types = {'HP'}, stats = {'4% Added Chance to Spawn Double HP', 'spawn_double_hp_chance', 4}, links = {367, 845}, size = 1}
@@ -894,29 +894,29 @@ tree[862] = {x = -774, y = 462, types = {'ASPD', 'Ammo'}, stats = {'10% Increase
 tree[863] = {x = -702, y = 390, types = {'HP'}, stats = {'+5 Max HP', 'flat_hp', 5}, links = {855, 864}, size = 1}
 tree[864] = {x = -726, y = 414, types = {'HP'}, stats = {'+10 Max HP', 'flat_hp', 10}, links = {863, 865}, size = 1}
 tree[865] = {x = -750, y = 438, types = {'HP'}, stats = {'+5 Max HP', 'flat_hp', 5}, links = {864, 862}, size = 1}
-tree[866] = {x = -690, y = 534, types = {'ES'}, stats = {'30% Increased Energy Shield Recharge Amount', 'energy_shield_recharge_amount_multiplier', 0.30, 
+tree[866] = {x = -690, y = 534, types = {'ES'}, stats = {'30% Increased Energy Shield Recharge Amount', 'energy_shield_recharge_amount_multiplier', 0.30,
 '30% Increased Energy Shield Recharge Cooldown', 'energy_shield_recharge_cooldown_multiplier', -0.30}, links = {512, 867}, size = 3}
 tree[867] = {x = -738, y = 534, types = {'ES'}, stats = {'5% Increased Energy Shield Recharge Amount', 'energy_shield_recharge_amount_multiplier', 0.05}, links = {866, 868}, size = 1}
 tree[868] = {x = -762, y = 558, types = {'ES'}, stats = {'5% Increased Energy Shield Recharge Amount', 'energy_shield_recharge_amount_multiplier', 0.05}, links = {867, 869}, size = 1}
 tree[869] = {x = -762, y = 594, types = {'ES'}, stats = {'5% Increased Energy Shield Recharge Amount', 'energy_shield_recharge_amount_multiplier', 0.05}, links = {868, 874}, size = 1}
-tree[870] = {x = -690, y = 642, types = {'ES'}, stats = {'30% Decreased Energy Shield Recharge Cooldown', 'energy_shield_recharge_cooldown_multiplier', 0.30, 
+tree[870] = {x = -690, y = 642, types = {'ES'}, stats = {'30% Decreased Energy Shield Recharge Cooldown', 'energy_shield_recharge_cooldown_multiplier', 0.30,
 '30% Decreased Energy Shield Recharge Amount', 'energy_shield_recharge_amount_multiplier', -0.30}, links = {513, 871}, size = 3}
 tree[871] = {x = -726, y = 678, types = {'ES'}, stats = {'5% Decreased Energy Shield Recharge Cooldown', 'energy_shield_recharge_cooldown_multiplier', 0.05}, links = {870, 872}, size = 1}
 tree[872] = {x = -762, y = 678, types = {'ES'}, stats = {'5% Decreased Energy Shield Recharge Cooldown', 'energy_shield_recharge_cooldown_multiplier', 0.05}, links = {873, 871}, size = 1}
 tree[873] = {x = -786, y = 654, types = {'ES'}, stats = {'5% Decreased Energy Shield Recharge Cooldown', 'energy_shield_recharge_cooldown_multiplier', 0.05}, links = {874, 872}, size = 1}
-tree[874] = {x = -786, y = 618, types = {'ES'}, stats = {'5% Increased Energy Shield Recharge Amount', 'energy_shield_recharge_amount_multiplier', 0.05, 
+tree[874] = {x = -786, y = 618, types = {'ES'}, stats = {'5% Increased Energy Shield Recharge Amount', 'energy_shield_recharge_amount_multiplier', 0.05,
 '5% Decreased Energy Shield Recharge Cooldown', 'energy_shield_recharge_cooldown_multiplier', 0.05}, links = {869, 873}, size = 1}
-tree[875] = {x = -570, y = 750, types = {'Proj'}, stats = {'5% Increased Angle Change Frequency', 'projectile_angle_change_frequency_multiplier', 0.05, 
+tree[875] = {x = -570, y = 750, types = {'Proj'}, stats = {'5% Increased Angle Change Frequency', 'projectile_angle_change_frequency_multiplier', 0.05,
 '5% Increased Projectile Waviness', 'projectile_waviness_multiplier', 0.05}, links = {509, 876, 877}, size = 1}
 tree[876] = {x = -594, y = 774, types = {'Proj'}, stats = {'5% Increased Angle Change Frequency', 'projectile_angle_change_frequency_multiplier', 0.05}, links = {875, 878}, size = 1}
 tree[877] = {x = -546, y = 774, types = {'Proj'}, stats = {'5% Added Projectile Waviness', 'projectile_waviness_multiplier', 0.05}, links = {878, 875}, size = 1}
-tree[878] = {x = -570, y = 798, types = {'Proj'}, stats = {'20% Increased Angle Change Frequency', 'projectile_angle_change_frequency_multiplier', 0.20, 
+tree[878] = {x = -570, y = 798, types = {'Proj'}, stats = {'20% Increased Angle Change Frequency', 'projectile_angle_change_frequency_multiplier', 0.20,
 '20% Increased Projectile Waviness', 'projectile_waviness_multiplier', 0.20}, links = {876, 877, 879}, size = 2}
-tree[879] = {x = -570, y = 834, types = {'Proj'}, stats = {'5% Increased Angle Change Frequency', 'projectile_angle_change_frequency_multiplier', 0.05, 
+tree[879] = {x = -570, y = 834, types = {'Proj'}, stats = {'5% Increased Angle Change Frequency', 'projectile_angle_change_frequency_multiplier', 0.05,
 '5% Increased Projectile Waviness', 'projectile_waviness_multiplier', 0.05}, links = {878, 880, 884}, size = 1}
 tree[880] = {x = -606, y = 834, types = {'Proj'}, stats = {'5% Increased Angle Change Frequency', 'projectile_angle_change_frequency_multiplier', 0.05}, links = {879, 881}, size = 1}
 tree[881] = {x = -606, y = 870, types = {'Proj'}, stats = {'5% Increased Angle Change Frequency', 'projectile_angle_change_frequency_multiplier', 0.05}, links = {880, 882}, size = 1}
-tree[882] = {x = -570, y = 870, types = {'Proj'}, stats = {'5% Increased Angle Change Frequency', 'projectile_angle_change_frequency_multiplier', 0.05, 
+tree[882] = {x = -570, y = 870, types = {'Proj'}, stats = {'5% Increased Angle Change Frequency', 'projectile_angle_change_frequency_multiplier', 0.05,
 '5% Increased Projectile Waviness', 'projectile_waviness_multiplier', 0.05}, links = {881, 883}, size = 1}
 tree[883] = {x = -534, y = 870, types = {'Proj'}, stats = {'5% Added Projectile Waviness', 'projectile_waviness_multiplier', 0.05}, links = {882, 884}, size = 1}
 tree[884] = {x = -534, y = 834, types = {'Proj'}, stats = {'5% Added Projectile Waviness', 'projectile_waviness_multiplier', 0.05}, links = {883, 879}, size = 1}
