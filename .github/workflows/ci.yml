@@ -54,11 +54,11 @@ jobs:
           Remove-Item "dist\love.exe" -ErrorAction SilentlyContinue
           Remove-Item "dist\lovec.exe" -ErrorAction SilentlyContinue
           Remove-Item "dist\bytepath.love" -ErrorAction SilentlyContinue
-          Compress-Archive -Path "dist\*" -DestinationPath "bytepath-love${{ matrix.love_version }}-windows.zip"
+          Compress-Archive -Path "dist\*" -DestinationPath "bytepath-love${{ matrix.love_version }}-windows-x86_64.zip"
       - uses: actions/upload-artifact@v4
         with:
-          name: bytepath-love${{ matrix.love_version }}-windows
-          path: bytepath-love${{ matrix.love_version }}-windows.zip
+          name: bytepath-love${{ matrix.love_version }}-windows-x86_64
+          path: bytepath-love${{ matrix.love_version }}-windows-x86_64.zip
 
   build-linux:
     runs-on: ubuntu-latest
@@ -90,26 +90,26 @@ jobs:
           echo 'SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"' >> bytepath.sh
           echo 'love "$SCRIPT_DIR/bytepath.love"' >> bytepath.sh
           chmod +x bytepath.sh
-          zip ../bytepath-love${{ matrix.love_version }}-x86_64.zip bytepath.love bytepath.sh
+          zip ../bytepath-love${{ matrix.love_version }}-linux-x86_64.zip bytepath.love bytepath.sh
       - name: Build Linux AppImage (11.5)
         if: matrix.format == 'appimage'
         run: |
           wget -q "https://github.com/love2d/love/releases/download/${{ matrix.love_version }}/love-${{ matrix.love_version }}-x86_64.AppImage" -O love.AppImage
           chmod +x love.AppImage
           cd dist
-          cat ../love.AppImage bytepath.love > bytepath-love${{ matrix.love_version }}-x86_64.AppImage
-          chmod +x bytepath-love${{ matrix.love_version }}-x86_64.AppImage
+          cat ../love.AppImage bytepath.love > bytepath-love${{ matrix.love_version }}-linux-x86_64.AppImage
+          chmod +x bytepath-love${{ matrix.love_version }}-linux-x86_64.AppImage
           rm bytepath.love
       - uses: actions/upload-artifact@v4
         if: matrix.format == 'love'
         with:
-          name: bytepath-love${{ matrix.love_version }}-x86_64
-          path: bytepath-love${{ matrix.love_version }}-linux.zip
+          name: bytepath-love${{ matrix.love_version }}-linux-x86_64
+          path: bytepath-love${{ matrix.love_version }}-linux-x86_64.zip
       - uses: actions/upload-artifact@v4
         if: matrix.format == 'appimage'
         with:
-          name: bytepath-love${{ matrix.love_version }}-x86_64
-          path: dist/bytepath-love${{ matrix.love_version }}-x86_64.AppImage
+          name: bytepath-love${{ matrix.love_version }}-linux-x86_64
+          path: dist/bytepath-love${{ matrix.love_version }}-linux-x86_64.AppImage
 
   build-linux-aarch64:
     runs-on: ubuntu-latest
@@ -131,11 +131,11 @@ jobs:
           echo 'SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"' >> bytepath.sh
           echo 'love "$SCRIPT_DIR/bytepath.love"' >> bytepath.sh
           chmod +x bytepath.sh
-          zip ../bytepath-love11.5-aarch64.zip bytepath.love bytepath.sh
+          zip ../bytepath-love11.5-linux-aarch64.zip bytepath.love bytepath.sh
       - uses: actions/upload-artifact@v4
         with:
-          name: bytepath-love11.5-aarch64
-          path: bytepath-love11.5-aarch64.zip
+          name: bytepath-love11.5-linux-aarch64
+          path: bytepath-love11.5-linux-aarch64.zip
 
   release:
     runs-on: ubuntu-latest
