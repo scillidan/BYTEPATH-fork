@@ -1,4 +1,4 @@
-.PHONY: all clean windows linux linux-arm
+.PHONY: all clean lint windows linux linux-arm
 
 GAME_NAME := bytepath
 LOVE_VERSION := 11.5
@@ -7,6 +7,9 @@ BUILD_DIR := build
 LOVE_DIR := love
 
 all: windows linux linux-arm
+
+lint:
+	luacheck --codes --ranges . || true
 
 clean:
 	@rm -rf $(DIST_DIR) $(BUILD_DIR)
