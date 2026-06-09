@@ -90,7 +90,7 @@ jobs:
           echo 'SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"' >> bytepath.sh
           echo 'love "$SCRIPT_DIR/bytepath.love"' >> bytepath.sh
           chmod +x bytepath.sh
-          zip ../bytepath-love${{ matrix.love_version }}-linux.zip bytepath.love bytepath.sh
+          zip ../bytepath-love${{ matrix.love_version }}-x86_64.zip bytepath.love bytepath.sh
       - name: Build Linux AppImage (11.5)
         if: matrix.format == 'appimage'
         run: |
@@ -103,7 +103,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: matrix.format == 'love'
         with:
-          name: bytepath-love${{ matrix.love_version }}-linux
+          name: bytepath-love${{ matrix.love_version }}-x86_64
           path: bytepath-love${{ matrix.love_version }}-linux.zip
       - uses: actions/upload-artifact@v4
         if: matrix.format == 'appimage'
