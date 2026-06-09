@@ -101,8 +101,8 @@ jobs:
           wget -q "https://github.com/love2d/love/releases/download/11.5/love-11.5-x86_64.AppImage" -O love.AppImage
           chmod +x love.AppImage
           cd dist
-          cat ../love.AppImage bytepath.love > bytepath.AppImage
-          chmod +x bytepath.AppImage
+          cat ../love.AppImage bytepath.love > bytepath-love11.5.AppImage
+          chmod +x bytepath-love11.5.AppImage
           rm bytepath.love
       - uses: actions/upload-artifact@v4
         if: matrix.format == 'love'
@@ -113,7 +113,7 @@ jobs:
         if: matrix.format == 'appimage'
         with:
           name: bytepath-linux-${{ matrix.suffix }}
-          path: dist/bytepath.AppImage
+          path: dist/bytepath-love11.5.AppImage
 
   release:
     runs-on: ubuntu-latest
