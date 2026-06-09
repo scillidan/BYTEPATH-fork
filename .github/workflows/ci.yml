@@ -72,9 +72,11 @@ jobs:
           - branch: master
             love_version: "0.10.2"
             suffix: love0.10.2
+            format: love
           - branch: dev
             love_version: "11.5"
             suffix: love11.5
+            format: appimage
     steps:
       - uses: actions/checkout@v4
         with:
@@ -83,21 +85,35 @@ jobs:
         run: |
           mkdir -p dist
           zip -r dist/bytepath.love conf.lua main.lua globals.lua utils.lua GameObject.lua tree.lua libraries objects rooms resources -x "*.git*"
-      - name: Download LÖVE AppImage
+      - name: Build Linux .love bundle (0.10.2)
+        if: matrix.format == 'love'
         run: |
-          wget -q "https://github.com/love2d/love/releases/download/${{ matrix.love_version }}/love-${{ matrix.love_version }}-x86_64.AppImage" -O love.AppImage
+          cd dist
+          echo '#!/bin/sh' > bytepath-love0.10.2.sh
+          echo 'if ! command -v love &> /dev/null; then echo "LÖVE 0.10.2 is required: https://love2d.org"; exit 1; fi' >> bytepath-love0.10.2.sh
+          echo 'SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"' >> bytepath-love0.10.2.sh
+          echo 'love "$SCRIPT_DIR/bytepath.love"' >> bytepath-love0.10.2.sh
+          chmod +x bytepath-love0.10.2.sh
+          zip ../bytepath-linux-love0.10.2.zip bytepath.love bytepath-love0.10.2.sh
+      - name: Build Linux AppImage (11.5)
+        if: matrix.format == 'appimage'
+        run: |
+          wget -q "https://github.com/love2d/love/releases/download/11.5/love-11.5-x86_64.AppImage" -O love.AppImage
           chmod +x love.AppImage
-      - name: Build Linux AppImage
-        run: |
           cd dist
           cat ../love.AppImage bytepath.love > bytepath.AppImage
           chmod +x bytepath.AppImage
           rm bytepath.love
-          zip ../bytepath-linux-${{ matrix.suffix }}.zip bytepath.AppImage
       - uses: actions/upload-artifact@v4
+        if: matrix.format == 'love'
         with:
           name: bytepath-linux-${{ matrix.suffix }}
-          path: bytepath-linux-${{ matrix.suffix }}.zip
+          path: bytepath-linux-love0.10.2.zip
+      - uses: actions/upload-artifact@v4
+        if: matrix.format == 'appimage'
+        with:
+          name: bytepath-linux-${{ matrix.suffix }}
+          path: dist/bytepath.AppImage
 
   release:
     runs-on: ubuntu-latest
