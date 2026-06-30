@@ -8,12 +8,17 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   lint:
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
-      - uses: actions/checkout@v6
-      - uses: lunarmodules/luacheck@v1
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v6
+        with:
+          persist-credentials: false
+      - uses: lunarmodules/luacheck@a4fd9e8a7b05be0163d7626e4a30e54eefc3bd06  # v1
         with:
           args: --codes --ranges .
 
@@ -21,6 +26,7 @@ jobs:
     runs-on: windows-latest
     needs: lint
     if: startsWith(github.ref, 'refs/tags/v')
+    permissions: {}
     strategy:
       matrix:
         include:
@@ -29,8 +35,9 @@ jobs:
           - branch: dev
             love_version: "11.5"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v6
         with:
+          persist-credentials: false
           ref: ${{ matrix.branch }}
       - name: Package .love
         run: |
@@ -38,7 +45,7 @@ jobs:
           Compress-Archive -Path conf.lua,main.lua,globals.lua,utils.lua,GameObject.lua,tree.lua,libraries,objects,rooms,resources -DestinationPath dist\bytepath.zip
           Rename-Item dist\bytepath.zip bytepath.love
         shell: pwsh
-      - name: Download LÖVE
+      - name: Download LOVE
         run: |
           $v = "${{ matrix.love_version }}"
           Invoke-WebRequest -Uri "https://github.com/love2d/love/releases/download/$v/love-$v-win64.zip" -OutFile "love-win64.zip"
@@ -55,7 +62,7 @@ jobs:
           Remove-Item "dist\lovec.exe" -ErrorAction SilentlyContinue
           Remove-Item "dist\bytepath.love" -ErrorAction SilentlyContinue
           Compress-Archive -Path "dist\*" -DestinationPath "bytepath-love${{ matrix.love_version }}-windows-x86_64.zip"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
         with:
           name: bytepath-love${{ matrix.love_version }}-windows-x86_64
           path: bytepath-love${{ matrix.love_version }}-windows-x86_64.zip
@@ -64,6 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
     if: startsWith(github.ref, 'refs/tags/v')
+    permissions: {}
     strategy:
       matrix:
         include:
@@ -74,8 +82,9 @@ jobs:
             love_version: "11.5"
             format: appimage
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v6
         with:
+          persist-credentials: false
           ref: ${{ matrix.branch }}
       - name: Package .love
         run: |
@@ -86,7 +95,7 @@ jobs:
         run: |
           cd dist
           echo '#!/bin/sh' > bytepath.sh
-          echo 'if ! command -v love &> /dev/null; then echo "LÖVE ${{ matrix.love_version }} is required: https://love2d.org"; exit 1; fi' >> bytepath.sh
+          echo 'if ! command -v love &> /dev/null; then echo "LOVE ${{ matrix.love_version }} is required: https://love2d.org"; exit 1; fi' >> bytepath.sh
           echo 'SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"' >> bytepath.sh
           echo 'love "$SCRIPT_DIR/bytepath.love"' >> bytepath.sh
           chmod +x bytepath.sh
@@ -100,12 +109,12 @@ jobs:
           cat ../love.AppImage bytepath.love > bytepath-love${{ matrix.love_version }}-linux-x86_64.AppImage
           chmod +x bytepath-love${{ matrix.love_version }}-linux-x86_64.AppImage
           rm bytepath.love
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
         if: matrix.format == 'love'
         with:
           name: bytepath-love${{ matrix.love_version }}-linux-x86_64
           path: bytepath-love${{ matrix.love_version }}-linux-x86_64.zip
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
         if: matrix.format == 'appimage'
         with:
           name: bytepath-love${{ matrix.love_version }}-linux-x86_64
@@ -115,9 +124,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
     if: startsWith(github.ref, 'refs/tags/v')
+    permissions: {}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v6
         with:
+          persist-credentials: false
           ref: dev
       - name: Package .love for aarch64
         run: |
@@ -127,12 +138,12 @@ jobs:
         run: |
           cd dist
           echo '#!/bin/sh' > bytepath.sh
-          echo 'if ! command -v love &> /dev/null; then echo "LÖVE 11.5 is required: https://love2d.org"; exit 1; fi' >> bytepath.sh
+          echo 'if ! command -v love &> /dev/null; then echo "LOVE 11.5 is required: https://love2d.org"; exit 1; fi' >> bytepath.sh
           echo 'SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"' >> bytepath.sh
           echo 'love "$SCRIPT_DIR/bytepath.love"' >> bytepath.sh
           chmod +x bytepath.sh
           zip ../bytepath-love11.5-linux-aarch64.zip bytepath.love bytepath.sh
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
         with:
           name: bytepath-love11.5-linux-aarch64
           path: bytepath-love11.5-linux-aarch64.zip
@@ -144,11 +155,15 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@95815c38cf36119d9dede3bcdceb8f4541db4b4f  # v4
         with:
           path: artifacts
           merge-multiple: true
-      - uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            artifacts/*
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${GITHUB_REF#refs/tags/}" \
+            artifacts/* \
+            --title "${GITHUB_REF#refs/tags/}" \
+            --generate-notes
