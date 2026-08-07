@@ -8,7 +8,7 @@ function love.conf(t)
         title = 'BYTEPATH',              -- The project title (string)
         package = 'BYTEPATH',            -- The project command and package name (string)
         loveVersion = '11.5',
-        version = '1.0',            -- The project version
+        version = '1.1.0',            -- The project version
         author = 'SSYGEN',             -- Your name (string)
         email = 'adonaac@gmail.com',              -- Your email (string)
         description = nil,        -- The project description (string)
