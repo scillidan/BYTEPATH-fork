@@ -18,9 +18,13 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v6
         with:
           persist-credentials: false
-      - uses: lunarmodules/luacheck@a4fd9e8a7b05be0163d7626e4a30e54eefc3bd06  # v1
-        with:
-          args: --codes --ranges .
+      - name: Install luacheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lua5.1 luarocks
+          sudo luarocks install luacheck
+      - name: Run luacheck
+        run: make lint
 
   build-windows:
     runs-on: windows-latest
