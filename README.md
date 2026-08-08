@@ -39,11 +39,9 @@ Build outputs are placed in `dist/` directory.
 - Added dynamic screen resizing with `love.resize` callback
 - Added letterbox/pillarbox support for non-16:9 displays
 - Added key rebinding system (`settings.lua` with persistent save)
-- Added touch controls for mobile (virtual joystick + action buttons)
-- Added Android config (`t.accelerometerjoystick`, `t.externalstorage`)
 - Fixed shader bug in AchievementScreenshots (wrong uniform name)
 - Added GitHub Actions CI (lint, build, release)
-- Added Flathub/Scoop/F-Droid packaging manifests
+- Added Flathub/Scoop packaging manifests
 
 ## Controls
 

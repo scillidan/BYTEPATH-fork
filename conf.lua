@@ -38,9 +38,6 @@ function love.conf(t)
     t.window.highdpi = false
     t.window.x = nil                   -- The x-coordinate of the window's position in the specified display (number)
     t.window.y = nil                   -- The y-coordinate of the window's position in the specified display (number)
-
-    t.accelerometerjoystick = false
-    t.externalstorage = true
  
     t.modules.audio = true -- Enable the audio module (boolean)
     t.modules.event = true             -- Enable the event module (boolean)

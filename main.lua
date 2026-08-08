@@ -53,11 +53,6 @@ function love.load()
 
     local Touch = require 'libraries/touch_controls'
     touch = Touch:new()
-    if touch:isMobile() then
-        touch:activate()
-        local sw, sh = love.graphics.getWidth(), love.graphics.getHeight()
-        touch:addButton("ESC", sw - 40, 40, 25, function() input:send('escape') end)
-    end
 
     --[[
     input:bind('f1', function()
@@ -112,7 +107,7 @@ function love.load()
         up = {'up', 'w', 'dpup', 'fright'},
         down = {'down', 's', 'dpdown', 'fdown'},
         left_click = {'mouse1'},
-        return = {'return', 'fleft', 'start'},
+        ['return'] = {'return', 'fleft', 'start'},
         backspace = {'backspace'},
         escape = {'escape', 'select'},
         tab = {'tab'},

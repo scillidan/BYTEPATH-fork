@@ -12,7 +12,6 @@ Original by [a327ex](https://github.com/a327ex/BYTEPATH) · Fork by scillidan ·
 | Key rebinding | None (hardcoded per room) |
 | Touch support | None |
 | Build targets | Windows, Linux, Linux-ARM |
-| Android | Not supported (love-android requires 11.x+) |
 
 ---
 
@@ -20,7 +19,7 @@ Original by [a327ex](https://github.com/a327ex/BYTEPATH) · Fork by scillidan ·
 
 ### 1.1 [BLOCKER] LÖVE 0.10.2 -> 11.5 API Migration
 
-Required for Android / F-Droid / modern platform support.
+Required for modern platform support.
 
 | 0.10.2 | 11.5 | Scope |
 |--------|------|-------|
@@ -56,22 +55,7 @@ Current: input:unbindAll() + hardcoded binds per room, no persistence.
 - [ ] Replace hardcoded input:bind() with configurable lookup
 - [ ] Preserve defaults as fallback
 
-### 1.4 Touch Support (Mobile)
-
-- [ ] Create touch_controls.lua: floating virtual joystick (left third, bottom half), action buttons (right side), pause button (top-right)
-- [ ] Hook love.touchpressed/touchmoved/touchreleased into boipushy Input
-- [ ] Auto-detect via love.system.getOS() -> enable overlay
-- [ ] Draw at screen coordinates, semi-transparent
-- [ ] Console text: love.keyboard.setTextInput() for native keyboard
-
-### 1.5 Android conf.lua
-
-- [ ] t.accelerometerjoystick = false
-- [ ] t.externalstorage = true
-- [ ] t.window.display = 1
-- [ ] Verify love.filesystem.getSaveDirectory() on Android
-
-### 1.6 Shader Pipeline Verification
+### 1.4 Shader Pipeline Verification
 
 6+ canvas/shader passes (RGB shift -> displacement -> glitch -> RGB separation -> distort).
 
@@ -90,8 +74,6 @@ Current: input:unbindAll() + hardcoded binds per room, no persistence.
 | Windows 10/11 | x64 fused exe | High |
 | Linux X11 | Flatpak | High |
 | Linux Wayland | Flatpak | High |
-| Android 10+ | ARM64 APK | High |
-| Android 10+ | x86_64 APK (emu) | Medium |
 
 ### 2.2 Smoke Test Checklist
 
@@ -101,7 +83,6 @@ Current: input:unbindAll() + hardcoded binds per room, no persistence.
 - [ ] Fullscreen toggle
 - [ ] Window resize (desktop)
 - [ ] Gamepad connect/disconnect
-- [ ] Touch controls (mobile)
 - [ ] Save / Load
 - [ ] Skill tree navigation
 - [ ] Console text input
@@ -114,14 +95,13 @@ Current: input:unbindAll() + hardcoded binds per room, no persistence.
 | FPS | >= 60 sustained |
 | Memory | < 500 MB |
 | Startup | < 3 sec |
-| APK size | < 50 MB |
+| Bundle size | < 50 MB |
 
 ### 2.4 CI (GitHub Actions)
 
 - [ ] Luacheck lint on push
 - [ ] Build .love on tag
 - [ ] Build Windows zip on tag
-- [ ] Build Android APK on tag
 - [ ] Build Flatpak on tag
 - [ ] Auto GitHub Release
 
@@ -137,17 +117,7 @@ Strategy: self-contained bucket.
 2. [ ] Write manifest bytepath.json (version, url, hash, bin, shortcuts, autoupdate)
 3. [ ] Users: `scoop bucket add bytepath <repo> && scoop install bytepath`
 
-### 3.2 F-Droid (Android)
-
-Prerequisite: FOSS (MIT OK), LÖVE 11.5 required.
-
-1. [ ] Build fused APK via love-android (game.love -> app/src/main/assets/)
-2. [ ] Fork fdroiddata on GitLab
-3. [ ] Write metadata/io.github.scillidan.bytepath.yml build recipe
-4. [ ] Local verify: fdroid build
-5. [ ] Submit MR
-
-### 3.3 Flathub (Linux)
+### 3.2 Flathub (Linux)
 
 Reference: org.love2d.love2d already on Flathub.
 
@@ -166,10 +136,8 @@ Reference: org.love2d.love2d already on Flathub.
 #2  Screen adaptation (love.resize + letterbox)
 #3  Key rebinding system
 #4  Shader pipeline verification on 11.5
-#5  Touch support + Android conf
-#6  CI setup (GitHub Actions)
-#7  Scoop bucket + manifest
-#8  F-Droid metadata + APK build
-#9  Flathub manifest + metainfo
-#10 GitHub Release automation
+#5  CI setup (GitHub Actions)
+#6  Scoop bucket + manifest
+#7  Flathub manifest + metainfo
+#8  GitHub Release automation
 ```

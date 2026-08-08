@@ -20,11 +20,6 @@ function Touch:new()
     return self
 end
 
-function Touch:isMobile()
-    local os = love.system.getOS()
-    return os == "Android" or os == "iOS"
-end
-
 function Touch:update()
     self.screenW = love.graphics.getWidth()
     self.screenH = love.graphics.getHeight()
