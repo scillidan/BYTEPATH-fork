@@ -46,7 +46,10 @@ jobs:
       - name: Package .love
         run: |
           mkdir dist
-          Compress-Archive -Path conf.lua,main.lua,globals.lua,utils.lua,GameObject.lua,tree.lua,settings.lua,libraries,objects,rooms,resources -DestinationPath dist\bytepath.zip
+          # settings.lua only exists on the dev branch; skip paths that are
+          # missing on the checked-out ref instead of failing.
+          $paths = 'conf.lua','main.lua','globals.lua','utils.lua','GameObject.lua','tree.lua','settings.lua','libraries','objects','rooms','resources' | Where-Object { Test-Path $_ }
+          Compress-Archive -Path $paths -DestinationPath dist\bytepath.zip
           Rename-Item dist\bytepath.zip bytepath.love
         shell: pwsh
       - name: Download LOVE
