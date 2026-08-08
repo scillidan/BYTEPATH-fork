@@ -10,7 +10,7 @@ function settings.setDefaultBinds(binds)
     settings.defaults = {}
     for action, keys in pairs(binds) do
         if type(keys) == 'table' then
-            settings.defaults[action] = fn.copy(keys)
+            settings.defaults[action] = fn.clone(keys)
         else
             settings.defaults[action] = {keys}
         end
@@ -18,7 +18,7 @@ function settings.setDefaultBinds(binds)
     if not settings.loaded then
         settings.binds = {}
         for action, keys in pairs(settings.defaults) do
-            settings.binds[action] = fn.copy(keys)
+            settings.binds[action] = fn.clone(keys)
         end
     end
 end
@@ -31,7 +31,7 @@ function settings.load()
             settings.loaded = true
             for action, keys in pairs(settings.defaults) do
                 if not settings.binds[action] then
-                    settings.binds[action] = fn.copy(keys)
+                    settings.binds[action] = fn.clone(keys)
                 end
             end
             return
@@ -39,7 +39,7 @@ function settings.load()
     end
     settings.binds = {}
     for action, keys in pairs(settings.defaults) do
-        settings.binds[action] = fn.copy(keys)
+        settings.binds[action] = fn.clone(keys)
     end
     settings.loaded = true
 end
@@ -51,7 +51,7 @@ end
 
 function settings.rebind(action, keys)
     if type(keys) == 'table' then
-        settings.binds[action] = fn.copy(keys)
+        settings.binds[action] = fn.clone(keys)
     else
         settings.binds[action] = {keys}
     end
@@ -60,14 +60,14 @@ end
 
 function settings.reset(action)
     if settings.defaults[action] then
-        settings.binds[action] = fn.copy(settings.defaults[action])
+        settings.binds[action] = fn.clone(settings.defaults[action])
         settings.save()
     end
 end
 
 function settings.resetAll()
     for action, keys in pairs(settings.defaults) do
-        settings.binds[action] = fn.copy(keys)
+        settings.binds[action] = fn.clone(keys)
     end
     settings.save()
 end
