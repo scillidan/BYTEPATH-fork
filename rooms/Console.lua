@@ -45,6 +45,8 @@ function Console:new()
     input:bind('start', 'start')
     input:bind('tab', 'tab')
 
+    if touch and touch.active then love.keyboard.setTextInput(true) end
+
     save()
     fadeVolume('music', 1, 0.05)
     fadeVolume('game', 1, 0.0)
@@ -180,7 +182,7 @@ function Console:draw()
 end
 
 function Console:destroy()
-    
+    if touch and touch.active then love.keyboard.setTextInput(false) end
 end
 
 function Console:addLine(after, text, duration, swaps)
@@ -217,9 +219,18 @@ function Console:getRandomArchWord()
 end
 
 function Console:keypressed(key)
-    if self.input_line and self:isConsoleCharacter(key) then 
+    if touch and touch.active then return end
+    if self.input_line and self:isConsoleCharacter(key) then
         self.bytepath_main = false
-        self.input_line:keypressed(key) 
+        self.input_line:keypressed(key)
+    end
+end
+
+function Console:textinput(t)
+    if not (touch and touch.active) then return end
+    if self.input_line then
+        self.bytepath_main = false
+        self.input_line:textinput(t)
     end
 end
 

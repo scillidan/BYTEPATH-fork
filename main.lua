@@ -204,8 +204,12 @@ function love.draw()
     end
     if flash_frames then
         love.graphics.setColor(background_color)
-        local ox, oy, s = getLetterboxOffset()
-        love.graphics.rectangle('fill', ox, oy, gw*s, gh*s)
+        if isDisplayRotated() then
+            love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+        else
+            local ox, oy, s = getLetterboxOffset()
+            love.graphics.rectangle('fill', ox, oy, gw*s, gh*s)
+        end
         love.graphics.setColor(1, 1, 1)
     end
 
@@ -217,6 +221,10 @@ end
 
 function love.keypressed(key)
     if current_room and current_room.keypressed then current_room:keypressed(key) end
+end
+
+function love.textinput(t)
+    if current_room and current_room.textinput then current_room:textinput(t) end
 end
 
 function love.focus(f)
@@ -247,8 +255,15 @@ function love.resize(w, h)
     if sy == 0 then sy = 1 end
 end
 
+function isDisplayRotated()
+    if not (touch and touch.active) then return false end
+    local w, h = love.graphics.getWidth(), love.graphics.getHeight()
+    return h > w
+end
+
 function getLetterboxOffset()
     local w, h = love.graphics.getWidth(), love.graphics.getHeight()
+    if isDisplayRotated() then w, h = h, w end
     local scale = math.min(w/gw, h/gh)
     local offset_x = math.floor((w - gw*scale)/2)
     local offset_y = math.floor((h - gh*scale)/2)
@@ -257,11 +272,16 @@ end
 
 function drawGameCanvas(canvas)
     local ox, oy, s = getLetterboxOffset()
+    local w, h = love.graphics.getWidth(), love.graphics.getHeight()
     love.graphics.setColor(0, 0, 0)
     love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
     love.graphics.setColor(1, 1, 1)
     love.graphics.setBlendMode('alpha', 'premultiplied')
-    love.graphics.draw(canvas, ox, oy, 0, s, s)
+    if isDisplayRotated() then
+        love.graphics.draw(canvas, w/2 + s*gh/2, h/2 - s*gw/2, math.pi/2, s, s)
+    else
+        love.graphics.draw(canvas, ox, oy, 0, s, s)
+    end
     love.graphics.setBlendMode('alpha')
 end
 
@@ -395,6 +415,10 @@ end
 function gotoRoom(room_type, ...)
     if current_room and current_room.destroy then current_room:destroy() end
     current_room = _G[room_type](...)
+    if touch and touch.active then
+        touch:setMode(room_type == 'Stage' and 'game' or 'menu')
+        touch:bindVirtual()
+    end
 end
 
 -- Load --

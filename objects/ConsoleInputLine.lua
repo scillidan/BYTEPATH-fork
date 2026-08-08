@@ -229,6 +229,14 @@ function ConsoleInputLine:keypressed(key)
     end
 end
 
+function ConsoleInputLine:textinput(t)
+    if self.console.input_line and self.console.input_line.id == self.id then
+        self.text = self.text .. t
+        self:setCharacters()
+        playKeystroke()
+    end
+end
+
 function ConsoleInputLine:help()
     self.console.input_line = nil
     self.console.bytepath_main = nil
