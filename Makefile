@@ -21,7 +21,7 @@ $(DIST_DIR):
 	@mkdir -p $(DIST_DIR)
 
 $(BUILD_DIR)/$(GAME_NAME).love: $(BUILD_DIR)
-	@cd . && zip -r $(BUILD_DIR)/$(GAME_NAME).love conf.lua main.lua globals.lua utils.lua GameObject.lua tree.lua libraries objects rooms resources -x "*.git*"
+	@cd . && zip -r $(BUILD_DIR)/$(GAME_NAME).love conf.lua main.lua globals.lua utils.lua GameObject.lua tree.lua settings.lua libraries objects rooms resources -x "*.git*"
 
 windows: $(BUILD_DIR)/$(GAME_NAME).love $(DIST_DIR)
 	@echo "Building Windows executable..."

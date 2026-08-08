@@ -46,7 +46,7 @@ jobs:
       - name: Package .love
         run: |
           mkdir dist
-          Compress-Archive -Path conf.lua,main.lua,globals.lua,utils.lua,GameObject.lua,tree.lua,libraries,objects,rooms,resources -DestinationPath dist\bytepath.zip
+          Compress-Archive -Path conf.lua,main.lua,globals.lua,utils.lua,GameObject.lua,tree.lua,settings.lua,libraries,objects,rooms,resources -DestinationPath dist\bytepath.zip
           Rename-Item dist\bytepath.zip bytepath.love
         shell: pwsh
       - name: Download LOVE
@@ -93,7 +93,7 @@ jobs:
       - name: Package .love
         run: |
           mkdir -p dist
-          zip -r dist/bytepath.love conf.lua main.lua globals.lua utils.lua GameObject.lua tree.lua libraries objects rooms resources -x "*.git*"
+          zip -r dist/bytepath.love conf.lua main.lua globals.lua utils.lua GameObject.lua tree.lua settings.lua libraries objects rooms resources -x "*.git*"
       - name: Build Linux .love bundle (0.10.2)
         if: matrix.format == 'love'
         run: |
@@ -137,7 +137,7 @@ jobs:
       - name: Package .love for aarch64
         run: |
           mkdir -p dist
-          zip -r dist/bytepath.love conf.lua main.lua globals.lua utils.lua GameObject.lua tree.lua libraries objects rooms resources -x "*.git*"
+          zip -r dist/bytepath.love conf.lua main.lua globals.lua utils.lua GameObject.lua tree.lua settings.lua libraries objects rooms resources -x "*.git*"
       - name: Build aarch64 .love bundle
         run: |
           cd dist
