@@ -60,7 +60,6 @@ Current: input:unbindAll() + hardcoded binds per room, no persistence.
 6+ canvas/shader passes (RGB shift -> displacement -> glitch -> RGB separation -> distort).
 
 - [ ] Test each shader on 11.5
-- [ ] Verify mobile GPU (Adreno / Mali / PowerVR)
 - [ ] Fallback: disable effects on shader compile failure
 
 ---
