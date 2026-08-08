@@ -152,8 +152,14 @@ function Input:down(action, interval, delay)
 
     elseif action and not interval and not delay then
         for _, key in ipairs(self.binds[action]) do
-            if (love.keyboard.isDown(key) or love.mouse.isDown(key_to_button[key] or 0)) then
-                return true
+            if key_to_button[key] then
+                if love.mouse.isDown(key_to_button[key]) then
+                    return true
+                end
+            elseif not gamepad_to_button[key] and not axis_to_button[key] then
+                if love.keyboard.isDown(key) then
+                    return true
+                end
             end
             
             -- Supports only 1 gamepad, add more later...
