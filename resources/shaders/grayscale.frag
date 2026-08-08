@@ -1,4 +1,4 @@
-uniform float grayscale_amount = 0.0;
+uniform float grayscale_amount;
 
 vec4 effect(vec4 color, sampler2D texture, vec2 tc, vec2 pc) {
     vec4 current_pixel = Texel(texture, tc);

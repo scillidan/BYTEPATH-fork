@@ -1,6 +1,6 @@
-uniform float scanlines = 0.5;
-uniform float rgb_offset = 0.2;
-uniform float horizontal_fuzz = 0.5;
+uniform float scanlines;
+uniform float rgb_offset;
+uniform float horizontal_fuzz;
 
 uniform float time;
 
