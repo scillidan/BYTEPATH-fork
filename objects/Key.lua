@@ -45,9 +45,9 @@ function Key:draw()
     draft:rhombus(self.x, self.y, 2*self.w, 2*self.h, 'line')
     draft:rhombus(self.x, self.y, 2.5*self.w, 2.5*self.h, 'line')
     love.graphics.pop()
-    love.graphics.setColor(222, 222, 222, self.alpha)
+    love.graphics.setColor(222/255, 222/255, 222/255, self.alpha/255)
     draft:rhombus(self.x, self.y, self.sx*3*self.w, self.sy*3*self.h, 'line')
-    love.graphics.setColor(255, 255, 255)
+    love.graphics.setColor(1, 1, 1)
 end
 
 function Key:die()

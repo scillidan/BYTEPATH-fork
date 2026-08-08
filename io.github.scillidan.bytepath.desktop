@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=BYTEPATH
+Comment=A replayable arcade shooter with build customization
+Exec=bytepath.sh
+Icon=io.github.scillidan.bytepath
+Type=Application
+Categories=Game;ArcadeGame;

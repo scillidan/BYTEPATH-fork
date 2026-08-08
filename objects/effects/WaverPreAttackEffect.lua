@@ -5,7 +5,7 @@ function WaverPreAttackEffect:new(area, x, y, opts)
 
     self.w, self.h = 12, 6
     self.s = 1
-    self.alpha = 255
+    self.alpha = 1
     self.timer:tween(0.35, self, {alpha = 0, s = 4}, 'in-out-cubic', function() self.dead = true end)
 end
 
@@ -21,7 +21,7 @@ function WaverPreAttackEffect:draw()
     pushRotateScale(self.x, self.y, self.waver.r, self.s, self.s)
     love.graphics.polygon('line', self.x + self.w, self.y, self.x, self.y + self.h, self.x - self.w, self.y, self.x, self.y - self.h)
     love.graphics.pop()
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(1, 1, 1, 1)
 end
 
 function WaverPreAttackEffect:destroy()

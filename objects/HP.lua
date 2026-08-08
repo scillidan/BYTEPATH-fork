@@ -32,7 +32,7 @@ function HP:draw()
     love.graphics.rectangle('fill', self.x - 2, self.y - self.h/2, 4, self.h)
     love.graphics.setColor(default_color)
     love.graphics.circle('line', self.x, self.y, self.w)
-    love.graphics.setColor(255, 255, 255)
+    love.graphics.setColor(1, 1, 1)
 end
 
 function HP:destroy()

@@ -1,0 +1,46 @@
+id: io.github.scillidan.bytepath
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+command: bytepath.sh
+finish-args:
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --device=all
+  - --share=ipc
+modules:
+  - shared-modules/luajit/luajit.json
+  - name: libmodplug
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://downloads.sourceforge.net/modplug-xmms/libmodplug-0.8.9.0.tar.gz
+        sha256: 457ca5a6c179656d66c01505c0d95fafaead4329b9dbaa0f997d00a3509ad0ac
+  - name: love2d
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://github.com/love2d/love/releases/download/11.5/love-11.5-linux-src.tar.gz
+        sha256: 066e0843f71aa9fd28b8eaf27d41abb74bfaef7556153ac2b4193df30e4b43e6
+  - name: bytepath
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 bytepath.love /app/share/bytepath/bytepath.love
+      - install -Dm755 bytepath.sh /app/bin/bytepath.sh
+      - install -Dm644 io.github.scillidan.bytepath.metainfo.xml /app/share/metainfo/
+      - install -Dm644 io.github.scillidan.bytepath.desktop /app/share/applications/
+      - install -Dm644 io.github.scillidan.bytepath.svg /app/share/icons/hicolor/scalable/apps/
+    sources:
+      - type: file
+        path: dist/bytepath.love
+      - type: script
+        dest-filename: bytepath.sh
+        commands:
+          - exec love /app/share/bytepath/bytepath.love "$@"
+      - type: file
+        path: io.github.scillidan.bytepath.metainfo.xml
+      - type: file
+        path: io.github.scillidan.bytepath.desktop
+      - type: file
+        path: io.github.scillidan.bytepath.svg

@@ -65,7 +65,7 @@ function Explosion:draw()
     if current_room.player.projectiles_explosions then return end
     love.graphics.setColor(self.current_color)
     love.graphics.rectangle('fill', self.x - self.w/2, self.y - self.w/2, self.w, self.w)
-    love.graphics.setColor(255, 255, 255)
+    love.graphics.setColor(1, 1, 1)
 end
 
 function Explosion:destroy()

@@ -199,9 +199,9 @@ function ConsoleInputLine:draw()
 
     if self.console.input_line and self.console.input_line.id == self.id then
         local r, g, b = unpack(default_color)
-        love.graphics.setColor(r, g, b, 96)
+        love.graphics.setColor(r, g, b, 96/255)
         if self.cursor_show then love.graphics.rectangle('fill', self.x + width, self.y + math.floor(normal_font:getHeight()/2), normal_font:getWidth('w'), normal_font:getHeight()) end
-        love.graphics.setColor(r, g, b, 255)
+        love.graphics.setColor(r, g, b, 1)
         love.graphics.setShader()
     end
 end

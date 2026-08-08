@@ -46,7 +46,7 @@ function ProjectileTrails:draw()
             love.graphics.setLineWidth(2)
             love.graphics.line(self.xs[i] - 2*self.ss[i], self.ys[i], self.xs[i] + 2*self.ss[i], self.ys[i])
             love.graphics.setLineWidth(1)
-            love.graphics.setColor(255, 255, 255, 255)
+            love.graphics.setColor(1, 1, 1, 1)
             love.graphics.pop()
         end
     end
@@ -61,7 +61,7 @@ function ProjectileTrails:add(x, y, r, s, color)
     self.rs[i] = r
     self.ss[i] = s
     self.colors[i] = color
-    self.alphas[i] = 128
+    self.alphas[i] = 128/255
     self.durations[i] = random(0.2, 0.3)
     self.tweens[i] = self.timer:tween(self.durations[i], self.alphas, {[i] = 0}, 'in-out-cubic')
     self.creation_times[i] = love.timer.getTime()

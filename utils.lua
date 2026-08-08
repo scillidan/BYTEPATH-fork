@@ -171,5 +171,5 @@ end
 
 function addColor(color, amount)
     local r, g, b = unpack(color)
-    return {r + amount, g + amount, b + amount}
+    return {r + amount/255, g + amount/255, b + amount/255}
 end

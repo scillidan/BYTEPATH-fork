@@ -53,7 +53,7 @@ function ExplodeParticles:draw()
             love.graphics.setLineWidth(self.line_widths[i])
             love.graphics.setColor(self.colors[i])
             love.graphics.line(self.xs[i] - self.ss[i], self.ys[i], self.xs[i] + self.ss[i], self.ys[i])
-            love.graphics.setColor(255, 255, 255)
+            love.graphics.setColor(1, 1, 1)
             love.graphics.setLineWidth(1)
             love.graphics.pop()
         end

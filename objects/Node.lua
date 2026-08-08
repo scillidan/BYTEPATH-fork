@@ -15,7 +15,7 @@ function Node:new(id, x, y, size)
     self.can_be_bought = false
     self.selected = false
     local r, g, b = unpack(default_color)
-    self.color = {r, g, b, 32}
+    self.color = {r, g, b, 32/255}
     self.types = tree[self.id].types
     self.colors = {}
     for _, t in ipairs(self.types) do table.insert(self.colors, types[t][2]) end
@@ -119,9 +119,9 @@ function Node:update(dt)
     end
 
     local r, g, b = unpack(default_color)
-    if self.bought then self.color = {r, g, b, 255}
-    elseif self.selected then self.color = {r/1.5, g/1.5, b/1.5, 255}
-    else self.color = {r/2, g/2, b/2, 255} end
+    if self.bought then self.color = {r, g, b, 1}
+    elseif self.selected then self.color = {r/1.5, g/1.5, b/1.5, 1}
+    else self.color = {r/2, g/2, b/2, 1} end
     self.previous_hot = self.hot
 end
 
@@ -137,9 +137,9 @@ function Node:draw()
         love.graphics.setColor(self.color)
         love.graphics.rectangle('line', self.x - 8, self.y - 8, 16, 16)
         local r, g, b = unpack(default_color)
-        love.graphics.setColor(r, g, b, 48)
+        love.graphics.setColor(r, g, b, 48/255)
         if self.can_be_bought then love.graphics.rectangle('line', self.x - 6, self.y - 6, 12, 12) end
-        love.graphics.setColor(r, g, b, 255)
+        love.graphics.setColor(r, g, b, 1)
         love.graphics.setLineWidth(1)
         love.graphics.draw(self.text, math.floor(self.x - self.tw/2), math.floor(self.y), 0, 1, 1, 0, math.floor(self.font:getHeight()/2))
         -- love.graphics.print(self.id, self.x + 8, self.y - 16)
@@ -151,9 +151,9 @@ function Node:draw()
         love.graphics.rectangle('line', self.x - 16, self.y - 16, 32, 32)
         love.graphics.setLineWidth(1/camera.scale)
         local r, g, b = unpack(default_color)
-        love.graphics.setColor(r, g, b, 48)
+        love.graphics.setColor(r, g, b, 48/255)
         if self.can_be_bought then love.graphics.rectangle('line', self.x - 12, self.y - 12, 25, 25) end
-        love.graphics.setColor(r, g, b, 255)
+        love.graphics.setColor(r, g, b, 1)
         love.graphics.setLineWidth(1)
         love.graphics.draw(self.text, math.floor(self.x - self.tw/2), math.floor(self.y), 0, 1, 1, 0, math.floor(self.font:getHeight()/2))
         -- love.graphics.print(self.id, self.x + 16, self.y - 16)
@@ -166,14 +166,14 @@ function Node:draw()
         love.graphics.setLineWidth(1/camera.scale)
         love.graphics.setColor(default_color)
         local r, g, b = unpack(default_color)
-        love.graphics.setColor(r, g, b, 48)
+        love.graphics.setColor(r, g, b, 48/255)
         if self.can_be_bought then love.graphics.rectangle('line', self.x - 20, self.y - 20, 41, 41) end
-        love.graphics.setColor(r, g, b, 255)
+        love.graphics.setColor(r, g, b, 1)
         love.graphics.setLineWidth(1)
         love.graphics.draw(self.text, math.floor(self.x - self.tw/2), math.floor(self.y), 0, 1, 1, 0, math.floor(self.font:getHeight()/2))
         -- love.graphics.print(self.id, self.x + 24, self.y - 16)
     end
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(1, 1, 1, 1)
 end
 
 function Node:updateStatus()

@@ -1,7 +1,7 @@
 .PHONY: all clean windows linux linux-arm
 
 GAME_NAME := bytepath
-LOVE_VERSION := 0.10.2
+LOVE_VERSION := 11.5
 DIST_DIR := dist
 BUILD_DIR := build
 LOVE_DIR := love

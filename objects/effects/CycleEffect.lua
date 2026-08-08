@@ -17,7 +17,7 @@ end
 function CycleEffect:draw()
     love.graphics.setColor(default_color)
     love.graphics.rectangle('fill', self.x - self.w/2, self.y, self.w, self.h)
-    love.graphics.setColor(255, 255, 255)
+    love.graphics.setColor(1, 1, 1)
 end
 
 function CycleEffect:destroy()

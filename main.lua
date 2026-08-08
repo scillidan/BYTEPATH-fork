@@ -14,6 +14,7 @@ Tim = require 'libraries/chrono/Timer'
 binser = require 'libraries/binser/binser'
 HC = require 'libraries/HC'
 ffi = require('ffi')
+settings = require 'settings'
 
 -- require 'enet'
 require 'libraries/sound'
@@ -49,6 +50,14 @@ function love.load()
     input = Input()
     camera = Camera()
     sound()
+
+    local Touch = require 'libraries/touch_controls'
+    touch = Touch:new()
+    if touch:isMobile() then
+        touch:activate()
+        local sw, sh = love.graphics.getWidth(), love.graphics.getHeight()
+        touch:addButton("ESC", sw - 40, 40, 25, function() input:send('escape') end)
+    end
 
     --[[
     input:bind('f1', function()
@@ -97,6 +106,19 @@ function love.load()
     input:bind('start', 'return')
     input:bind('tab', 'tab')
 
+    settings.setDefaultBinds({
+        left = {'left', 'a', 'dpleft'},
+        right = {'right', 'd', 'dpright'},
+        up = {'up', 'w', 'dpup', 'fright'},
+        down = {'down', 's', 'dpdown', 'fdown'},
+        left_click = {'mouse1'},
+        return = {'return', 'fleft', 'start'},
+        backspace = {'backspace'},
+        escape = {'escape', 'select'},
+        tab = {'tab'},
+    })
+    settings.load()
+
     load()
 
     if first_run_ever then resizeFullscreen()
@@ -144,6 +166,7 @@ function love.update(dt)
     timer:update(dt*slow_amount)
     camera:update(dt*slow_amount)
     soundUpdate(dt*slow_amount)
+    if touch then touch:update() end
     if current_room then current_room:update(dt*slow_amount) end
 
     -- Disable expensive shaders if FPS remains below 10 for 1 seconds
@@ -174,11 +197,13 @@ function love.draw()
     if flash_frames then
         love.graphics.setColor(background_color)
         love.graphics.rectangle('fill', 0, 0, sx*gw, sy*gh)
-        love.graphics.setColor(255, 255, 255)
+        love.graphics.setColor(1, 1, 1)
     end
 
     draw_times[draw_index] = os.clock() - start_time
     draw_index = draw_index + 1
+
+    if touch then touch:draw() end
 end
 
 function love.keypressed(key)
@@ -200,8 +225,23 @@ end
 function resize(x, y, fs)
     local y = y or x
     fullscreen = fs
-    love.window.setMode(x*gw, y*gh, {display = display, fullscreen = fs, borderless = fs})
+    love.window.setMode(x*gw, y*gh, {display = display, fullscreen = fs, borderless = fs, resizable = true})
     sx, sy = x, y
+end
+
+function love.resize(w, h)
+    local new_sx, new_sy = math.floor(w/gw), math.floor(h/gh)
+    if new_sx < 1 then new_sx = 1 end
+    if new_sy < 1 then new_sy = 1 end
+    sx, sy = new_sx, new_sy
+end
+
+function getLetterboxOffset()
+    local w, h = love.graphics.getWidth(), love.graphics.getHeight()
+    local scale = math.min(w/gw, h/gh)
+    local offset_x = math.floor((w - gw*scale)/2)
+    local offset_y = math.floor((h - gh*scale)/2)
+    return offset_x, offset_y, scale
 end
 
 function resizeFullscreen()
@@ -313,11 +353,11 @@ function load()
     end
 
     local localLoad = function()
-        if love.filesystem.exists('permanent_save') then
+        if love.filesystem.getInfo('permanent_save') ~= nil then
             local save_data = bitser.loadLoveFile('permanent_save')
             loadPermanentVariables(save_data)
         end
-        if love.filesystem.exists('transient_save') then
+        if love.filesystem.getInfo('transient_save') ~= nil then
             local save_data = bitser.loadLoveFile('transient_save')
             loadTransientVariables(save_data)
         else first_run_ever = true end
@@ -341,9 +381,9 @@ function recursiveEnumerate(folder, file_list)
     local items = love.filesystem.getDirectoryItems(folder)
     for _, item in ipairs(items) do
         local file = folder .. '/' .. item
-        if love.filesystem.isFile(file) then
+        if love.filesystem.getInfo(file, "file") ~= nil then
             table.insert(file_list, file)
-        elseif love.filesystem.isDirectory(file) then
+        elseif love.filesystem.getInfo(file, "directory") ~= nil then
             recursiveEnumerate(file, file_list)
         end
     end
@@ -480,4 +520,16 @@ function love.run()
 
         if love.timer then love.timer.sleep(0.001) end
     end
+end
+
+function love.touchpressed(id, x, y, dx, dy, pressure)
+    if touch then touch:touchpressed(id, x, y) end
+end
+
+function love.touchmoved(id, x, y, dx, dy, pressure)
+    if touch then touch:touchmoved(id, x, y) end
+end
+
+function love.touchreleased(id, x, y, dx, dy, pressure)
+    if touch then touch:touchreleased(id, x, y) end
 end

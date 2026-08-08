@@ -1,37 +1,34 @@
--- Colors
-default_color = {222, 222, 222}
-background_color = {16, 16, 16}
-ammo_color = {123, 200, 164}
-boost_color = {76, 195, 217}
-hp_color = {241, 103, 69}
-skill_point_color = {255, 198, 93}
+default_color = {222/255, 222/255, 222/255}
+background_color = {16/255, 16/255, 16/255}
+ammo_color = {123/255, 200/255, 164/255}
+boost_color = {76/255, 195/255, 217/255}
+hp_color = {241/255, 103/255, 69/255}
+skill_point_color = {255/255, 198/255, 93/255}
 
 default_colors = {default_color, hp_color, ammo_color, boost_color, skill_point_color}
 negative_colors = {
-    {255-default_color[1], 255-default_color[2], 255-default_color[3]}, 
-    {255-hp_color[1], 255-hp_color[2], 255-hp_color[3]}, 
-    {255-ammo_color[1], 255-ammo_color[2], 255-ammo_color[3]}, 
-    {255-boost_color[1], 255-boost_color[2], 255-boost_color[3]}, 
-    {255-skill_point_color[1], 255-skill_point_color[2], 255-skill_point_color[3]}
+    {1-default_color[1], 1-default_color[2], 1-default_color[3]}, 
+    {1-hp_color[1], 1-hp_color[2], 1-hp_color[3]}, 
+    {1-ammo_color[1], 1-ammo_color[2], 1-ammo_color[3]}, 
+    {1-boost_color[1], 1-boost_color[2], 1-boost_color[3]}, 
+    {1-skill_point_color[1], 1-skill_point_color[2], 1-skill_point_color[3]}
 }
 all_colors = fn.append(default_colors, negative_colors)
 
--- Skill tree colors
-white = {222, 222, 222}
-dark = {96, 96, 96}
-gray = {160, 160, 160}
-red = {222, 32, 32}
-green = {32, 222, 32}
-blue = {32, 32, 222}
-pink = {222, 32, 222}
-brown = {192, 96, 32}
-yellow = {222, 222, 32}
-orange = {222, 128, 32}
-bluegreen = {32, 222, 222}
-purple = {128, 32, 128}
+white = {222/255, 222/255, 222/255}
+dark = {96/255, 96/255, 96/255}
+gray = {160/255, 160/255, 160/255}
+red = {222/255, 32/255, 32/255}
+green = {32/255, 222/255, 32/255}
+blue = {32/255, 32/255, 222/255}
+pink = {222/255, 32/255, 222/255}
+brown = {192/255, 96/255, 32/255}
+yellow = {222/255, 222/255, 32/255}
+orange = {222/255, 128/255, 32/255}
+bluegreen = {32/255, 222/255, 222/255}
+purple = {128/255, 32/255, 128/255}
 
 
--- Attacks
 attacks = {
     ['Neutral'] = {cooldown = 0.24, ammo = 0, abbreviation = 'N', color = default_color},
     ['Double'] = {cooldown = 0.32, ammo = 2, abbreviation = '2', color = ammo_color},
@@ -53,7 +50,6 @@ attacks = {
 }
 attack_names = {'Double', 'Triple', 'Rapid', 'Spread', 'Back', 'Side', 'Homing', 'Blast', 'Spin', 'Bounce', 'Lightning', 'Flame', '2Split', '4Split', 'Explode', 'Laser'}
 
--- Globals
 function setPermanentGlobals(opts)
     local opts = opts or {}
     id = UUID()
@@ -90,17 +86,12 @@ function setTransientGlobals()
     command_history = {}
 end
 
--- Before running the UUID() function we need to set a random seed
--- love.run also sets the random seed but we require this file before love.run is run once
 if love.math then love.math.setRandomSeed(os.time()) end 
 setPermanentGlobals()
 setTransientGlobals()
 
--- Enemies
--- enemies = {'Rock', 'BigRock', 'Shooter', 'Seeker', 'Waver', 'Roller', 'Trailer', 'Reflecteer', 'Orbitter', 'Tanker', 'RotatorPart', 'Triad', 'Sapper', 'Glitcher'}
 enemies = {'Rock', 'BigRock', 'Shooter', 'Seeker', 'Waver', 'Roller', 'Trailer', 'Reflecteer', 'Orbitter', 'Tanker', 'Triad', 'Sapper', 'Glitcher'}
 
--- Classes
 class_colors = { 
     ['Gunner'] = ammo_color, ['Tanker'] = hp_color, ['Runner'] = boost_color, ['Cycler'] = default_color,
     ['Buster'] = ammo_color, ['Buffer'] = ammo_color, ['Berserker'] = ammo_color, ['Shielder'] = hp_color,
@@ -113,7 +104,6 @@ class_colors = {
     ['Racer'] = boost_color, ['Miner'] = ammo_color, ['Piercer'] = ammo_color, ['Dasher'] = boost_color, ['Engineer'] = hp_color, ['Threader'] = default_color
 }
 
--- Achievements
 function unlockAchievement(achievement_name)
     if achievements[achievement_name] then return end
     achievements[achievement_name] = true
@@ -173,5 +163,4 @@ achievement_descriptions = {
     ['1KK Cycler'] = 'Reach 1KK score with the Cycler device',
     ['1KK Wisp'] = 'Reach 1KK score with the Wisp device',
 }
-
 devices = {'Fighter', 'Crusader', 'Rogue', 'Bit Hunter', 'Sentinel', 'Striker', 'Nuclear', 'Cycler', 'Wisp'}

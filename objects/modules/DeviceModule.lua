@@ -445,10 +445,10 @@ function DeviceModule:draw()
     end
 
     local r, g, b = unpack(default_color)
-    love.graphics.setColor(r, g, b, 32)
+    love.graphics.setColor(r, g, b, 32/255)
     drawPentagon(32)
     drawPentagon(16)
-    love.graphics.setColor(r, g, b, 255)
+    love.graphics.setColor(r, g, b, 1)
     love.graphics.print('TECH', x, y - 38, 0, 1, 1, self.font:getWidth('TECH')/2, self.font:getHeight()/2)
     love.graphics.print('ATK', x - 41, y - 12, 0, 1, 1, self.font:getWidth('ATK')/2, self.font:getHeight()/2)
     love.graphics.print('DEF', x + 41, y - 12, 0, 1, 1, self.font:getWidth('DEF')/2, self.font:getHeight()/2)
@@ -462,10 +462,10 @@ function DeviceModule:draw()
         table.insert(points, x + d*16*math.cos(-math.pi/2 + (i-1)*(2*math.pi/5)) + random(-1, 1))
         table.insert(points, y + d*16*math.sin(-math.pi/2 + (i-1)*(2*math.pi/5)) + random(-1, 1))
     end
-    love.graphics.setColor(r, g, b, 64)
+    love.graphics.setColor(r, g, b, 64/255)
     local triangles = love.math.triangulate(points)
     for _, triangle in ipairs(triangles) do love.graphics.polygon('fill', triangle) end
-    love.graphics.setColor(r, g, b, 255)
+    love.graphics.setColor(r, g, b, 1)
     love.graphics.polygon('line', points)
 
     -- Text

@@ -10,7 +10,7 @@ function LightningLine:new(area, x, y, opts)
     self.max_offset = opts.max_offset or 8
     self:generate()
     self.duration = opts.duration or 0.15
-    self.alpha = 255
+    self.alpha = 1
     self.timer:tween(self.duration, self, {alpha = 0}, 'in-out-cubic', function() self.dead = true end)
 end
 
@@ -52,7 +52,7 @@ function LightningLine:draw()
         love.graphics.line(line.x1, line.y1, line.x2, line.y2) 
     end
     love.graphics.setLineWidth(1)
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(1, 1, 1, 1)
 end
 
 function LightningLine:destroy()

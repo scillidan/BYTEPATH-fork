@@ -1,12 +1,8 @@
-// change these values to 0.0 to turn off individual effects
-extern number scanlines = 0.5;
-extern number rgb_offset = 0.2;
-extern number horizontal_fuzz = 0.5;
+uniform float scanlines = 0.5;
+uniform float rgb_offset = 0.2;
+uniform float horizontal_fuzz = 0.5;
 
-extern number time;
-
-// Noise generation functions borrowed from: 
-// https://github.com/ashima/webgl-noise/blob/master/src/noise2D.glsl
+uniform float time;
 
 vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
 vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -20,7 +16,7 @@ float snoise(vec2 v) {
     vec4 x12 = x0.xyxy + C.xxzz;
     x12.xy -= i1;
 
-    i = mod289(i); // Avoid truncation effects in permutation
+    i = mod289(i);
     vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 )) + i.x + vec3(0.0, i1.x, 1.0 ));
 
     vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
@@ -40,7 +36,7 @@ float snoise(vec2 v) {
     return 130.0 * dot(m, g);
 }
 
-vec4 effect(vec4 color, Image texture, vec2 uv, vec2 pc) {
+vec4 effect(vec4 color, sampler2D texture, vec2 uv, vec2 pc) {
 	float fuzz_offset = snoise(vec2(time*15.0, uv.y*80.0))*0.003;
 	float large_fuzz_offset = snoise(vec2(time*1.0, uv.y*25.0))*0.004;
 	float x_offset = (fuzz_offset + large_fuzz_offset) * horizontal_fuzz;
