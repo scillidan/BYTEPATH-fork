@@ -124,10 +124,11 @@ function love.load()
 
     load()
 
-    local is_gpi = love.system.getOS() == "Linux"
-        and (ffi.arch == "arm" or ffi.arch == "arm64")
-        and select(2, love.window.getDesktopDimensions()) <= 480
-    if is_gpi then
+    -- Any Raspberry Pi / ARM Linux handheld (GPi CASE 2, PocketTerm, ...) should
+    -- always launch into a fullscreen window covering the whole desktop, otherwise
+    -- the game window can end up smaller than the panel and show the desktop
+    -- background (often white) as bars around the 16:9 game area.
+    if is_pi then
         resizeFullscreen()
     elseif first_run_ever then resizeFullscreen()
     else resize(sx, sy, fullscreen) end
@@ -288,7 +289,14 @@ end
 function resizeFullscreen()
     fullscreen = true
     local w, h = love.window.getDesktopDimensions()
-    love.window.setMode(w, h, {display = display, fullscreen = true, borderless = true})
+    love.window.setMode(w, h, {display = display, fullscreen = true, borderless = true, resizable = false, x = 0, y = 0})
+    local _, _, flags = love.window.getMode()
+    if not flags.fullscreen then
+        -- Fullscreen was not honoured (e.g. bare framebuffer / no window manager).
+        -- Fall back to a borderless window that still covers the whole desktop so
+        -- no desktop edges (white bars) show around the game.
+        love.window.setMode(w, h, {display = display, fullscreen = false, borderless = true, resizable = false, x = 0, y = 0})
+    end
     sx, sy = w/gw, h/gh
 end
 
