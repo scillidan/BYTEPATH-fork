@@ -57,8 +57,7 @@ function love.load()
 
     local Touch = require 'libraries/touch_controls'
     touch = Touch:new()
-    local is_pi = love.system.getOS() == "Linux" and (ffi.arch == "arm" or ffi.arch == "arm64")
-    if is_pi then
+    if isHandheldDevice() then
         touch = nil
     end
 
@@ -128,10 +127,19 @@ function love.load()
     -- always launch into a fullscreen window covering the whole desktop, otherwise
     -- the game window can end up smaller than the panel and show the desktop
     -- background (often white) as bars around the 16:9 game area.
-    if is_pi then
+    if isHandheldDevice() then
         resizeFullscreen()
     elseif first_run_ever then resizeFullscreen()
     else resize(sx, sy, fullscreen) end
+
+    -- Small diagnostic: report the real window/desktop sizes so handheld display
+    -- problems can be diagnosed from the save directory (window_debug.txt).
+    local w_, h_ = love.window.getMode()
+    local dw_, dh_ = love.window.getDesktopDimensions()
+    local _, _, mode_flags = love.window.getMode()
+    love.filesystem.write('window_debug.txt',
+        'window: ' .. w_ .. 'x' .. h_ .. '  desktop: ' .. dw_ .. 'x' .. dh_
+        .. '  fullscreen: ' .. tostring(mode_flags.fullscreen) .. '\n')
 
     current_room = nil
     timer:after(0.5, function() gotoRoom('Console') end)
@@ -286,16 +294,25 @@ function drawGameCanvas(canvas)
     love.graphics.setBlendMode('alpha')
 end
 
+function isHandheldDevice()
+    if love.system.getOS() ~= "Linux" then return false end
+    local ok, ffi = pcall(require, 'ffi')
+    if not ok then return false end
+    return ffi.arch == "arm" or ffi.arch == "arm64"
+end
+
 function resizeFullscreen()
     fullscreen = true
     local w, h = love.window.getDesktopDimensions()
-    love.window.setMode(w, h, {display = display, fullscreen = true, borderless = true, resizable = false, x = 0, y = 0})
+    -- Same fullscreen setup as SNKRX (desktop fullscreen + borderless), so the
+    -- window always covers the whole panel instead of leaving desktop edges.
+    love.window.setMode(w, h, {display = display, vsync = 1, fullscreen = true, borderless = true, resizable = false, x = 0, y = 0})
     local _, _, flags = love.window.getMode()
     if not flags.fullscreen then
         -- Fullscreen was not honoured (e.g. bare framebuffer / no window manager).
         -- Fall back to a borderless window that still covers the whole desktop so
         -- no desktop edges (white bars) show around the game.
-        love.window.setMode(w, h, {display = display, fullscreen = false, borderless = true, resizable = false, x = 0, y = 0})
+        love.window.setMode(w, h, {display = display, vsync = 1, fullscreen = false, borderless = true, resizable = false, x = 0, y = 0})
     end
     sx, sy = w/gw, h/gh
 end
@@ -565,7 +582,7 @@ function love.run()
         end
 
         if love.graphics and love.graphics.isActive() then
-            love.graphics.clear(love.graphics.getBackgroundColor())
+            love.graphics.clear(0, 0, 0, 1)
             love.graphics.origin()
             if love.draw then love.draw() end
             love.graphics.present()
