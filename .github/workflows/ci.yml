@@ -127,50 +127,6 @@ jobs:
           name: bytepath-love${{ matrix.love_version }}-linux-x86_64
           path: dist/bytepath-love${{ matrix.love_version }}-linux-x86_64.AppImage
 
-  build-linux-aarch64:
-    runs-on: ubuntu-latest
-    needs: lint
-    if: startsWith(github.ref, 'refs/tags/v')
-    permissions: {}
-    steps:
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803  # v6
-        with:
-          persist-credentials: false
-          ref: dev
-      - name: Package .love for aarch64
-        run: |
-          mkdir -p dist
-          zip -r dist/bytepath.love conf.lua main.lua globals.lua utils.lua GameObject.lua tree.lua settings.lua libraries objects rooms resources -x "*.git*"
-      - name: Build aarch64 .love bundle
-        run: |
-          cd dist
-          echo '#!/bin/sh' > bytepath.sh
-          echo '# BYTEPATH needs LOVE; look under common names and paths' >> bytepath.sh
-          echo 'LOVE_BIN=""' >> bytepath.sh
-          echo 'for name in love love-11.5 love-11.4 love-11.3 love-0.10.2; do' >> bytepath.sh
-          echo '  if command -v "$name" >/dev/null 2>&1; then LOVE_BIN="$name"; break; fi' >> bytepath.sh
-          echo 'done' >> bytepath.sh
-          echo 'if [ -z "$LOVE_BIN" ]; then' >> bytepath.sh
-          echo '  for dir in /usr/local/bin /usr/bin /snap/bin "$HOME/.local/bin" "$HOME/bin" /opt/love/usr/bin; do' >> bytepath.sh
-          echo '    for name in love love-11.5; do' >> bytepath.sh
-          echo '      if [ -x "$dir/$name" ]; then LOVE_BIN="$dir/$name"; break 2; fi' >> bytepath.sh
-          echo '    done' >> bytepath.sh
-          echo '  done' >> bytepath.sh
-          echo 'fi' >> bytepath.sh
-          echo 'if [ -z "$LOVE_BIN" ]; then' >> bytepath.sh
-          echo '  echo "LOVE 11.5 is required but no love executable was found in PATH." >&2' >> bytepath.sh
-          echo '  echo "Install it, e.g.:  sudo apt install love" >&2' >> bytepath.sh
-          echo '  exit 1' >> bytepath.sh
-          echo 'fi' >> bytepath.sh
-          echo 'SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"' >> bytepath.sh
-          echo 'exec "$LOVE_BIN" "$SCRIPT_DIR/bytepath.love"' >> bytepath.sh
-          chmod +x bytepath.sh
-          zip ../bytepath-love11.5-linux-aarch64.zip bytepath.love bytepath.sh
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
-        with:
-          name: bytepath-love11.5-linux-aarch64
-          path: bytepath-love11.5-linux-aarch64.zip
-
   build-love:
     runs-on: ubuntu-latest
     needs: lint
@@ -192,7 +148,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: [build-windows, build-linux, build-linux-aarch64, build-love]
+    needs: [build-windows, build-linux, build-love]
     if: startsWith(github.ref, 'refs/tags/v')
     permissions:
       contents: write

@@ -11,7 +11,7 @@ Original by [a327ex](https://github.com/a327ex/BYTEPATH) · Fork by scillidan ·
 | Input | Keyboard + Mouse + Gamepad (boipushy) |
 | Key rebinding | None (hardcoded per room) |
 | Touch support | None |
-| Build targets | Windows, Linux, Linux-ARM |
+| Build targets | Windows, Linux |
 
 ---
 

@@ -21,10 +21,9 @@ love .
 ## Building
 
 ```bash
-make all        # Build for all platforms (windows, linux, linux-arm)
+make all        # Build for all platforms (windows, linux)
 make windows    # Build for Windows
 make linux      # Build for Linux
-make linux-arm  # Build for Linux ARM
 ```
 
 Build outputs are placed in `dist/` directory.
