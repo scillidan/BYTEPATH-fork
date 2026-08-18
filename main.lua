@@ -282,9 +282,16 @@ end
 function drawGameCanvas(canvas)
     local ox, oy, s = getLetterboxOffset()
     local w, h = love.graphics.getWidth(), love.graphics.getHeight()
+    -- The distort shader samples the bound texture and ignores the vertex color,
+    -- so a solid-color rectangle drawn through it renders WHITE (default texture
+    -- is white). Draw the letterbox background without the shader and re-apply it
+    -- only for the game canvas, like SNKRX does.
+    local shader = love.graphics.getShader()
+    love.graphics.setShader()
     love.graphics.setColor(0, 0, 0)
     love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
     love.graphics.setColor(1, 1, 1)
+    love.graphics.setShader(shader)
     love.graphics.setBlendMode('alpha', 'premultiplied')
     if isDisplayRotated() then
         love.graphics.draw(canvas, w/2 + s*gh/2, h/2 - s*gw/2, math.pi/2, s, s)
